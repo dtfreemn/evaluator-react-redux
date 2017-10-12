@@ -33,7 +33,10 @@ class NewScoreForm extends React.Component {
   }
 
   makeEvalEmpSelectOptions = () => {
-    return this.props.users.map(user => <option key={user.id} value={user.id}>{user.first_name} {user.last_name}</option>)
+    const options = this.props.users.map(user => <option key={user.id} value={user.id}>{user.first_name} {user.last_name}</option>)
+    options.unshift(<option key='default' value=''>Make Selection</option>)
+    return options
+
   }
   
 

@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux'
 import { deleteUser } from '../actions/users'
+import { NavLink } from 'react-router-dom'
 
 const UserItem = (props) => {
   
@@ -8,10 +9,26 @@ const UserItem = (props) => {
 
   const handleDelete = (e) => {
     props.deleteUserItem(user)
+      if (props.windowProps.location.pathname.includes(user.id)) {
+      props.windowProps.history.push('/users')
+    }
+  }
+
+  const profileOrDeleteButton = () => {
+    return !props.windowProps.location.pathname.includes(user.id) ? <button><NavLink to={'/users/' + user.id}>See Profile</NavLink></button> : <button onClick={handleDelete}>Delete This User</button>
+  }
+
+  //DELETE LATER -- HERE SO THAT I CAN SEE THE HASH STRUCTURE
+  if (props.windowProps.location.pathname.includes(user.id)) {
+    console.log(user.scores)
   }
 
   return (
-    <p data-id={user.id}>{user.first_name} {user.last_name} -- {user.email} <button onClick={handleDelete}>X</button></p>
+    <tr data-id={user.id}>
+      <td>{user.first_name} {profileOrDeleteButton()}</td>
+      <td>{user.last_name}</td>
+      <td>{user.email}</td>
+    </tr>
   )
 }
 

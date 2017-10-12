@@ -4,13 +4,15 @@ import UserItem from './UserItem'
 const UsersList = (props) => {
 
   const createUsers = () => {
-    return props.users.map((user, index) => <UserItem key={index} info={user}/>)
+    if (props.users) {
+      return props.users.map((user, index) => <UserItem key={index} info={user} windowProps={props.windowProps}/>)
+    }
   }
 
   return (
-    <div>
+    <tbody>
       {createUsers()}
-    </div>
+    </tbody>
   )
 }
 

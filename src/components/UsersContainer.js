@@ -6,17 +6,28 @@ import UsersList from './UsersList'
 class UsersContainer extends React.Component {
   
   componentDidMount() {
-    if (this.props.users.length === 0) {
-      this.props.fetchUsers()
-    }
+    this.props.fetchUsers()
   }
   
+  filterUsers = () => {
+    if (this.props.location.pathname === '/users' || this.props.location.pathname === '/users/new') {
+      return this.props.users
+    } else if (this.props.match.params.id) {
+      let id = this.props.match.params.id
+      return this.props.users.filter(user => user.id === parseInt(id, 10))
+    }
+  }
 
   render() {
     return (
-      <div id='users-container'>
-        <UsersList users={this.props.users}/>
-      </div>
+      <table id='users-container'>
+        <tr>
+          <th className='table-header'>First Name</th>
+          <th className='table-header'>Last Name</th>
+          <th className='table-header'>Email</th>
+        </tr>
+        <UsersList users={this.filterUsers()} windowProps={this.props}/>
+      </table>
     )
   }
 

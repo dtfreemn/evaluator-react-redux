@@ -14,7 +14,8 @@ class App extends Component {
       <div className="App">
         <NavBar />
         <Route exact path='/users/new' component={NewUserForm} />
-        <Route path='/users' component={UsersContainer} /> 
+        <Route exact path='/users' component={UsersContainer} />
+        <Route path='/users/:id' component={UsersContainer} />
         <Route exact path='/eval_items/new' component={NewEvalItemForm} />
         <Route path='/eval_items' component={EvalItemsContainer} />
         <Route path='/scores/new' component={NewScoreFormContainer} />
