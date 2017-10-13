@@ -12,7 +12,7 @@ class LineGraph extends React.Component {
     const scores = this.filterScoresByCurrentFilter()
     return scores.map(score => {
       let date = new Date(score.created_at.split('T')[0])
-      return `Admin: ${score.admin.first_name[0]}. ${score.admin.last_name} -- ${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`
+      return `Admin: ${score.administrator.first_name[0]}. ${score.administrator.last_name} -- ${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`
     })
   }
 
@@ -27,13 +27,11 @@ class LineGraph extends React.Component {
   }
 
   render() {
-    let that = this
     return (
       <Line data={this.makeDataset()} options={{ legend: {display: false}, scales: { xAxes: [{ ticks: {maxRotation: 90, minRotation: 90}}], yAxes: [{ ticks: {beginAtZero: true, max: 5}}]},
             tooltips: {
               callbacks: {
                 label: function(tooltipItem, data) {
-                  console.log(tooltipItem)
                   return tooltipItem.xLabel = ` Score: ${tooltipItem.yLabel}`
                 }
               }

@@ -15,7 +15,7 @@ class App extends Component {
     return (
       <div className="App base-grey-background">
         <NavBar />
-        <Route path='/login' component={LogInForm} />
+        <Route path='/login' render={(props) => <LogInForm props={props}/>} />
         <Route path='/logout' render={(props) => {
           localStorage.clear()
           return (

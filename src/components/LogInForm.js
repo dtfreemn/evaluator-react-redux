@@ -18,7 +18,8 @@ class LogInForm extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault()
-    this.props.submitLogin(this.state)
+    this.props.submitLogin(this.state, this.props.props)
+    
   }
 
   handleChange = (e) => {
@@ -40,8 +41,8 @@ class LogInForm extends React.Component {
 
 function mapDispatchToProps(dispatch) {
   return {
-    submitLogin: (emailPassword) => {
-      dispatch(logInToApi(emailPassword))
+    submitLogin: (emailPassword, props) => {
+      dispatch(logInToApi(emailPassword, props))
     },
     logOutOfFrontEnd: () => {
       dispatch(clearCurrentUserAndOrg())

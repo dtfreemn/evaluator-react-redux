@@ -28,8 +28,8 @@ class NewScoreForm extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault()
-    const evalEmpIds = {evaluatorID: document.getElementById('evaluatorID').value, employeeID: document.getElementById('employeeID').value}
-    this.props.submitNewScore(this.state, evalEmpIds)
+    const employeeId = {employeeID: document.getElementById('employeeID').value}
+    this.props.submitNewScore(this.state, employeeId)
   }
 
   makeEvalEmpSelectOptions = () => {
@@ -44,7 +44,6 @@ class NewScoreForm extends React.Component {
     if (this.state) {
       return (
         <form id='new-score-form' className='form fade-in' onSubmit={this.handleSubmit}>
-         Evaluator: <select id='evaluatorID' required>{this.makeEvalEmpSelectOptions()}</select><br/><br/> 
          Employee: <select id='employeeID'required>{this.makeEvalEmpSelectOptions()}</select>
          {this.makeInputs()}
          <button type="submit">Submit Evaluation</button>
@@ -60,8 +59,8 @@ class NewScoreForm extends React.Component {
 
 function mapDispatchToProps(dispatch) {
   return {
-    submitNewScore: (score, evalEmpids) => {
-      dispatch(createNewScore(score, evalEmpids))
+    submitNewScore: (score, employeeID) => {
+      dispatch(createNewScore(score, employeeID))
     }
   }
 }

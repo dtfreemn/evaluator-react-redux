@@ -2,7 +2,13 @@ import { baseURL } from '../urls'
 
 export function fetchAllEvalItems() {
   return function(dispatch) {
-    fetch(baseURL + '/eval_items')
+    fetch(baseURL + '/eval_items', {
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': localStorage.getItem('jwt')
+      }
+    })
       .then(resp => resp.json())
       .then(eval_items => dispatch(setAllEvalItems(eval_items)))
   }
@@ -16,7 +22,8 @@ export function createEvalItem(evalItem) {
       body: payload,
       headers: {
         'Accept': 'application/json',
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': localStorage.getItem('jwt')
       }
     })
       .then(resp => resp.json())
@@ -30,7 +37,8 @@ export function deleteEvalItem(item) {
       method: 'delete',
       headers: {
         'Accept': 'application/json',
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': localStorage.getItem('jwt')
       }
     })
       .then(resp => resp.json())

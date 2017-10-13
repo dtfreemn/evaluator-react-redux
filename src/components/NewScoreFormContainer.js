@@ -11,7 +11,7 @@ class NewScoreFormContainer extends React.Component {
       this.props.fetchEvalItems()
     }
     if (this.props.users.length === 0) {
-      this.props.fetchAllUsers()
+      this.props.fetchAllUsers(this.props.currentUser)
     }
 
   }
@@ -32,7 +32,8 @@ class NewScoreFormContainer extends React.Component {
 function mapStateToProps(state) {
   return {
     evalItems: state.evalItems,
-    users: state.users
+    users: state.users,
+    currentUser: state.currentUser
   }
 }
 
@@ -41,8 +42,8 @@ function mapDispatchToProps(dispatch) {
     fetchEvalItems: () => {
       dispatch(fetchAllEvalItems())
     },
-    fetchAllUsers: () => {
-      dispatch(fetchAllUsers())
+    fetchAllUsers: (user) => {
+      dispatch(fetchAllUsers(user))
     }
   }
 }
