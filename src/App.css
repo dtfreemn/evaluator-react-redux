@@ -35,7 +35,8 @@
 #nav-bar {
   grid-column: 1/6;
   height: 40px;
-  background: linear-gradient(to top, rgba(98,125,77,1) 16%, rgba(98,125,77,1) 24%, rgba(92,119,71,1) 31%, rgba(31,59,8,1) 100%);
+  /*MARTINA SAYS NO background: linear-gradient(to top, rgba(98,125,77,1) 16%, rgba(98,125,77,1) 24%, rgba(92,119,71,1) 31%, rgba(31,59,8,1) 100%);*/
+  background: darkgreen;
   -webkit-box-shadow: 0px 2px 5px 3px rgba(0,0,0,0.39);
   margin-bottom: 15px;
   display: grid;
@@ -68,26 +69,31 @@
 #users-container {
   grid-row: 3;
   grid-column: 1/6;
-  margin-left: 75px;
-  border: 1px solid #e3e5e8;
+  margin: 0 40px 25px 40px;
+  /*border: 1px solid #e3e5e8;*/
 }
 
 #users-container table {
   width: 100%;
 }
 
-table th.table-header {
+table thead tr td.table-header {
   font-family: 'Varela', sans-serif;
   font-size: 2em;
   text-decoration: underline;
 } 
 
-#users-container tbody tr td {
+.greydient {
+  background: linear-gradient(to bottom, rgba(255,255,255,1) 0%, rgba(246,246,246,1) 15%, rgba(240,240,240,1) 74%, rgba(237,237,237,1) 100%);;
+}
+
+td.rounded {
   font-family: 'Varela', sans-serif;
   text-align: center;
   /*border: 1px solid black;*/
   width: 400px;
   font-size: 1.4em;
+  border-radius: 10px;
 }
 /*END USERS CONTAINER*/
 
@@ -98,5 +104,17 @@ table th.table-header {
   margin-bottom: 50px;
   margin-top: 50px;
 }
-
 /* END NEW USER FORM*/
+
+/* START USER CHART */
+.chart {
+  margin-top: 30px;
+}
+
+.no-evals-yet {
+  padding-top: 200px;
+  font-family: 'Varela', sans-serif;
+  font-size: 3em;
+}
+
+/* END USER CHART */

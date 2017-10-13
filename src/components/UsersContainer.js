@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { fetchAllUsers } from '../actions/users'
 import UsersList from './UsersList'
+import UserChartContainer from './UserChartContainer'
 
 class UsersContainer extends React.Component {
   
@@ -18,16 +19,27 @@ class UsersContainer extends React.Component {
     }
   }
 
+  chartComponent = () => {
+    if (this.props.match.params.id && this.props.match.params.id !== 'new') {
+      return <UserChartContainer user={this.filterUsers()} />
+    }
+  }
+
   render() {
     return (
-      <table id='users-container'>
-        <tr>
-          <th className='table-header'>First Name</th>
-          <th className='table-header'>Last Name</th>
-          <th className='table-header'>Email</th>
-        </tr>
-        <UsersList users={this.filterUsers()} windowProps={this.props}/>
-      </table>
+      <div id='users-container'>
+        <table>
+          <thead>
+            <tr className='greydient'>
+              <td className='rounded table-header'>First Name</td>
+              <td className='rounded table-header'>Last Name</td>
+              <td className='rounded table-header'>Email</td>
+            </tr>
+          </thead>
+          <UsersList users={this.filterUsers()} windowProps={this.props}/>
+        </table>
+        {this.chartComponent()}
+      </div>
     )
   }
 

@@ -19,15 +19,15 @@ const UserItem = (props) => {
   }
 
   //DELETE LATER -- HERE SO THAT I CAN SEE THE HASH STRUCTURE
-  if (props.windowProps.location.pathname.includes(user.id)) {
-    console.log(user.scores)
-  }
+  // if (props.windowProps.location.pathname.includes(user.id)) {
+  //   console.log(user.scores)
+  // }
 
   return (
-    <tr data-id={user.id}>
-      <td>{user.first_name} {profileOrDeleteButton()}</td>
-      <td>{user.last_name}</td>
-      <td>{user.email}</td>
+    <tr className='greydient' data-id={user.id}>
+      <td className='rounded'>{user.first_name} {profileOrDeleteButton()}</td>
+      <td className='rounded'>{user.last_name}</td>
+      <td className='rounded'>{user.email}</td>
     </tr>
   )
 }
