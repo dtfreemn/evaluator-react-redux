@@ -4,6 +4,8 @@ import { NavLink } from 'react-router-dom'
 const NavBar = () => {
   return (
     <div id='nav-bar'>
+      <NavLink to='/login'>Log In</NavLink>
+      <NavLink to='/logout'>Log Out</NavLink>
       <NavLink to='/users'>All Users</NavLink>
       <NavLink to='/users/new'>Add User</NavLink>
       <NavLink to='/eval_items'>All Eval Items</NavLink>

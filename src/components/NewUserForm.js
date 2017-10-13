@@ -27,7 +27,7 @@ class NewUserForm extends React.Component {
 
   render() {
     return (
-      <form className='new-user-form' onSubmit={this.handleSubmit}>
+      <form className='form greydient fade-in' onSubmit={this.handleSubmit}>
         First Name: <input type="text" id='firstName' value={this.state.firstName} onChange={this.handleChange} required/>
         Last Name: <input type="text" id='lastName' value={this.state.lastName} onChange={this.handleChange} required/>
         Email: <input type="email" id='email' value={this.state.email} onChange={this.handleChange} required/>

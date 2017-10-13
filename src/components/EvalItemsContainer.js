@@ -14,7 +14,10 @@ class EvalItemsContainer extends React.Component {
 
   render() {
     return (
-      <EvalItemsList evalItems={this.props.evalItems}/>
+      <div className='container'>
+        <EvalItemsList evalItems={this.props.evalItems}/>
+      </div>
+
     )
   }
 }

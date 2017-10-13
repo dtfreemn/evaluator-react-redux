@@ -26,6 +26,7 @@ const UserChartContainer = (props) => {
       return <LineGraph user={props.user[0]} filter={props.currentChartFilter}/>
     }
   }
+  
 
   if (props.user.length > 0 && props.user[0].scores.length > 0) {
   return (

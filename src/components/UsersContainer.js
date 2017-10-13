@@ -7,7 +7,7 @@ import UserChartContainer from './UserChartContainer'
 class UsersContainer extends React.Component {
   
   componentDidMount() {
-    this.props.fetchUsers()
+    this.props.fetchUsers(this.props.currentUser)
   }
   
   filterUsers = () => {
@@ -27,8 +27,8 @@ class UsersContainer extends React.Component {
 
   render() {
     return (
-      <div id='users-container'>
-        <table>
+      <div id='users-container' className='container base-grey-background'>
+        <table className='fade-in'>
           <thead>
             <tr className='greydient'>
               <td className='rounded table-header'>First Name</td>
@@ -47,14 +47,15 @@ class UsersContainer extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    users: state.users
+    users: state.users,
+    currentUser: state.currentUser
   }
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    fetchUsers: () => {
-      dispatch(fetchAllUsers())
+    fetchUsers: (jwt) => {
+      dispatch(fetchAllUsers(jwt))
     }
   }
 }

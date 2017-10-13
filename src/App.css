@@ -1,13 +1,12 @@
+.base-grey-background {
+  background: rgba(237,237,237,1)
+}
+
 /*START APP*/
 .App {
   text-align: center;
   display: grid;
-  grid-template-columns: repeat(5, 1fr)
-}
-
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+  grid-template-columns: repeat(5, 1fr);
 }
 
 .App-header {
@@ -65,15 +64,15 @@
 }
 /*END NEW SCORE FORM*/
 
-/*START USERS CONTAINER*/
-#users-container {
+/*START CONTAINER*/
+.container {
   grid-row: 3;
   grid-column: 1/6;
   margin: 0 40px 25px 40px;
   /*border: 1px solid #e3e5e8;*/
 }
 
-#users-container table {
+.container table {
   width: 100%;
 }
 
@@ -95,20 +94,46 @@ td.rounded {
   font-size: 1.4em;
   border-radius: 10px;
 }
-/*END USERS CONTAINER*/
+/*END CONTAINER*/
 
-/* START NEW USER FORM */
-.new-user-form {
+/* START FORM */
+.form {
   grid-row: 2;
   grid-column: 2/5;
   margin-bottom: 50px;
   margin-top: 50px;
+  padding: 15px;
+  border-radius: 15px;
+}
+/* END FORM */
+
+.fade-in {
+    opacity:0;  /* make things invisible upon start */
+    animation:fadeIn ease-in 1; /* call our keyframe named fadeIn, use animattion ease-in and repeat it only 1 time */
+
+    animation-fill-mode:forwards;  /* this makes sure that after animation is done we remain at the last keyframe value (opacity: 1)*/
+
+    animation-duration:0.7s;
+    animation-delay: 0s
+}
+
+@keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+
+/* START NEW USER FORM */
+.new-user-form input {
+  border-radius: 25px;
+  padding: 5px;
+  margin: 5px;
 }
 /* END NEW USER FORM*/
 
 /* START USER CHART */
 .chart {
-  margin-top: 30px;
+  margin-top: 5%;
+  margin-bottom: 10%;
+  margin-left: 5%;
+  max-width: 90%;
+  max-height: 90%;
 }
 
 .no-evals-yet {
@@ -116,5 +141,15 @@ td.rounded {
   font-family: 'Varela', sans-serif;
   font-size: 3em;
 }
-
 /* END USER CHART */
+
+/* START ERROR PAGE */
+  
+#error-page {
+  grid-column: 2/5;
+  margin-top: 200px;
+  font-family: 'Varela', sans-serif;
+  font-size: 3em;
+}
+
+/* END ERROR PAGE */ 

@@ -29,7 +29,7 @@ class LineGraph extends React.Component {
   render() {
     let that = this
     return (
-      <Line data={this.makeDataset()} options={{ legend: {display: false}, scales: { xAxes: [{ ticks: {maxRotation: 60, minRotation: 60}}], yAxes: [{ ticks: {beginAtZero: true, max: 5}}]},
+      <Line data={this.makeDataset()} options={{ legend: {display: false}, scales: { xAxes: [{ ticks: {maxRotation: 90, minRotation: 90}}], yAxes: [{ ticks: {beginAtZero: true, max: 5}}]},
             tooltips: {
               callbacks: {
                 label: function(tooltipItem, data) {

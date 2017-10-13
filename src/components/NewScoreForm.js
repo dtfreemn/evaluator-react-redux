@@ -43,7 +43,7 @@ class NewScoreForm extends React.Component {
   render() {
     if (this.state) {
       return (
-        <form id='new-score-form' onSubmit={this.handleSubmit}>
+        <form id='new-score-form' className='form fade-in' onSubmit={this.handleSubmit}>
          Evaluator: <select id='evaluatorID' required>{this.makeEvalEmpSelectOptions()}</select><br/><br/> 
          Employee: <select id='employeeID'required>{this.makeEvalEmpSelectOptions()}</select>
          {this.makeInputs()}
