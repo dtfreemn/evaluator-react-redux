@@ -1,12 +1,12 @@
 import { baseURL } from '../urls'
 
-export function fetchAllUsers(jwt) {
+export function fetchAllUsers() {
   return function(dispatch) {
     fetch(baseURL + '/users', {
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
-        'Authorization': jwt
+        'Authorization': localStorage.getItem('jwt')
       }
     })
       .then(resp => resp.json())
@@ -67,12 +67,13 @@ export function logInToApi(emailPassword, props) {
       .then(resp => resp.json())
       .then(loggedInUserInfo => {
         if (loggedInUserInfo.admin) {
-        localStorage.setItem('jwt', loggedInUserInfo.jwt)
-        localStorage.setItem('org', loggedInUserInfo.admin.organization_id)
-        const payload = Object.assign({}, {jwt: loggedInUserInfo.jwt, org_id: loggedInUserInfo.admin.organization_id})
-        dispatch(setLoggedInUserAndOrg(payload))
+          localStorage.setItem('jwt', loggedInUserInfo.jwt)
+          localStorage.setItem('org', loggedInUserInfo.admin.organization_id)
+          const payload = Object.assign({}, {jwt: loggedInUserInfo.jwt, org_id: loggedInUserInfo.admin.organization_id})
+          dispatch(setLoggedInUserAndOrg(payload))
+          props.history.push('/users')
       } else if (loggedInUserInfo.error) {
-        props.history.push('/login')
+        // props.history.push('/login')
         //CREATE ACTION TO DISPATCH AN ERROR TO STATE THEN CHECK IN LOGIN FORM IF THERE'S AN ERROR
       }
       })

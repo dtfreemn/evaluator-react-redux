@@ -4,7 +4,6 @@ import { createNewScore } from '../actions/scores'
 
 class NewScoreForm extends React.Component {
 
-  
   componentDidMount() {
     let ids = this.props.evalItems.map(item => item.id)
     let stateObj = {}
@@ -14,7 +13,7 @@ class NewScoreForm extends React.Component {
   
   makeInputs = () => {
     if (this.state) {
-      return this.props.evalItems.map(item => <p key={item.id}>{item.name}: <input type='text' id={item.id} value={this.state[`${item.id}`]} onChange={this.handleChange} required/></p>)
+      return this.props.evalItems.map(item => <p key={item.id}>{item.name} -- {item.description}: <input type='text' id={item.id} value={this.state[`${item.id}`]} onChange={this.handleChange} required/></p>)
     } else {
       return null
     }
@@ -34,7 +33,7 @@ class NewScoreForm extends React.Component {
 
   makeEvalEmpSelectOptions = () => {
     const options = this.props.users.map(user => <option key={user.id} value={user.id}>{user.first_name} {user.last_name}</option>)
-    options.unshift(<option key='default' value=''>Make Selection</option>)
+    options.unshift(<option key='default' value=''>Choose Evaluee</option>)
     return options
 
   }

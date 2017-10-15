@@ -9,6 +9,13 @@ import { createStore, combineReducers, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import { rootReducer } from './reducers/rootReducer'
+// import usersReducer from './reducers/usersReducer'
+// import evalItemsReducer from './reducers/evalItemsReducer'
+// import chartFilterReducer from './reducers/chartFilterReducer'
+
+// const rootReducer = combineReducers({
+//   users: usersReducer, evalItems: evalItemsReducer, chartFilter: chartFilterReducer
+// })
 
 const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)))
 

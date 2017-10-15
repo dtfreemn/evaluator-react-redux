@@ -7,7 +7,7 @@ import UserChartContainer from './UserChartContainer'
 class UsersContainer extends React.Component {
   
   componentDidMount() {
-    this.props.fetchUsers(this.props.currentUser)
+    this.props.fetchUsers()
   }
   
   filterUsers = () => {
@@ -54,8 +54,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    fetchUsers: (jwt) => {
-      dispatch(fetchAllUsers(jwt))
+    fetchUsers: () => {
+      dispatch(fetchAllUsers())
     }
   }
 }

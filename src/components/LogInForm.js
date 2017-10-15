@@ -9,16 +9,15 @@ class LogInForm extends React.Component {
     password: ''
   }
 
-  componentDidMount() {
-    if (!localStorage.getItem('jwt') && this.props.props) {
-      this.props.logOutOfFrontEnd()
-      this.props.props.history.push('/login')
-    }
-  }
+  // componentDidMount() {
+  //   if (!localStorage.getItem('jwt') && this.props) {
+  //     this.props.logOutOfFrontEnd()
+  //   }
+  // }
 
   handleSubmit = (e) => {
     e.preventDefault()
-    this.props.submitLogin(this.state, this.props.props)
+    this.props.submitLogin(this.state, this.props)
     
   }
 
@@ -30,7 +29,7 @@ class LogInForm extends React.Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit} className='greydient form'>
+      <form onSubmit={this.handleSubmit} className='greydient form fade-in'>
         <input id='email' type="text" placeholder='user@email.com' onChange={this.handleChange}/>
         <input id='password' type="password" onChange={this.handleChange} />
         <input type="submit" value='Submit'/>
