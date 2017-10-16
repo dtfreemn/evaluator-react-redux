@@ -6,11 +6,13 @@ export function rootReducer(state = { currentUser: localStorage.getItem('jwt'), 
     case 'SET_LOGGED_IN_USER_AND_ORG':
       return Object.assign({}, state, { currentUser: action.payload.jwt, currentOrg: action.payload.org_id } )
     case 'CLEAR_CURRENT_USER_AND_ORG':
-      return Object.assign({}, state, {currentUser: '', currentOrg: ''})
+      return Object.assign({}, state, { currentUser: '', currentOrg: '', users: [] } )
     
     //evalItems actions
     case 'SET_ALL_EVAL_ITEMS':
       return Object.assign({}, state, { evalItems: action.payload } )
+    case 'CLEAR_ALL_EVAL_ITEMS':
+      return Object.assign({}, state, { evalItems: [] } )
 
     //filter actions
     case 'SET_CHART_FILTER':

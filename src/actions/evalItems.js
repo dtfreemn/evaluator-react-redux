@@ -52,3 +52,9 @@ export function setAllEvalItems(payload) {
     payload
   }
 }
+
+export function clearAllEvalItems() {
+  return {
+    type: 'CLEAR_ALL_EVAL_ITEMS'
+  }
+}

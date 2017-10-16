@@ -1,16 +1,36 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom'
+import { clearCurrentUserAndOrg } from '../actions/users'
+import { clearAllEvalItems } from '../actions/evalItems'
+import { connect } from 'react-redux'
 
-const NavBar = () => {
+const NavBar = (props) => {
   
-  const logInLogOutButton = localStorage.getItem('jwt') ? <NavLink to='/logout'><button>Log Out</button></NavLink> : <NavLink to='/login'><button>Log In</button></NavLink>
+  const handleClick = () => {
+    props.logOutUser()
+    props.logOutEvalItems()
+    localStorage.clear()
+    props.history.push('/login')
+  }
+
+  const logOutButton = localStorage.getItem('jwt') ? <button onClick={handleClick}>Log Out</button> : null
 
   return (
     <div id='nav-bar'>
-      {logInLogOutButton}
+      {logOutButton}
       <span className='logo'>Evaluator</span>
     </div>
   )
 }
 
-export default NavBar;
+function mapDispatchToProps(dispatch) {
+  return {
+    logOutUser: () => {
+      dispatch(clearCurrentUserAndOrg())
+    },
+    logOutEvalItems: () => {
+      dispatch(clearAllEvalItems())
+    }
+  }
+}
+
+export default connect(null, mapDispatchToProps)(NavBar);

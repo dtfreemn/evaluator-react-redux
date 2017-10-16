@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import { Route } from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom'
 import NavBar from './components/NavBar'
 import UsersContainer from './components/UsersContainer'
 import NewUserForm from './components/NewUserForm'
@@ -24,19 +24,18 @@ class App extends Component {
 
     return (
       <div className="App base-grey-background">
-        <NavBar />
+        <Route path='/' render={(props) => <NavBar {...props}/>}/>
         <Route path='/' render={(props) => <MenuLeft {...props}/>}/>
-        <Route path='/login' render={(props) => <AuthLogInForm {...props}/>} />
-        <Route path='/logout' render={(props) => { localStorage.clear()
-            return ( <AuthLogInForm {...props}/> ) } } />
-        <Route exact path='/users/new' component={AuthNewUserForm} />
-        <Route exact path='/users/new' component={AuthNewUserForm} />
-        <Route exact path='/users' component={AuthUsersContainer} />
-        <Route path='/users/:id' component={AuthUsersContainer} />
-        <Route exact path='/eval_items/new' component={AuthNewEvalItemForm} />
-        <Route path='/eval_items' component={AuthEvalItemsContainer} />
-        <Route exact path='/scores/new' component={AuthNewScoreFormContainer} />
-        <Route path='/404' component={ErrorPage} />
+        <Switch>
+            <Route exact path='/login' render={(props) => <AuthLogInForm {...props}/>} />
+            <Route exact path='/users/new' component={AuthNewUserForm} />
+            <Route exact path='/users' component={AuthUsersContainer} />
+            <Route exact path='/users/:id' component={AuthUsersContainer} />
+            <Route exact path='/eval_items/new' component={AuthNewEvalItemForm} />
+            <Route exact path='/eval_items' component={AuthEvalItemsContainer} />
+            <Route exact path='/scores/new' component={AuthNewScoreFormContainer} />
+            <Route component={ErrorPage} />
+        </Switch>
       </div>
     );
   }
