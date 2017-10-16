@@ -15,7 +15,13 @@ const UserItem = (props) => {
   }
 
   const profileOrDeleteButton = () => {
-    return !props.windowProps.location.pathname.includes(user.id) ? <button><NavLink to={'/users/' + user.id}>See Profile</NavLink></button> : <button onClick={handleDelete}>Delete This User</button>
+    return !props.windowProps.location.pathname.includes(user.id) ? <button><NavLink to={'/users/' + user.id}>See Profile</NavLink></button> : <button onClick={handleDelete}>Delete This Employee</button>
+  }
+
+  const editUserButton = () => {
+    if (props.windowProps.location.pathname.includes(user.id) && !props.windowProps.location.pathname.includes('edit')) {
+      return <button><NavLink to={'/users/' + user.id + '/edit'}>Edit Employee</NavLink></button>
+    }
   }
 
   //DELETE LATER -- HERE SO THAT I CAN SEE THE HASH STRUCTURE
@@ -24,10 +30,10 @@ const UserItem = (props) => {
   // }
 
   return (
-    <tr className='greydient' data-id={user.id}>
-      <td className='rounded'>{user.first_name} {profileOrDeleteButton()}</td>
-      <td className='rounded'>{user.last_name}</td>
-      <td className='rounded'>{user.email}</td>
+    <tr data-id={user.id}>
+      <td>{user.first_name} {profileOrDeleteButton()} {editUserButton()}</td>
+      <td>{user.last_name}</td>
+      <td>{user.email}</td>
     </tr>
   )
 }

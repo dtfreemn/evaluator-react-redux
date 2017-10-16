@@ -31,6 +31,26 @@ export function createUser(user) {
   }
 }
 
+export function editUser(user, id, props) {
+  return function(dispatch) {
+    const payload = JSON.stringify({first_name: user.firstName, last_name: user.lastName, email: user.email})
+    fetch(baseURL + '/users/' + id, {
+      method: 'PATCH',
+      body: payload,
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': localStorage.getItem('jwt')
+      }
+    })
+      .then(resp => resp.json())
+      .then(users => dispatch(setAllUsers(users)))
+      .then(() => {
+        props.history.push(props.match.url)
+      })
+}
+}
+
 export function deleteUser(user) {
   return function(dispatch) {
     fetch(baseURL + '/users/' + user.id, {

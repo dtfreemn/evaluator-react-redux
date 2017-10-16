@@ -1,12 +1,10 @@
-.base-grey-background {
-  background: rgba(237,237,237,1)
-}
-
 /*START APP*/
 .App {
-  text-align: center;
+  /*text-align: center;*/
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: 225px auto 200px;
+  grid-template-rows: 50px auto;
+  grid-gap: 5px;
 }
 
 .App-header {
@@ -32,8 +30,7 @@
 
 /*START NAVBAR*/
 #nav-bar {
-  grid-column: 1/6;
-  height: 40px;
+  grid-column: 1/5;
   /*MARTINA SAYS NO background: linear-gradient(to top, rgba(98,125,77,1) 16%, rgba(98,125,77,1) 24%, rgba(92,119,71,1) 31%, rgba(31,59,8,1) 100%);*/
   background: darkgreen;
   -webkit-box-shadow: 0px 2px 5px 3px rgba(0,0,0,0.39);
@@ -45,6 +42,7 @@
 #nav-bar span.logo {
   grid-row: 1;
   grid-column: 5;
+  margin-left: 40px;
   color: white;
   font-family: 'Patua One', cursive;
   font-size: 2em;
@@ -54,20 +52,50 @@
   color: white;
   grid-row: 1;
   margin-top: 10px;
+  text-align: center;
 }
 
 /*END NAVBAR*/
+
+/*START MENU LEFT*/
+.menu-left {
+  grid-column: 1/2;
+  /*border: 1px solid black;*/
+  text-align: center;
+  margin-top: 100px;
+  margin-left: 20px;
+  grid-row: 2/3;
+}
+
+.menu-left a {
+  text-decoration: none;
+  background-color: darkgreen;
+  color: white;
+  padding: 2px 6px 2px 6px;
+  border-top: 1px solid #CCCCCC;
+  border-right: 1px solid #333333;
+  border-bottom: 1px solid #333333;
+  border-left: 1px solid #CCCCCC;
+  border-radius: 15px;
+  width: 50px;
+}
+
+/*END MENU LEFT*/
 
 /*START NEW SCORE FORM*/
 #new-score-form input {
   width: 35px;
 }
+
+#new-score-form {
+  text-align: left;
+}
 /*END NEW SCORE FORM*/
 
 /*START CONTAINER*/
 .container {
-  grid-row: 3;
-  grid-column: 1/6;
+  /*grid-row: 3;*/
+  grid-column: 2/5;
   margin: 0 40px 25px 40px;
   /*border: 1px solid #e3e5e8;*/
 }
@@ -80,13 +108,9 @@ table thead tr td.table-header {
   font-family: 'Varela', sans-serif;
   font-size: 2em;
   text-decoration: underline;
-} 
-
-.greydient {
-  background: linear-gradient(to bottom, rgba(255,255,255,1) 0%, rgba(246,246,246,1) 15%, rgba(240,240,240,1) 74%, rgba(237,237,237,1) 100%);;
 }
 
-td.rounded {
+td {
   font-family: 'Varela', sans-serif;
   text-align: center;
   /*border: 1px solid black;*/
@@ -104,6 +128,12 @@ td.rounded {
   margin-top: 50px;
   padding: 15px;
   border-radius: 15px;
+}
+
+.log-in-form {
+  grid-row: 2;
+  grid-column: 2/3;
+  margin-left: 275px;
 }
 /* END FORM */
 
@@ -152,4 +182,15 @@ td.rounded {
   font-size: 3em;
 }
 
-/* END ERROR PAGE */ 
+/* END ERROR PAGE */
+
+/* Position of lists on chart page...need to probably change to make chart container display grid with 2 rows and 2 columns*/
+#action-steps {
+  float: right;
+  display: inline-block;
+}
+
+#scores-list {
+  float:left;
+  display: inline-block;
+}

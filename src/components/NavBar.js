@@ -2,15 +2,12 @@ import React from 'react';
 import { NavLink } from 'react-router-dom'
 
 const NavBar = () => {
+  
+  const logInLogOutButton = localStorage.getItem('jwt') ? <NavLink to='/logout'><button>Log Out</button></NavLink> : <NavLink to='/login'><button>Log In</button></NavLink>
+
   return (
     <div id='nav-bar'>
-      <NavLink to='/login'>Log In</NavLink>
-      <NavLink to='/logout'><button>Log Out</button></NavLink>
-      <NavLink to='/users'>All Employees</NavLink>
-      <NavLink to='/users/new'>Add Employee</NavLink>
-      <NavLink to='/eval_items'>All Eval Items</NavLink>
-      <NavLink to='/eval_items/new'>Add Eval Item</NavLink>
-      <NavLink to='/scores/new'>Add Score</NavLink>
+      {logInLogOutButton}
       <span className='logo'>Evaluator</span>
     </div>
   )

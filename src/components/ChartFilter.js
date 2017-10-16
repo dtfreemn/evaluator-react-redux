@@ -10,8 +10,8 @@ class ChartFilter extends React.Component {
 
   makeEvalItemOptions = () => {
     let options = this.props.items.map(name => <option key={name} value={name}>See Timeline Graph for "{name}"</option>)
-    options.unshift(<option key='average' value='default'>See Average Scores Summary Graph</option>)
-    options.unshift(<option key='default' value='default'>Select Different Graph</option>)
+    options.unshift(<option key='average' value='default'>Average Scores Summary Graph</option>)
+    // options.unshift(<option key='default' value='default'>Select Different Graph</option>)
     return options
   }
 
