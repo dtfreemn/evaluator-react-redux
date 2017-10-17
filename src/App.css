@@ -110,7 +110,7 @@ table thead tr td.table-header {
   text-decoration: underline;
 }
 
-td {
+.large td {
   font-family: 'Varela', sans-serif;
   text-align: center;
   /*border: 1px solid black;*/
@@ -188,9 +188,41 @@ td {
 #action-steps {
   float: right;
   display: inline-block;
+  width: 450px;
 }
 
 #scores-list {
   float:left;
   display: inline-block;
 }
+
+/* SCORES AND ACTION STEPS TABLES IN CHART CONTAINER*/
+.charts-container table {
+  font-family: 'Varela', sans-serif;
+  text-align: center;
+  border-top: 1px solid #e3e5e8;
+  border-right: 1px solid grey;
+  border-left: 1px solid #e3e5e8;
+  border-bottom: 1px solid #e3e5e8;
+  width: 450px;
+  font-size: 0.5em;
+  max-height: 350px;
+  overflow-y: scroll;
+  word-break: break-all;
+}
+
+.charts-container table tbody tr {
+  border-bottom: 1px solid #e3e5e8;
+}
+
+.charts-container table td {
+  width: 150px;
+  border-bottom: 1px solid grey;
+  border-radius: 0;
+}
+
+.underline {
+  text-decoration: underline;
+}
+
+

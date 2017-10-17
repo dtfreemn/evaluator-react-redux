@@ -19,7 +19,7 @@ class UsersContainer extends React.Component {
   filterUsers = () => {
     if (this.props.location.pathname === '/users' || this.props.location.pathname === '/users/new') {
       return this.props.users.filter(user => user.first_name.toLowerCase().includes(this.state.searchFilter.toLowerCase()) || user.last_name.toLowerCase().includes(this.state.searchFilter.toLowerCase()) || user.email.toLowerCase().includes(this.state.searchFilter.toLowerCase()))
-    } else if (this.props.match.params.id) {
+    } else if (this.props.match.params.id && !isNaN(this.props.match.params.id)) {
       let id = this.props.match.params.id
       return this.props.users.filter(user => user.id === parseInt(id, 10))
     }
@@ -55,7 +55,7 @@ class UsersContainer extends React.Component {
 
   render() {
     return (
-      <div id='users-container' className='container'>
+      <div id='users-container' className='container large'>
         {this.userSearch()}
         {this.editUserForm()}
         <table className='fade-in'>

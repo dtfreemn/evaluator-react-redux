@@ -26,16 +26,13 @@ class App extends Component {
       <div className="App base-grey-background">
         <Route path='/' render={(props) => <NavBar {...props}/>}/>
         <Route path='/' render={(props) => <MenuLeft {...props}/>}/>
-        <Switch>
-            <Route exact path='/login' render={(props) => <AuthLogInForm {...props}/>} />
-            <Route exact path='/users/new' component={AuthNewUserForm} />
-            <Route exact path='/users' component={AuthUsersContainer} />
-            <Route exact path='/users/:id' component={AuthUsersContainer} />
-            <Route exact path='/eval_items/new' component={AuthNewEvalItemForm} />
-            <Route exact path='/eval_items' component={AuthEvalItemsContainer} />
-            <Route exact path='/scores/new' component={AuthNewScoreFormContainer} />
-            <Route component={ErrorPage} />
-        </Switch>
+        <Route exact path='/login' render={(props) => <AuthLogInForm {...props}/>} />
+        <Route path='/users/new' component={AuthNewUserForm} />
+        <Route exact path='/users' component={AuthUsersContainer} />
+        <Route path='/users/:id' component={AuthUsersContainer} />
+        <Route exact path='/eval_items/new' component={AuthNewEvalItemForm} />
+        <Route path ='/eval_items' component={AuthEvalItemsContainer} />
+        <Route exact path='/scores/new' component={AuthNewScoreFormContainer} />
       </div>
     );
   }

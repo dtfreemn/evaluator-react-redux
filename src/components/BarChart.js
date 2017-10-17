@@ -55,7 +55,7 @@ class BarChart extends React.Component {
               callbacks: {
                 label: function(tooltipItem, data) {
                   let description = that.props.user.scores.filter(score => score.eval_item.name === tooltipItem.xLabel)[0].eval_item.description
-                  tooltipItem.xLabel += ` -- ${description} -- ${that.props.user.first_name}'s Average Score: ${tooltipItem.yLabel}`
+                  tooltipItem.xLabel = `${description} -- ${that.props.user.first_name}'s Average Score: ${tooltipItem.yLabel}`
                   return tooltipItem.xLabel
                 }
               }

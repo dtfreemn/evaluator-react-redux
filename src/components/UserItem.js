@@ -15,12 +15,12 @@ const UserItem = (props) => {
   }
 
   const profileOrDeleteButton = () => {
-    return !props.windowProps.location.pathname.includes(user.id) ? <button><NavLink to={'/users/' + user.id}>See Profile</NavLink></button> : <button onClick={handleDelete}>Delete This Employee</button>
+    return !props.windowProps.location.pathname.includes(user.id) ? <button><NavLink to={'/users/' + user.id}>See Profile</NavLink></button> : <button onClick={handleDelete}>Delete</button>
   }
 
   const editUserButton = () => {
     if (props.windowProps.location.pathname.includes(user.id) && !props.windowProps.location.pathname.includes('edit')) {
-      return <button><NavLink to={'/users/' + user.id + '/edit'}>Edit Employee</NavLink></button>
+      return <button><NavLink to={'/users/' + user.id + '/edit'}>Edit</NavLink></button>
     }
   }
 

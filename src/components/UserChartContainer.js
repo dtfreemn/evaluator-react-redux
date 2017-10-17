@@ -29,30 +29,60 @@ const UserChartContainer = (props) => {
 
   const makeScoreList = () => {
     if (props.currentChartFilter === 'default') { 
-      return props.user[0].scores.map(score => <p key={score.id}>{score.eval_item.name} -- {score.administrator.first_name[0]}. {score.administrator.last_name} -- {score.score} -- {score.note}</p>)
+      return props.user[0].scores.map(score => 
+        <tr key={score.id}>
+          <td>{score.eval_item.name}<br/>({score.administrator.first_name[0]}. {score.administrator.last_name})</td>
+          <td>{score.score}</td>
+          <td>{score.note}</td>
+        </tr>
+      )
     } else {
       let scores = props.user[0].scores.filter(score => score.eval_item.name === props.currentChartFilter)
-      return scores.map(score => <p key={score.id}>{score.eval_item.name} -- {score.administrator.first_name[0]}. {score.administrator.last_name} -- {score.score} -- {score.note}</p>)
+      return scores.map(score => <tr key={score.id}>
+          <td>{score.eval_item.name}<br/>({score.administrator.first_name[0]}. {score.administrator.last_name})</td>
+          <td>{score.score}</td>
+          <td>{score.note}</td>
+        </tr>
+      )
     }
   }
 
   const makeActionStepsList = () => {
-    return props.user[0].action_steps.map(step => <p key={step.id}>{step.description} -- by: {step.administrator.first_name[0]}. {step.administrator.last_name} -- {step.completed ? 'Complete' : 'Incomplete'}</p>)
+    return props.user[0].action_steps.map(step => 
+      <tr key={step.id}>
+        <td>{step.description}<br/>({step.administrator.first_name[0]}. {step.administrator.last_name})</td>
+        <td>{step.completed ? 'Complete' : 'Incomplete'}</td>
+        <td><button>Mark Complete</button></td>
+      </tr>
+    )
   }
 
   if (props.user.length > 0 && props.user[0].scores.length > 0) {
   return (
-    <div className='container'>
+    <div className='container charts-container'>
       <ChartFilter items={getUniqueEvalItems()}/>
       <div className='chart'>
         {graphToRender()}
       </div>
-      <div id='scores-list'>
-        {makeScoreList()}
-      </div>
-      <div id='action-steps'>
-        {makeActionStepsList()}
-      </div>
+      <table id='scores-list'>
+        <tbody>
+          <tr>
+            <th className='underline'>Item/Admin</th>
+            <th className='underline'>Score</th>
+            <th className='underline'>Notes</th>
+          </tr>
+          {makeScoreList()}
+        </tbody>
+      </table>
+      <table id='action-steps'>
+        <tbody>
+          <tr>
+            <th className='underline'>Action Step</th>
+            <th className='underline'>Status</th>
+          </tr>
+          {makeActionStepsList()}
+        </tbody>
+      </table>
     </div>
   )} else if (props.user.length > 0) {
     return (
