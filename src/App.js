@@ -23,16 +23,26 @@ class App extends Component {
     const AuthNewScoreFormContainer = Authorize(NewScoreFormContainer)
 
     return (
-      <div className="App base-grey-background">
+      <div className="App base-grey-background"> 
         <Route path='/' render={(props) => <NavBar {...props}/>}/>
         <Route path='/' render={(props) => <MenuLeft {...props}/>}/>
         <Route exact path='/login' render={(props) => <AuthLogInForm {...props}/>} />
-        <Route path='/users/new' component={AuthNewUserForm} />
-        <Route exact path='/users' component={AuthUsersContainer} />
-        <Route path='/users/:id' component={AuthUsersContainer} />
+        <Route path='/users' render={(props) => {
+            if (props.location.pathname === '/users' || props.location.pathname.includes('edit')) {
+                console.log(props.location.pathname.split('/'))
+                return <AuthUsersContainer {...props}/>
+            } else if (props.location.pathname.includes('new')) {
+                return (<div><AuthNewUserForm {...props}/><AuthUsersContainer {...props}/></div>)
+            } else if (!isNaN(parseInt(props.location.pathname.split('/').pop()))) {
+                return <AuthUsersContainer {...props}/>
+            } else {
+                return <ErrorPage {...props}/>
+            }
+        }} />
         <Route exact path='/eval_items/new' component={AuthNewEvalItemForm} />
         <Route path ='/eval_items' component={AuthEvalItemsContainer} />
         <Route exact path='/scores/new' component={AuthNewScoreFormContainer} />
+        <Route path='*' component={ErrorPage} />
       </div>
     );
   }

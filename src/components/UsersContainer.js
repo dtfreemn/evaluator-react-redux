@@ -19,14 +19,17 @@ class UsersContainer extends React.Component {
   filterUsers = () => {
     if (this.props.location.pathname === '/users' || this.props.location.pathname === '/users/new') {
       return this.props.users.filter(user => user.first_name.toLowerCase().includes(this.state.searchFilter.toLowerCase()) || user.last_name.toLowerCase().includes(this.state.searchFilter.toLowerCase()) || user.email.toLowerCase().includes(this.state.searchFilter.toLowerCase()))
-    } else if (this.props.match.params.id && !isNaN(this.props.match.params.id)) {
-      let id = this.props.match.params.id
+    } else if (!isNaN(this.props.location.pathname.split('/').pop())) {
+      let id = this.props.location.pathname.split('/').pop()
+      return this.props.users.filter(user => user.id === parseInt(id, 10))
+    } else if (this.props.location.pathname.split('/').pop() === 'edit' && !isNaN(this.props.location.pathname.split('/')[this.props.location.pathname.split('/').length - 2])) {
+      let id = this.props.location.pathname.split('/')[this.props.location.pathname.split('/').length - 2]
       return this.props.users.filter(user => user.id === parseInt(id, 10))
     }
   }
 
   chartComponent = () => {
-    if (this.props.match.params.id && this.props.match.params.id !== 'new') {
+    if (!isNaN(this.props.location.pathname.split('/').pop())) {
       return <UserChartContainer user={this.filterUsers()} />
     }
   }
@@ -48,12 +51,15 @@ class UsersContainer extends React.Component {
 
   editUserForm = () => {
     if (this.props.location.pathname.split('/').includes('edit') && this.props.users.length > 0) {
-      let user = this.filterUsers()[0]
-      return <EditUserForm user={user} id={this.props.match.params.id} {...this.props}/>
+      if (this.filterUsers().length > 0) {
+        let user = this.filterUsers()[0]
+        return <EditUserForm user={user} id={this.props.location.pathname.split('/')[this.props.location.pathname.split('/').length - 2]} {...this.props}/>
+      }
     }
   }
 
   render() {
+    console.log(this.props)
     return (
       <div id='users-container' className='container large'>
         {this.userSearch()}

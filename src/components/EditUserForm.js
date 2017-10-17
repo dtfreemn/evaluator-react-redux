@@ -6,7 +6,9 @@ import { connect } from 'react-redux'
 class EditUserForm extends React.Component {
 
   handleSubmit = (user) => {
+    console.log(this.props.id)
     this.props.editUser(user, this.props.id, this.props)
+    this.props.history.push(`/users/${this.props.id}`)
   }
   
   render() {
