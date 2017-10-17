@@ -17,7 +17,7 @@ class NewScoreForm extends React.Component {
   
   makeInputs = () => {
     if (this.state) {
-      return this.props.evalItems.map(item => <p key={item.id}>{item.name} -- {item.description}: <input type='text' id={item.id} name='score' placeholder='score' value={this.state.scores[`${item.id}`]['score']} onChange={this.handleChange} required/> <textarea id={item.id} type='text' name='note' placeholder='notes' value={this.state.scores[`${item.id}`]['note']} onChange={this.handleChange}/></p>)
+      return this.props.evalItems.map(item => <p key={item.id}>{item.name} -- {item.description}: <input type='text' id={item.id} name='score' placeholder='score' value={this.state.scores[`${item.id}`]['score']} onChange={this.handleChange}/> <textarea id={item.id} type='text' name='note' placeholder='notes' value={this.state.scores[`${item.id}`]['note']} onChange={this.handleChange}/></p>)
     } else {
       return null
     }
@@ -35,7 +35,23 @@ class NewScoreForm extends React.Component {
   handleSubmit = (e) => {
     e.preventDefault()
     const employeeId = {employeeID: document.getElementById('employeeID').value}
-    this.props.submitNewScore(this.state.scores, this.state.actionSteps, employeeId)
+    let finalScoresObj = {}
+    for (let key in this.state.scores) {
+      if (this.state.scores[key]['score'] !== '' && this.state.scores[key]['note'] !== '') {
+        finalScoresObj[key] = this.state.scores[key]
+      } else if (this.state.scores[key]['score'] !== '' || this.state.scores[key]['note'] !== '') {
+        alert('You must fill out both the score and the note for any item that you choose to evaluate. If you do not want to score an item, please leave both inputs blank.')
+        return
+      }
+    }
+
+    
+
+    if (Object.keys(finalScoresObj).length === 0) {
+      alert('You cannot submit an evaluation without scoring at least one item')
+      return
+    }
+    this.props.submitNewScore(finalScoresObj, this.state.actionSteps, employeeId)
     this.makeInitialState()
   }
 

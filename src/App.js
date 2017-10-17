@@ -32,7 +32,7 @@ class App extends Component {
             <Route exact path='/users' component={AuthUsersContainer} />
             <Route exact path='/users/:id/s' component={AuthUsersContainer} />
             <Route exact path='/users/:id/edit' component={AuthUsersContainer} />
-            <Route exact path='/eval_items/new' component={AuthNewEvalItemForm} />
+            <Route exact path='/eval_items/new' render={(props) => <div><AuthNewEvalItemForm {...props}/><AuthEvalItemsContainer {...props}/></div>} />
             <Route exact path ='/eval_items' component={AuthEvalItemsContainer} />
             <Route exact path='/scores/new' component={AuthNewScoreFormContainer} />
             <Route path='*' component={ErrorPage}/>
