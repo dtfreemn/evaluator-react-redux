@@ -23,7 +23,7 @@ class ChartFilter extends React.Component {
 
   render() {
     return (
-      <select onChange={this.handleChange}>
+      <select id='chart-filter' onChange={this.handleChange}>
         {this.makeEvalItemOptions()}
       </select>
     )

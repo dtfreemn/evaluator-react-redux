@@ -14,7 +14,7 @@ export function fetchAllUsers() {
   }
 }
 
-export function createUser(user) {
+export function createUser(user, props) {
   return function(dispatch) {
     const payload = JSON.stringify({first_name: user.firstName, last_name: user.lastName, email: user.email})
     fetch(baseURL + '/users', {
@@ -28,6 +28,9 @@ export function createUser(user) {
     })
       .then(resp => resp.json())
       .then(users => dispatch(setAllUsers(users)))
+      .then( () => {
+        props.history.push('/users')
+      })
   }
 }
 
@@ -46,7 +49,7 @@ export function editUser(user, id, props) {
       .then(resp => resp.json())
       .then(users => dispatch(setAllUsers(users)))
       .then(() => {
-        props.history.push(props.match.url)
+        props.history.push('/users/' + props.id + '/s')
       })
 }
 }

@@ -29,21 +29,33 @@ const UserChartContainer = (props) => {
 
   const makeScoreList = () => {
     if (props.currentChartFilter === 'default') { 
-      return props.user[0].scores.map(score => 
-        <tr key={score.id}>
+      let scoresSortedByDate = props.user[0].scores.sort(function(a,b) {
+        if (a.created_at < b.created_at) return -1;
+        if (a.created_at > b.created_at) return 1;
+        return 0
+      })
+      return scoresSortedByDate.map(score => {
+        let date = new Date(score.created_at.split('T')[0])
+        let dateString = `${date.getMonth()}/${date.getDate()}/${date.getFullYear()}`
+        return <tr key={score.id}>
           <td>{score.eval_item.name}<br/>({score.administrator.first_name[0]}. {score.administrator.last_name})</td>
           <td>{score.score}</td>
           <td>{score.note}</td>
+          <td>{dateString}</td>
         </tr>
-      )
+      })
     } else {
       let scores = props.user[0].scores.filter(score => score.eval_item.name === props.currentChartFilter)
-      return scores.map(score => <tr key={score.id}>
+      return scores.map(score => {
+        let date = new Date(score.created_at.split('T')[0])
+        let dateString = `${date.getMonth()}/${date.getDate()}/${date.getFullYear()}`
+        return <tr key={score.id}>
           <td>{score.eval_item.name}<br/>({score.administrator.first_name[0]}. {score.administrator.last_name})</td>
           <td>{score.score}</td>
           <td>{score.note}</td>
+          <td>{dateString}</td>
         </tr>
-      )
+      })
     }
   }
 
@@ -67,6 +79,9 @@ const UserChartContainer = (props) => {
       <table id='scores-list'>
         <tbody>
           <tr>
+            <td>Employee Scores</td>
+          </tr>
+          <tr>
             <th className='underline'>Item/Admin</th>
             <th className='underline'>Score</th>
             <th className='underline'>Notes</th>
@@ -76,6 +91,9 @@ const UserChartContainer = (props) => {
       </table>
       <table id='action-steps'>
         <tbody>
+          <tr>
+            <td>Employee Action Steps</td>
+          </tr>
           <tr>
             <th className='underline'>Action Step</th>
             <th className='underline'>Status</th>

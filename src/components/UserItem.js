@@ -15,7 +15,7 @@ const UserItem = (props) => {
   }
 
   const profileOrDeleteButton = () => {
-    return !props.windowProps.location.pathname.includes(user.id) ? <button><NavLink to={'/users/' + user.id}>See Profile</NavLink></button> : <button onClick={handleDelete}>Delete</button>
+    return !props.windowProps.location.pathname.includes(user.id) ? <button><NavLink to={'/users/' + user.id + '/s'}>See Profile</NavLink></button> : <button onClick={handleDelete}>Delete</button>
   }
 
   const editUserButton = () => {

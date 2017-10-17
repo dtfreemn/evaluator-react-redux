@@ -25,8 +25,8 @@ class UsersContainer extends React.Component {
     }
   }
 
-  chartComponent = () => {
-    if (this.props.match.params.id && this.props.match.params.id !== 'new') {
+  chartContainer = () => {
+    if (this.props.match.params.id && this.props.match.params.id !== 'new' && this.props.users.length > 0) {
       return <UserChartContainer user={this.filterUsers()} />
     }
   }
@@ -48,8 +48,10 @@ class UsersContainer extends React.Component {
 
   editUserForm = () => {
     if (this.props.location.pathname.split('/').includes('edit') && this.props.users.length > 0) {
-      let user = this.filterUsers()[0]
-      return <EditUserForm user={user} id={this.props.match.params.id} {...this.props}/>
+      if (this.filterUsers().length > 0) {
+        let user = this.filterUsers()[0]
+        return <EditUserForm user={user} id={this.props.match.params.id} {...this.props}/>
+      }
     }
   }
 
@@ -68,7 +70,7 @@ class UsersContainer extends React.Component {
           </thead>
           <UsersList users={this.filterUsers()} windowProps={this.props}/>
         </table>
-        {this.chartComponent()}
+        {this.chartContainer()}
       </div>
     )
   }

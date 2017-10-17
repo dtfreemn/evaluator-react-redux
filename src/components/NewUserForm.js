@@ -6,7 +6,7 @@ import UserForm from './UserForm'
 const NewUserForm = (props) => {
 
   const handleSubmit = (user) => {
-    props.submitNewUser(user)
+    props.submitNewUser(user, props)
   }
 
   return (
@@ -17,8 +17,8 @@ const NewUserForm = (props) => {
 
 function mapDispatchToProps(dispatch) {
   return {
-    submitNewUser: (user) => {
-        dispatch(createUser(user))
+    submitNewUser: (user, props) => {
+        dispatch(createUser(user, props))
       }
   }
 }

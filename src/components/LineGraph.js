@@ -12,7 +12,7 @@ class LineGraph extends React.Component {
     const scores = this.filterScoresByCurrentFilter()
     return scores.map(score => {
       let date = new Date(score.created_at.split('T')[0])
-      return `Admin: ${score.administrator.first_name[0]}. ${score.administrator.last_name} -- ${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`
+      return `Admin: ${score.administrator.first_name[0]}. ${score.administrator.last_name} -- ${date.getMonth()}/${date.getDate()}/${date.getFullYear()}`
     })
   }
 

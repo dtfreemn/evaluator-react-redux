@@ -159,7 +159,7 @@ table thead tr td.table-header {
 
 /* START USER CHART */
 .chart {
-  margin-top: 5%;
+  margin-top: 2%;
   margin-bottom: 10%;
   margin-left: 5%;
   max-width: 90%;
@@ -223,6 +223,16 @@ table thead tr td.table-header {
 
 .underline {
   text-decoration: underline;
+}
+
+.charts-container table tbody tr td.no-underline span {
+  text-decoration: none;
+}
+
+#chart-filter {
+  margin-top: 15px;
+  margin-left: 70px;
+  margin-bottom: 0;
 }
 
 
