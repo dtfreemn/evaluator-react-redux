@@ -26,7 +26,6 @@ class NewScoreForm extends React.Component {
   handleChange = (e) => {
     let newScore = this.state.scores[e.target.id]
     newScore[e.target.name] = e.target.value
-
     this.setState({
       scores: Object.assign({}, this.state.scores, {[e.target.id]: newScore})
     })
@@ -37,11 +36,14 @@ class NewScoreForm extends React.Component {
     const employeeId = {employeeID: document.getElementById('employeeID').value}
     let finalScoresObj = {}
     for (let key in this.state.scores) {
-      if (this.state.scores[key]['score'] !== '' && this.state.scores[key]['note'] !== '') {
-        finalScoresObj[key] = this.state.scores[key]
+      if (isNaN(this.state.scores[key]['score'])) {
+        alert('All scores must be a number')
+        return
       } else if (this.state.scores[key]['score'] !== '' || this.state.scores[key]['note'] !== '') {
         alert('You must fill out both the score and the note for any item that you choose to evaluate. If you do not want to score an item, please leave both inputs blank.')
         return
+      } else if (this.state.scores[key]['score'] !== '' && this.state.scores[key]['note'] !== '') {
+        finalScoresObj[key] = this.state.scores[key]
       }
     }
 
@@ -93,6 +95,8 @@ class NewScoreForm extends React.Component {
          {this.makeInputs()}
          <button onClick={this.incrementActionSteps}>Add Action Step</button><br/><br/>
          {this.makeActionStepInputs()}
+         
+        <div className='submission-warning'>NOTE: Please confirm that your intended submissions are correct. You will not be able to undo any score submission after clicking submit.</div>
          <button type="submit">Submit Evaluation</button>
         </form>
       )

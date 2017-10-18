@@ -102,6 +102,7 @@
 
 .container table {
   width: 100%;
+  border-collapse: collapse;
 }
 
 table thead tr td.table-header {
@@ -116,7 +117,6 @@ table thead tr td.table-header {
   /*border: 1px solid black;*/
   width: 400px;
   font-size: 1.4em;
-  border-radius: 10px;
 }
 /*END CONTAINER*/
 
@@ -150,10 +150,21 @@ table thead tr td.table-header {
 @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
 
 /* START NEW USER FORM */
-.new-user-form input {
-  border-radius: 25px;
-  padding: 5px;
-  margin: 5px;
+.create-edit-form input {
+  border-radius: 5px;
+  padding: 10px;
+  margin: 10px;
+  border: 1px solid #e3e5e8;
+  font-size: 1.2em;
+}
+
+.create-edit-form {
+  margin-left: 75px;
+}
+
+.create-edit-form span.create-edit-label {
+  font-family: 'Varela', sans-serif;
+  font-size: 1.3em;
 }
 /* END NEW USER FORM*/
 
@@ -234,5 +245,33 @@ table thead tr td.table-header {
   margin-left: 70px;
   margin-bottom: 0;
 }
+
+/* START EVAL ITEMS TABLE */
+.eval-items-table td {
+  width: 600px;
+  font-size: 1.1em;
+  font-family: 'Varela', sans-serif;
+  white-space: normal;
+}
+
+.eval-items-table {
+  border-collapse: collapse;
+}
+
+tr.bottom td {
+  border-bottom: thin solid #e3e5e8;
+  padding: 10px;
+}
+
+/* END EVAL ITEMS TABLE */
+
+/* START NEW EVAL ITEMS FORM */
+.submission-warning {
+  color: red;
+  text-decoration: italic;
+  font-size: 0.7em;
+  margin-bottom: 10px;
+}
+/* END NEW EVAL ITEMS FORM */
 
 

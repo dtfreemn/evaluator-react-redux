@@ -7,11 +7,16 @@ const EvalItem = (props) => {
   const item = props.info
 
   const handleDelete = (e) => {
+    alert('If you delete item, all association scores will also be deleted and will not be recoverable. Are you sure you want to delete this item?')
     props.deleteEvalItem(item)
   }
 
   return (
-    <p>{item.name} -- {item.description} <button onClick={handleDelete}>X</button></p>
+    <tr className='bottom'>
+      <td>{item.name}</td>
+      <td>{item.description}</td>
+      <td><button onClick={handleDelete}>Delete This Evaluation Item</button></td>
+    </tr>
   )
 }
 

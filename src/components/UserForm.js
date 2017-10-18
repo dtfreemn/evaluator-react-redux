@@ -27,9 +27,9 @@ class Form extends React.Component {
   render() {
     return (
       <form className='form fade-in' onSubmit={this.handleSubmit}>
-          First Name: <input type="text" id='firstName' value={this.state.firstName} onChange={this.handleChange} required/>
-          Last Name: <input type="text" id='lastName' value={this.state.lastName} onChange={this.handleChange} required/>
-          Email: <input type="email" id='email' value={this.state.email} onChange={this.handleChange} required/>
+          <span className='create-edit-form-label'>First Name: </span><input type="text" id='firstName' value={this.state.firstName} onChange={this.handleChange} required/>
+         <span className='create-edit-form-label'>Last Name: </span><input type="text" id='lastName' value={this.state.lastName} onChange={this.handleChange} required/>
+          <span className='create-edit-form-label'>Email: </span><input type="email" id='email' value={this.state.email} onChange={this.handleChange} required/>
           <input type="submit" value="Submit"/>
       </form>
     )

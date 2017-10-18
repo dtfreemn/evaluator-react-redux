@@ -14,8 +14,16 @@ class EvalItemsContainer extends React.Component {
 
   render() {
     return (
-      <div className='container fade-in'>
-        <EvalItemsList evalItems={this.props.evalItems}/>
+      <div className='container large fade-in'>
+        <table className='eval-items-table'>
+          <thead>
+            <tr>
+              <td className='table-header'>Evaluation Item</td>
+              <td className='table-header'>Item Description</td>
+            </tr>
+          </thead>
+          <EvalItemsList evalItems={this.props.evalItems}/>
+        </table>
       </div>
 
     )

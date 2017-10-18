@@ -8,7 +8,9 @@ const EvalItemsList = (props) => {
   }
 
   return (
-    <div>{createEvalItems()}</div>
+    <tbody>
+      {createEvalItems()}
+    </tbody>
   )
 
 }

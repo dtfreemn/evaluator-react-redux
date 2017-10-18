@@ -33,7 +33,7 @@ class UsersContainer extends React.Component {
 
   userSearch = () => {
     if (this.props.location.pathname === '/users') {
-      return <input type='text' placeholder='search users' value={this.state.searchFilter} onChange={this.handleSearchChange} />
+      return <div className='create-edit-form'><input type='text' placeholder='search for employee' value={this.state.searchFilter} onChange={this.handleSearchChange} /></div>
     } else {
       return null
     }

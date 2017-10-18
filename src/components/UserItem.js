@@ -30,7 +30,7 @@ const UserItem = (props) => {
   // }
 
   return (
-    <tr data-id={user.id}>
+    <tr className='bottom' data-id={user.id}>
       <td>{user.first_name} {profileOrDeleteButton()} {editUserButton()}</td>
       <td>{user.last_name}</td>
       <td>{user.email}</td>

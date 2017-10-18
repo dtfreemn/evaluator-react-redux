@@ -10,7 +10,9 @@ const NewUserForm = (props) => {
   }
 
   return (
-    <UserForm handleSubmit={handleSubmit} firstName={''} lastName={''} email={''}/>
+    <div className='create-edit-form'>
+      <UserForm handleSubmit={handleSubmit} firstName={''} lastName={''} email={''}/>
+    </div>
   )
   
 }

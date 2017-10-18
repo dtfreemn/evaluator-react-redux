@@ -23,18 +23,18 @@ class App extends Component {
     const AuthNewScoreFormContainer = Authorize(NewScoreFormContainer)
 
     return (
-      <div className="App base-grey-background">
+      <div className='App'>
         <Route path='/' render={(props) => <NavBar {...props}/>}/>
         <Route path='/' render={(props) => <MenuLeft {...props}/>}/>
         <Switch>
             <Route exact path='/login' render={(props) => <AuthLogInForm {...props}/>} />
-            <Route exact path='/users/new' render={(props) => <div><AuthNewUserForm {...props}/><AuthUsersContainer {...props}/></div>} />
-            <Route exact path='/users' component={AuthUsersContainer} />
-            <Route exact path='/users/:id/s' component={AuthUsersContainer} />
-            <Route exact path='/users/:id/edit' component={AuthUsersContainer} />
-            <Route exact path='/eval_items/new' render={(props) => <div><AuthNewEvalItemForm {...props}/><AuthEvalItemsContainer {...props}/></div>} />
-            <Route exact path ='/eval_items' component={AuthEvalItemsContainer} />
-            <Route exact path='/scores/new' component={AuthNewScoreFormContainer} />
+            <Route exact path='/users/new' render={(props) => <div className='container'><AuthNewUserForm {...props}/><AuthUsersContainer {...props}/></div>} />
+            <Route exact path='/users' render={(props) => <div className='container'><AuthUsersContainer {...props}/></div>} />
+            <Route exact path='/users/:id/s' render={(props) => <div className='container'><AuthUsersContainer {...props}/></div>} />
+            <Route exact path='/users/:id/edit' render={(props) => <div className='container'><AuthUsersContainer {...props}/></div>} />
+            <Route exact path='/eval_items/new' render={(props) => <div className='container'><AuthNewEvalItemForm {...props}/><AuthEvalItemsContainer {...props}/></div>} />
+            <Route exact path ='/eval_items' render={(props) => <div className='container'><AuthEvalItemsContainer {...props}/></div>} />
+            <Route exact path='/scores/new' render={(props) => <div className='container'><AuthNewScoreFormContainer {...props}/></div>} />
             <Route path='*' component={ErrorPage}/>
         </Switch>
       </div>
