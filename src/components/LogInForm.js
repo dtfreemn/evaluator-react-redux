@@ -29,7 +29,7 @@ class LogInForm extends React.Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit} className='greydient form log-in-form fade-in'>
+      <form onSubmit={this.handleSubmit} className='form create-edit-form log-in-form fade-in'>
         <input id='email' type="text" placeholder='user@email.com' onChange={this.handleChange}/>
         <input id='password' type="password" onChange={this.handleChange} />
         <input type="submit" value='Submit'/>

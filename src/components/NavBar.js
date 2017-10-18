@@ -12,7 +12,7 @@ const NavBar = (props) => {
     props.history.push('/login')
   }
 
-  const logOutButton = localStorage.getItem('jwt') ? <button onClick={handleClick}>Log Out</button> : null
+  const logOutButton = localStorage.getItem('jwt') ? <button onClick={handleClick}><strong>Log Out</strong></button> : null
 
   return (
     <div id='nav-bar'>

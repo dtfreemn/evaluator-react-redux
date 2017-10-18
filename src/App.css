@@ -31,7 +31,7 @@
 /*START NAVBAR*/
 #nav-bar {
   grid-column: 1/5;
-  /*MARTINA SAYS NO background: linear-gradient(to top, rgba(98,125,77,1) 16%, rgba(98,125,77,1) 24%, rgba(92,119,71,1) 31%, rgba(31,59,8,1) 100%);*/
+  /*background: linear-gradient(to top, rgba(98,125,77,1) 16%, rgba(98,125,77,1) 24%, rgba(92,119,71,1) 31%, rgba(31,59,8,1) 100%);*/
   background: darkgreen;
   -webkit-box-shadow: 0px 2px 5px 3px rgba(0,0,0,0.39);
   margin-bottom: 15px;
@@ -41,18 +41,27 @@
 
 #nav-bar span.logo {
   grid-row: 1;
-  grid-column: 5;
+  grid-column: 5/6;
   margin-left: 40px;
   color: white;
   font-family: 'Patua One', cursive;
   font-size: 2em;
 }
 
-#nav-bar a {
-  color: white;
+#nav-bar button {
+  color: darkgreen;
   grid-row: 1;
-  margin-top: 10px;
+  margin-right: 40px;
+  margin-bottom: 4px;
   text-align: center;
+  background: white;
+  border: none;
+  font-size: 1em;
+  font-family: 'Patua One', cursive;
+}
+
+#nav-bar button:hover {
+  background: #e3e5e8;
 }
 
 /*END NAVBAR*/
@@ -116,8 +125,11 @@ table thead tr td.table-header {
   text-align: center;
   /*border: 1px solid black;*/
   width: 400px;
+  min-width: 350px;
   font-size: 1.4em;
+  margin-left: 0;
 }
+
 /*END CONTAINER*/
 
 /* START FORM */
@@ -132,8 +144,8 @@ table thead tr td.table-header {
 
 .log-in-form {
   grid-row: 2;
-  grid-column: 2/3;
-  margin-left: 275px;
+  grid-column: 2;
+  padding-left: 220px;
 }
 /* END FORM */
 
@@ -143,7 +155,7 @@ table thead tr td.table-header {
 
     animation-fill-mode:forwards;  /* this makes sure that after animation is done we remain at the last keyframe value (opacity: 1)*/
 
-    animation-duration:0.7s;
+    animation-duration:0.2s;
     animation-delay: 0s
 }
 
