@@ -11,10 +11,10 @@ class EvalItemsContainer extends React.Component {
     itemToDelete: null
   }
   componentDidMount() {
-    if (this.props.evalItems.length === 0) {
-      this.props.fetchEvalItems()
-    }
+    this.props.hideDeleteReview()
+    this.props.fetchEvalItems()
   }
+
 
   handleDeleteItem = (item) => {
     if (!this.props.isDeletingItem) {
@@ -26,8 +26,6 @@ class EvalItemsContainer extends React.Component {
       this.props.deleteEvalItem(item)
       this.props.hideDeleteReview()
     }
-
-    // this.props.deleteEvalItem(item)
   }
 
 
@@ -48,7 +46,7 @@ class EvalItemsContainer extends React.Component {
       )
     } else {
       return (
-        <DeleteEvalItemConfirm handleDelete={this.handleDeleteItem} item={this.state.itemToDelete} hideSelf={this.props.hideDeleteReview}/>
+        <DeleteEvalItemConfirm handleDelete={this.handleDeleteItem} item={this.state.itemToDelete} hideSelf={this.props.hideDeleteReview} {...this.props}/>
       )
     }
   }

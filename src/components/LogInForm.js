@@ -27,14 +27,27 @@ class LogInForm extends React.Component {
     })
   }
 
+  errorMessage = () => {
+    if (this.props.error) {
+      return <div className='error-message'>User not found</div>
+    }
+  }
+
   render() {
     return (
       <form onSubmit={this.handleSubmit} className='form create-edit-form log-in-form fade-in'>
+        {this.errorMessage()}
         <input id='email' type="text" placeholder='user@email.com' onChange={this.handleChange}/>
         <input id='password' placeholder='password' type="password" onChange={this.handleChange} /><br/>
         <input id='log-in-submit' type="submit" value='Log In'/>
       </form>
     )
+  }
+}
+
+function mapStateToProps(state) {
+  return {
+    error: state.isError
   }
 }
 
@@ -49,4 +62,4 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-export default connect(null, mapDispatchToProps)(LogInForm);
+export default connect(mapStateToProps, mapDispatchToProps)(LogInForm);

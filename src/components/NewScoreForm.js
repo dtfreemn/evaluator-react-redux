@@ -18,7 +18,7 @@ class NewScoreForm extends React.Component {
   
   makeInputs = () => {
     if (this.state) {
-      return this.props.evalItems.map(item => <p key={item.id}>{item.name} -- {item.description}: <input type='text' id={item.id} name='score' placeholder='score' value={this.state.scores[`${item.id}`]['score']} onChange={this.handleChange}/> <textarea id={item.id} type='text' name='note' placeholder='notes' value={this.state.scores[`${item.id}`]['note']} onChange={this.handleChange}/></p>)
+      return this.props.evalItems.map(item => <tr key={item.id}><td className='score-cell'>{item.name}</td><td className='score-cell'>{item.description}</td><td className='score-cell'><input className='score-cell-input'type='text' id={item.id} name='score' value={this.state.scores[`${item.id}`]['score']} onChange={this.handleChange}/></td><td className='score-cell'><textarea id={item.id} type='text' name='note' value={this.state.scores[`${item.id}`]['note']} onChange={this.handleChange}/></td></tr>)
     } else {
       return null
     }
@@ -106,7 +106,7 @@ class NewScoreForm extends React.Component {
     let num = this.state.actionStepCount
     let inputs = []
     for (let i = 0; i < num; i++) {
-      let newInput = <div key={i}>New Action Step: <br/><textarea id={i} onChange={this.handleActionStepInputChange} value={this.state.actionSteps[i]}/><br/><br/></div>
+      let newInput = <div key={i}><span className='table-header'>Action Step {i+1} </span><br/><textarea className='action-step-entry' id={i} onChange={this.handleActionStepInputChange} value={this.state.actionSteps[i]}/><br/><br/></div>
       inputs.push(newInput)
     }
     return inputs
@@ -115,7 +115,7 @@ class NewScoreForm extends React.Component {
   employeeBeingReviewed = () => {
     if (this.state.employeeId && this.state.employeeId!== '') {
       let employee = this.props.employees.filter(employee => employee.id === parseInt(this.state.employeeId,10))[0]
-      return `You have chosen to evaluate ${employee.first_name} ${employee.last_name}`
+      return `${employee.first_name} ${employee.last_name}`
     } else {
       return ''
     }
@@ -124,17 +124,31 @@ class NewScoreForm extends React.Component {
   render() {
     if (this.state && !this.props.isReviewingScore) {
       return (
-        <form id='new-score-form' className='form fade-in'>
-         Employee: <select id='employeeID' onChange={this.handleEmployeeSelectChange} required>{this.makeEvalEmpSelectOptions()}</select> <span>{this.employeeBeingReviewed()}</span>
-         {this.makeInputs()}
-         <button onClick={this.incrementActionSteps}>Add Action Step</button><br/><br/>
-         {this.makeActionStepInputs()}
-         <button onClick={this.handleSubmit}>Review Evaluation For Submit</button>
-        </form>
+        <div className='container large new-score-form'>
+          <form className='form fade-in'>
+            <select id='employeeID' onChange={this.handleEmployeeSelectChange} required>{this.makeEvalEmpSelectOptions()}</select><span className='table-header'>{this.employeeBeingReviewed()}</span>
+            <table className='top-margin'>
+              <thead>
+                <tr>
+                  <td className='table-header'>Evaluation Item</td>
+                  <td className='table-header'>Item Description</td>
+                  <td className='table-header'>Your Score</td>
+                  <td className='table-header'>Your Notes</td>
+                </tr>
+              </thead>
+              <tbody>
+                {this.makeInputs()}
+              </tbody>
+            </table>
+            <button className='green-white-button' onClick={this.incrementActionSteps}>Add Action Step</button><br/><br/>
+            {this.makeActionStepInputs()}
+            <button className='submit-score-button score-button float-right'onClick={this.handleSubmit}>Next</button>
+          </form>
+        </div>
       )
     } else if (this.state && this.props.isReviewingScore){
       return (
-        <NewScoreReviewSubmit showFormAgain={this.props.hideScoreReviewPage} submitNewScore={this.handleSubmit} scores={this.state.scores} actionSteps={this.state.actionSteps} evalItems={this.props.evalItems}/>
+        <NewScoreReviewSubmit showFormAgain={this.props.hideScoreReviewPage} submitNewScore={this.handleSubmit} scores={this.state.scores} actionSteps={this.state.actionSteps} evalItems={this.props.evalItems} employee={this.employeeBeingReviewed()}/>
       )
     } else {
       return (

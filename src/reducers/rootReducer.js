@@ -1,4 +1,4 @@
-export function rootReducer(state = { currentUser: localStorage.getItem('jwt'), currentOrg: localStorage.getItem('org'), users: [], evalItems: [] , chartFilter: 'default', isLoading: false, isReviewingScore: false, attemptingItemDelete: false }, action) {
+export function rootReducer(state = { currentUser: localStorage.getItem('jwt'), currentOrg: localStorage.getItem('org'), users: [], evalItems: [] , chartFilter: 'default', isLoading: false, isReviewingScore: false, attemptingItemDelete: false, isError: false }, action) {
   switch (action.type) {
     //users actions
     case 'SET_ALL_USERS':
@@ -24,6 +24,13 @@ export function rootReducer(state = { currentUser: localStorage.getItem('jwt'), 
     //toggle loading
     case 'TOGGLE_LOADING':
       return Object.assign({}, state, { isLoading: !state.isLoading } )
+
+    //toggle error on page
+    case 'ERROR':
+      return Object.assign({}, state, { isError: true })
+
+    case 'CANCEL_ERROR':
+      return Object.assign({}, state, { isError: false })
 
     //scores review page
     case 'IS_REVIEWING_SCORE':

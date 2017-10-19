@@ -17,7 +17,7 @@ const NavBar = (props) => {
   return (
     <div id='nav-bar'>
       {logOutButton}
-      <span className='logo'>Evaluator</span>
+      <span className='logo'>E-Valuator</span>
     </div>
   )
 }

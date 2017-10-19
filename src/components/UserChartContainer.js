@@ -2,6 +2,8 @@ import React from 'react';
 import BarChart from './BarChart'
 import LineGraph from './LineGraph'
 import ChartFilter from './ChartFilter'
+import UserScoresList from './UserScoresList'
+import UserActionStepsList from './UserActionStepsList'
 import { connect } from 'react-redux'
 
 const UserChartContainer = (props) => {
@@ -27,46 +29,21 @@ const UserChartContainer = (props) => {
     }
   }
 
-  const makeScoreList = () => {
+  const filterScores = () => {
     if (props.currentChartFilter === 'default') { 
-      let scoresSortedByDate = props.user[0].scores.sort(function(a,b) {
+      return props.user[0].scores.sort(function(a,b) {
         if (b.created_at < a.created_at) return -1;
         if (b.created_at > a.created_at) return 1;
         return 0
       })
-      return scoresSortedByDate.map(score => {
-        let date = new Date(score.created_at.split('T')[0])
-        let dateString = `${date.getMonth()}/${date.getDate()}/${date.getFullYear()}`
-        return <tr key={score.id}>
-          <td>{score.eval_item.name}<br/>({score.administrator.first_name[0]}. {score.administrator.last_name})</td>
-          <td>{score.score}</td>
-          <td>{score.note}</td>
-          <td>{dateString}</td>
-        </tr>
-      })
     } else {
       let scores = props.user[0].scores.filter(score => score.eval_item.name === props.currentChartFilter)
-      return scores.map(score => {
-        let date = new Date(score.created_at.split('T')[0])
-        let dateString = `${date.getMonth()}/${date.getDate()}/${date.getFullYear()}`
-        return <tr key={score.id}>
-          <td>{score.eval_item.name}<br/>({score.administrator.first_name[0]}. {score.administrator.last_name})</td>
-          <td>{score.score}</td>
-          <td>{score.note}</td>
-          <td>{dateString}</td>
-        </tr>
+      return scores.sort(function(a,b) {
+        if (b.created_at < a.created_at) return -1;
+        if (b.created_at > a.created_at) return 1;
+        return 0
       })
     }
-  }
-
-  const makeActionStepsList = () => {
-    return props.user[0].action_steps.map(step => 
-      <tr key={step.id}>
-        <td>{step.description}<br/>({step.administrator.first_name[0]}. {step.administrator.last_name})</td>
-        <td>{step.completed ? 'Complete' : 'Incomplete'}</td>
-        <td><button>Mark Complete</button></td>
-      </tr>
-    )
   }
 
   if (props.user.length > 0 && props.user[0].scores.length > 0) {
@@ -77,7 +54,7 @@ const UserChartContainer = (props) => {
         {graphToRender()}
       </div>
       <table id='scores-list'>
-        <tbody>
+        <thead>
           <tr>
             <td>Employee Scores</td>
           </tr>
@@ -87,11 +64,11 @@ const UserChartContainer = (props) => {
             <th className='underline'>Notes</th>
             <th className='underline'>Date</th>
           </tr>
-          {makeScoreList()}
-        </tbody>
+        </thead>
+        <UserScoresList scores={filterScores()}/>
       </table>
       <table id='action-steps'>
-        <tbody>
+        <thead>
           <tr>
             <td>Employee Action Steps</td>
           </tr>
@@ -99,8 +76,8 @@ const UserChartContainer = (props) => {
             <th className='underline'>Action Step</th>
             <th className='underline'>Status</th>
           </tr>
-          {makeActionStepsList()}
-        </tbody>
+        </thead>
+        <UserActionStepsList actionSteps={props.user[0].action_steps}/>
       </table>
     </div>
   )} else if (props.user.length > 0) {

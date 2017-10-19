@@ -48,6 +48,11 @@
   border: 1px solid black;
 }
 
+td.profile-button-col {
+  max-width: 70px;
+  min-width: 0;
+}
+
 
 
 /*START NAVBAR*/
@@ -65,16 +70,16 @@
   grid-row: 1;
   grid-column: 5/6;
   margin-left: 40px;
+  margin-top: 5px;
   color: white;
   font-family: 'Patua One', cursive;
-  font-size: 2em;
+  font-size: 1.5em;
 }
 
 #nav-bar button {
   color: darkgreen;
   grid-row: 1;
   margin-right: 40px;
-  margin-bottom: 4px;
   text-align: center;
   background: white;
   border: none;
@@ -92,12 +97,15 @@
 .menu-left {
   grid-column: 1/2;
   /*border: 1px solid black;*/
-  text-align: center;
+  text-align: left;
   margin-top: 100px;
-  margin-left: 20px;
+  margin-left: 50px;
   grid-row: 2/3;
 }
 
+a.menu-button {
+  width: 100px;
+}
 /*.menu-left a {
   text-decoration: none;
   background-color: darkgreen;
@@ -130,12 +138,52 @@
 /*END MENU LEFT*/
 
 /*START NEW SCORE FORM*/
-#new-score-form {
+.new-score-form {
   text-align: left;
+  border-collapse: collapse
 }
 
-#new-score-form input {
-  width: 35px;
+select#employeeID {
+  font-family: 'Varela', sans-serif;
+  font-size: 1em;
+  margin: 5px;
+  color: #444;
+  line-height: 1.3;
+  border-radius: .2em;
+}
+
+.new-score-form td.score-cell input {
+  width: 50px;
+  height: 50px;
+  border-radius: 15px;
+  font-size: 1.5em;
+  text-align: center;
+}
+
+.new-score-form td.score-cell textarea {
+  width: 200px;
+  height: 100px;
+  border-radius: 15px;
+  font-size: 1em;
+  border: 1px solid grey;
+}
+
+.action-step-entry {
+  width: 500px;
+  height: 100px;
+  border-radius: 15px;
+  font-size: 1em;
+  text-align: left;
+  border: 1px solid grey;
+}
+
+.top-margin {
+  margin-top: 25px;
+}
+
+.new-score-form td.score-cell {
+  font-size: 1.2em;
+  border-bottom: thin solid #e3e5e8;
 }
 
 /*END NEW SCORE FORM*/
@@ -157,6 +205,16 @@ table thead tr td.table-header {
   font-family: 'Varela', sans-serif;
   font-size: 2em;
   text-decoration: underline;
+}
+
+.table-header {
+  font-family: 'Varela', sans-serif;
+  font-size: 2em;
+  text-decoration: underline;
+}
+
+span.table-header {
+  text-decoration: none;
 }
 
 .large td {
@@ -184,7 +242,7 @@ table thead tr td.table-header {
 .log-in-form {
   grid-row: 2;
   grid-column: 2;
-  padding-left: 220px;
+  padding-left: 300px;
 }
 
 #log-in-submit {
@@ -225,6 +283,7 @@ table thead tr td.table-header {
 
 /* START USER CHART */
 .chart {
+  grid-row: 2;
   margin-top: 2%;
   margin-bottom: 10%;
   margin-left: 5%;
@@ -253,10 +312,11 @@ table thead tr td.table-header {
 
 /* Position of lists on chart page...need to probably change to make chart container display grid with 2 rows and 2 columns*/
 #action-steps {
-  clear: right;
-  float:right;
+  /*margin-left: 10%;*/
   display: inline-block;
   width: 450px;
+  margin-bottom: 50px;
+  float: right;
 }
 
 #action-steps td {
@@ -265,9 +325,11 @@ table thead tr td.table-header {
 }
 
 #scores-list {
-  /*float:left;*/
+  float:left;
   display: inline-block;
   width: 450px;
+  margin-left: 2%;
+  margin-bottom: 50px;
 }
 
 #scores-list td {
@@ -276,6 +338,9 @@ table thead tr td.table-header {
 }
 
 /* SCORES AND ACTION STEPS TABLES IN CHART CONTAINER*/
+.charts-container {
+}
+
 .charts-container table {
   font-family: 'Varela', sans-serif;
   text-align: center;
@@ -287,7 +352,7 @@ table thead tr td.table-header {
   font-size: 0.5em;
   max-height: 350px;
   overflow-y: scroll;
-  word-break: break-all;
+  /*word-break: break-all;*/
 }
 
 .charts-container table tbody tr {
@@ -309,9 +374,20 @@ table thead tr td.table-header {
 }
 
 #chart-filter {
+  grid-column: 0/2;
+  grid-row: 1; 
   margin-top: 15px;
   margin-left: 70px;
   margin-bottom: 0;
+}
+
+select#chart-filter {
+  font-family: 'Varela', sans-serif;
+  font-size: 1em;
+  margin: 5px;
+  color: #444;
+  line-height: 1.3;
+  border-radius: .2em;
 }
 
 /* START EVAL ITEMS TABLE */
@@ -340,6 +416,13 @@ tr.bottom td {
 /* START SCORE REVIEW TABLE*/
 .score-review-table {
   border-collapse: collapse;
+}
+
+.highlight {
+  padding: 0 20px 0 20px;
+  border: 1px solid grey;
+  background: lightblue;
+  border-radius: 5px;
 }
 
 .score-review-table td {
@@ -381,8 +464,7 @@ tr.bottom td {
 }
 
 .edit-score-button:hover {
-  background: darkgreen;
-  color: white;
+  background: #c4c487;
 }
 
 .submit-score-button {
@@ -395,6 +477,21 @@ tr.bottom td {
   background: darkgreen;
 }
 
+.float-right {
+  margin-left: 85%;
+  width: 100px;
+}
+
 
 /* END SCORE REVIEW TABLE*/
 
+.error-message {
+  border-radius: 5px;
+  text-align: center;
+  background: #f9cfcf;
+  color: red;
+  padding: 10px;
+  margin: 10px;
+  border: 1px solid #e3e5e8;
+  font-size: 2em;
+}

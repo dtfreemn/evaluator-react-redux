@@ -21,8 +21,8 @@ class EditUserForm extends React.Component {
 
 function mapDispatchToProps(dispatch) {
   return {
-    editUser: (user, id, props) => {
-      dispatch(editUser(user, id, props))
+    editUser: (user, userId, props) => {
+      dispatch(editUser(user, userId, props))
     }
   }
 }

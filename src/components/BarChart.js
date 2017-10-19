@@ -27,6 +27,17 @@ class BarChart extends React.Component {
     return finalItems
   }
 
+  setGraphMax = () => {
+    let max = 0
+    this.props.user.scores.forEach(score => {
+      if (score.score > max) {
+        max = score.score
+      }
+    })
+    max = (max + (max*0.1))
+    return max
+  }
+
   setGraphColors = () => {
     const colorsArray = makeArrayOfColors()
     const numberNeeded = Object.keys(this.getUniqueEvalItems())
@@ -45,12 +56,16 @@ class BarChart extends React.Component {
     return data
   }
 
+  makeOptions = () => {
+    return 
+  }
+
   render() {
     let that = this
     return (
         <Bar
           data={ this.makeDataset() }
-          options={ { legend: {display: false}, scales: { yAxes: [ { ticks: { beginAtZero: true, max: 5 } } ] },
+          options={ { legend: { display: false }, scales: { yAxes: [ { ticks: { beginAtZero: true, suggestedMax: 5 } } ] },
             tooltips: {
               callbacks: {
                 label: function(tooltipItem, data) {

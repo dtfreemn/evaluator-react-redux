@@ -39,8 +39,10 @@ const NewScoreReviewSubmit = (props) => {
   return (
     <div className='container fade-in'>
     <div className='align-left review-warning'>Please review your scores and action steps before submitting. Once you click submit, you will be unable to edit any part of your submission.</div><br/><br/>
+    <div><span className='table-header highlight'>{props.employee}</span><br/><button className='edit-score-button score-button' onClick={handleBack}>I Want To Edit My Submission</button></div><br/><br/>
     <table className='score-review-table'>
       <thead>
+
         <tr>
           <th className='align-left'>Evaluation Item</th>
           <th className='align-left'>Your Score</th>
@@ -63,7 +65,7 @@ const NewScoreReviewSubmit = (props) => {
       </tbody>
     </table>
     <br/><br/>
-    <button className='edit-score-button score-button' onClick={handleBack}>I Want To Edit My Submission</button><br/><br/>
+    <br/><br/>
     <button className='submit-score-button score-button' onClick={handleSubmit}>Submit My Scores and Action Steps</button>
     </div>
     )

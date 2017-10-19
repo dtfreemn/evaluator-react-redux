@@ -1,4 +1,5 @@
 import { baseURL } from '../urls'
+import { isError, cancelError } from './loadingAndErrors'
 
 export function fetchAllUsers() {
   return function(dispatch) {
@@ -94,10 +95,10 @@ export function logInToApi(emailPassword, props) {
           localStorage.setItem('org', loggedInUserInfo.admin.organization_id)
           const payload = Object.assign({}, {jwt: loggedInUserInfo.jwt, org_id: loggedInUserInfo.admin.organization_id})
           dispatch(setLoggedInUserAndOrg(payload))
+          dispatch(cancelError())
           props.history.push('/users')
       } else if (loggedInUserInfo.error) {
-        // props.history.push('/login')
-        //CREATE ACTION TO DISPATCH AN ERROR TO STATE THEN CHECK IN LOGIN FORM IF THERE'S AN ERROR
+        dispatch(isError())
       }
       })
   }
