@@ -12,7 +12,7 @@ class EditUserForm extends React.Component {
   render() {
     return (
       <div className='create-edit-form'>
-        <UserForm handleSubmit={this.handleSubmit} firstName={this.props.user.first_name} lastName={this.props.user.last_name} email={this.props.user.email}/>
+        <UserForm handleSubmit={this.handleSubmit} firstName={this.props.user.first_name} lastName={this.props.user.last_name} email={this.props.user.email} {...this.props}/>
       </div>
     )
   }

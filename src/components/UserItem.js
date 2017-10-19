@@ -15,12 +15,12 @@ const UserItem = (props) => {
   }
 
   const profileOrDeleteButton = () => {
-    return !props.windowProps.location.pathname.includes(user.id) ? <button><NavLink to={'/users/' + user.id + '/s'}>See Profile</NavLink></button> : <button onClick={handleDelete}>Delete</button>
+    return !props.windowProps.location.pathname.includes(user.id) ? <NavLink className='profile-delete-edit-button' to={'/users/' + user.id + '/s'}>See Profile</NavLink> : <button className='profile-delete-edit-button' onClick={handleDelete}>Delete</button>
   }
 
   const editUserButton = () => {
     if (props.windowProps.location.pathname.includes(user.id) && !props.windowProps.location.pathname.includes('edit')) {
-      return <button><NavLink to={'/users/' + user.id + '/edit'}>Edit</NavLink></button>
+      return <NavLink className='profile-delete-edit-button' to={'/users/' + user.id + '/edit'}>Edit</NavLink>
     }
   }
 
@@ -31,7 +31,7 @@ const UserItem = (props) => {
 
   return (
     <tr className='bottom' data-id={user.id}>
-      <td>{user.first_name} {profileOrDeleteButton()} {editUserButton()}</td>
+      <td>{profileOrDeleteButton()} {user.first_name} {editUserButton()}</td>
       <td>{user.last_name}</td>
       <td>{user.email}</td>
     </tr>

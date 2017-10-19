@@ -11,7 +11,7 @@ const NewUserForm = (props) => {
 
   return (
     <div className='create-edit-form'>
-      <UserForm handleSubmit={handleSubmit} firstName={''} lastName={''} email={''}/>
+      <UserForm handleSubmit={handleSubmit} firstName={''} lastName={''} email={''} {...props}/>
     </div>
   )
   

@@ -58,3 +58,15 @@ export function clearAllEvalItems() {
     type: 'CLEAR_ALL_EVAL_ITEMS'
   }
 }
+
+export function startEvalItemDelete() {
+  return {
+    type: 'IS_DELETING_EVAL_ITEM'
+  }
+}
+
+export function endEvalItemDelete() {
+  return {
+    type: 'IS_NOT_DELETING_EVAL_ITEM'
+  }
+}

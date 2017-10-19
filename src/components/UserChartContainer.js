@@ -30,8 +30,8 @@ const UserChartContainer = (props) => {
   const makeScoreList = () => {
     if (props.currentChartFilter === 'default') { 
       let scoresSortedByDate = props.user[0].scores.sort(function(a,b) {
-        if (a.created_at < b.created_at) return -1;
-        if (a.created_at > b.created_at) return 1;
+        if (b.created_at < a.created_at) return -1;
+        if (b.created_at > a.created_at) return 1;
         return 0
       })
       return scoresSortedByDate.map(score => {
@@ -85,6 +85,7 @@ const UserChartContainer = (props) => {
             <th className='underline'>Item/Admin</th>
             <th className='underline'>Score</th>
             <th className='underline'>Notes</th>
+            <th className='underline'>Date</th>
           </tr>
           {makeScoreList()}
         </tbody>

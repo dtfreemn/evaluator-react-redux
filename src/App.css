@@ -28,6 +28,28 @@
 }
 /*END APP*/
 
+#users-container {
+  margin-left: 0;
+}
+
+.profile-delete-edit-button {
+  border-radius: 5px;
+  border: 1px solid #e3e5e8;
+  background: darkgreen;
+  color: white;
+  text-decoration: none;
+  font-size: 0.7em;
+  padding: 3px 10px 3px 10px;
+}
+
+.profile-delete-edit-button:hover {
+  color: darkgreen;
+  background: white;
+  border: 1px solid black;
+}
+
+
+
 /*START NAVBAR*/
 #nav-bar {
   grid-column: 1/5;
@@ -76,7 +98,7 @@
   grid-row: 2/3;
 }
 
-.menu-left a {
+/*.menu-left a {
   text-decoration: none;
   background-color: darkgreen;
   color: white;
@@ -87,18 +109,35 @@
   border-left: 1px solid #CCCCCC;
   border-radius: 15px;
   width: 50px;
+}*/
+
+.green-white-button {
+  border-radius: 5px;
+  padding: 5px 15px 5px 15px;
+  border: 1px solid #e3e5e8;
+  font-size: 1.2em;
+  background: darkgreen;
+  color: white;
+  text-decoration: none;
+}
+
+.green-white-button:hover {
+  color: darkgreen;
+  background: white;
+  border: 1px solid black;
 }
 
 /*END MENU LEFT*/
 
 /*START NEW SCORE FORM*/
+#new-score-form {
+  text-align: left;
+}
+
 #new-score-form input {
   width: 35px;
 }
 
-#new-score-form {
-  text-align: left;
-}
 /*END NEW SCORE FORM*/
 
 /*START CONTAINER*/
@@ -125,7 +164,7 @@ table thead tr td.table-header {
   text-align: center;
   /*border: 1px solid black;*/
   width: 400px;
-  min-width: 350px;
+  min-width: 200px;
   font-size: 1.4em;
   margin-left: 0;
 }
@@ -146,6 +185,10 @@ table thead tr td.table-header {
   grid-row: 2;
   grid-column: 2;
   padding-left: 220px;
+}
+
+#log-in-submit {
+  width: 230px;
 }
 /* END FORM */
 
@@ -171,10 +214,10 @@ table thead tr td.table-header {
 }
 
 .create-edit-form {
-  margin-left: 75px;
+  margin-left: 50px;
 }
 
-.create-edit-form span.create-edit-label {
+.create-edit-form span.create-edit-form-label {
   font-family: 'Varela', sans-serif;
   font-size: 1.3em;
 }
@@ -199,24 +242,37 @@ table thead tr td.table-header {
 /* START ERROR PAGE */
   
 #error-page {
-  grid-column: 2/5;
+  grid-column: 3;
   margin-top: 200px;
   font-family: 'Varela', sans-serif;
   font-size: 3em;
+  text-align: center;
 }
 
 /* END ERROR PAGE */
 
 /* Position of lists on chart page...need to probably change to make chart container display grid with 2 rows and 2 columns*/
 #action-steps {
-  float: right;
+  clear: right;
+  float:right;
   display: inline-block;
   width: 450px;
 }
 
+#action-steps td {
+  max-width: 150px;
+  font-size: 1.5em;
+}
+
 #scores-list {
-  float:left;
+  /*float:left;*/
   display: inline-block;
+  width: 450px;
+}
+
+#scores-list td {
+  max-width: 100px;
+  font-size: 1.5em;
 }
 
 /* SCORES AND ACTION STEPS TABLES IN CHART CONTAINER*/
@@ -239,7 +295,7 @@ table thead tr td.table-header {
 }
 
 .charts-container table td {
-  width: 150px;
+  width: 100px;
   border-bottom: 1px solid grey;
   border-radius: 0;
 }
@@ -278,12 +334,67 @@ tr.bottom td {
 /* END EVAL ITEMS TABLE */
 
 /* START NEW EVAL ITEMS FORM */
-.submission-warning {
-  color: red;
-  text-decoration: italic;
-  font-size: 0.7em;
-  margin-bottom: 10px;
-}
+
 /* END NEW EVAL ITEMS FORM */
 
+/* START SCORE REVIEW TABLE*/
+.score-review-table {
+  border-collapse: collapse;
+}
+
+.score-review-table td {
+  width: 300px;
+  font-family: 'Varela', sans-serif;
+  font-size: 1.3em;
+  white-space: normal;
+  /*border-right: thin solid #e3e5e8;*/
+}
+
+.score-review-table tr {
+  border-bottom: ;
+}
+
+.align-left {
+  text-align: left;
+  font-family: 'Varela', sans-serif;
+  font-size: 2em;
+  text-decoration: underline;
+}
+
+.review-warning {
+  font-size: 1.5em;
+  color: red;
+  text-decoration: underline;
+}
+
+.score-button {
+  border-radius: 5px;
+  padding: 10px;
+  margin: 10px;
+  border: 1px solid #e3e5e8;
+  font-size: 1.2em;
+}
+
+.edit-score-button {
+  background: yellow;
+  border: 1px solid black;
+}
+
+.edit-score-button:hover {
+  background: darkgreen;
+  color: white;
+}
+
+.submit-score-button {
+  background: red;
+  color: white;
+  border: 1px solid black;
+}
+
+.submit-score-button:hover {
+  background: darkgreen;
+}
+
+
+/* END SCORE REVIEW TABLE*/
 

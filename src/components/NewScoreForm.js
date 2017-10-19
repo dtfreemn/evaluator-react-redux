@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux'
-import { createNewScoresAndActionSteps } from '../actions/scores'
+import { createNewScoresAndActionSteps, isReviewingScore, isNotReviewingScore } from '../actions/scores'
+import NewScoreReviewSubmit from './NewScoreReviewSubmit'
 
 class NewScoreForm extends React.Component {
 
@@ -10,7 +11,7 @@ class NewScoreForm extends React.Component {
 
   makeInitialState = () => {
     let ids = this.props.evalItems.map(item => item.id)
-    let stateObj = { scores: {}, actionStepCount: 0 , actionSteps: {} }
+    let stateObj = { scores: {}, actionStepCount: 0 , actionSteps: {} , employeeId: ''}
     ids.forEach(id => stateObj.scores[id] = {score: '', note: ''})
     this.setState(stateObj)
   }
@@ -31,15 +32,29 @@ class NewScoreForm extends React.Component {
     })
   }
 
+  handleEmployeeSelectChange = (e) => {
+    this.setState({
+      employeeId: e.target.value
+    })
+  }
+
   handleSubmit = (e) => {
     e.preventDefault()
-    const employeeId = {employeeID: document.getElementById('employeeID').value}
+    const employeeId = this.state.employeeId
+    
+    if (employeeId === '') {
+      alert('You must choose an employee to evaluate')
+      return
+    }
+
     let finalScoresObj = {}
+    let finalActionStepsObj = {}
+
     for (let key in this.state.scores) {
       if (isNaN(this.state.scores[key]['score'])) {
         alert('All scores must be a number')
         return
-      } else if (this.state.scores[key]['score'] !== '' || this.state.scores[key]['note'] !== '') {
+      } else if ((this.state.scores[key]['score'] === '' && this.state.scores[key]['note'] !== '') || (this.state.scores[key]['score'] !== '' && this.state.scores[key]['note'] === '')) {
         alert('You must fill out both the score and the note for any item that you choose to evaluate. If you do not want to score an item, please leave both inputs blank.')
         return
       } else if (this.state.scores[key]['score'] !== '' && this.state.scores[key]['note'] !== '') {
@@ -47,14 +62,25 @@ class NewScoreForm extends React.Component {
       }
     }
 
-    
-
     if (Object.keys(finalScoresObj).length === 0) {
       alert('You cannot submit an evaluation without scoring at least one item')
       return
     }
-    this.props.submitNewScore(finalScoresObj, this.state.actionSteps, employeeId)
-    this.makeInitialState()
+
+    for (let key in this.state.actionSteps) {
+      if (this.state.actionSteps[key] !== '') {
+        finalActionStepsObj[key] = this.state.actionSteps[key]
+      }
+    }
+    
+    if (!this.props.isReviewingScore) {
+      this.props.showScoreReviewPage()
+    } else {
+      this.props.submitNewScore(finalScoresObj, finalActionStepsObj, employeeId)
+      this.props.hideScoreReviewPage()
+      this.makeInitialState()
+    }
+
   }
 
   makeEvalEmpSelectOptions = () => {
@@ -86,23 +112,33 @@ class NewScoreForm extends React.Component {
     return inputs
   }
   
+  employeeBeingReviewed = () => {
+    if (this.state.employeeId && this.state.employeeId!== '') {
+      let employee = this.props.employees.filter(employee => employee.id === parseInt(this.state.employeeId,10))[0]
+      return `You have chosen to evaluate ${employee.first_name} ${employee.last_name}`
+    } else {
+      return ''
+    }
+  }
 
   render() {
-    if (this.state) {
+    if (this.state && !this.props.isReviewingScore) {
       return (
-        <form id='new-score-form' className='form fade-in' onSubmit={this.handleSubmit}>
-         Employee: <select id='employeeID'required>{this.makeEvalEmpSelectOptions()}</select>
+        <form id='new-score-form' className='form fade-in'>
+         Employee: <select id='employeeID' onChange={this.handleEmployeeSelectChange} required>{this.makeEvalEmpSelectOptions()}</select> <span>{this.employeeBeingReviewed()}</span>
          {this.makeInputs()}
          <button onClick={this.incrementActionSteps}>Add Action Step</button><br/><br/>
          {this.makeActionStepInputs()}
-         
-        <div className='submission-warning'>NOTE: Please confirm that your intended submissions are correct. You will not be able to undo any score submission after clicking submit.</div>
-         <button type="submit">Submit Evaluation</button>
+         <button onClick={this.handleSubmit}>Review Evaluation For Submit</button>
         </form>
+      )
+    } else if (this.state && this.props.isReviewingScore){
+      return (
+        <NewScoreReviewSubmit showFormAgain={this.props.hideScoreReviewPage} submitNewScore={this.handleSubmit} scores={this.state.scores} actionSteps={this.state.actionSteps} evalItems={this.props.evalItems}/>
       )
     } else {
       return (
-        <div> </div>
+      <div></div>
       )
     }
   }
@@ -112,8 +148,21 @@ function mapDispatchToProps(dispatch) {
   return {
     submitNewScore: (scores, actionSteps, employeeID) => {
       dispatch(createNewScoresAndActionSteps(scores, actionSteps, employeeID))
+    },
+    showScoreReviewPage: () => {
+      dispatch(isReviewingScore())
+    },
+    hideScoreReviewPage: () => {
+      dispatch(isNotReviewingScore())
     }
   }
 }
 
-export default connect(null, mapDispatchToProps)(NewScoreForm);
+function mapStateToProps(state) {
+  return {
+    isReviewingScore: state.isReviewingScore,
+    employees: state.users
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(NewScoreForm);
