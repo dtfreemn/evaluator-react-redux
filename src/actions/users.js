@@ -93,7 +93,7 @@ export function logInToApi(emailPassword, props) {
         if (loggedInUserInfo.admin) {
           localStorage.setItem('jwt', loggedInUserInfo.jwt)
           localStorage.setItem('org', loggedInUserInfo.admin.organization_id)
-          const payload = Object.assign({}, {jwt: loggedInUserInfo.jwt, org_id: loggedInUserInfo.admin.organization_id})
+          const payload = Object.assign({}, {jwt: loggedInUserInfo.jwt, org_id: loggedInUserInfo.admin.organization_id, evaluation_categories: loggedInUserInfo.admin.organization.evaluation_categories})
           dispatch(setLoggedInUserAndOrg(payload))
           dispatch(cancelError())
           props.history.push('/users')

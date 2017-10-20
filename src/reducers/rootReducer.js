@@ -1,10 +1,10 @@
-export function rootReducer(state = { currentUser: localStorage.getItem('jwt'), currentOrg: localStorage.getItem('org'), users: [], evalItems: [] , chartFilter: 'default', isLoading: false, isReviewingScore: false, attemptingItemDelete: false, isError: false }, action) {
+export function rootReducer(state = { currentUser: localStorage.getItem('jwt'), currentOrg: localStorage.getItem('org'), users: [], evalItems: [] , currentEvalCategories: [], chartFilter: 'default', isLoading: false, isReviewingScore: false, attemptingItemDelete: false, isError: false }, action) {
   switch (action.type) {
     //users actions
     case 'SET_ALL_USERS':
       return Object.assign({}, state, { users: action.payload } )
     case 'SET_LOGGED_IN_USER_AND_ORG':
-      return Object.assign({}, state, { currentUser: action.payload.jwt, currentOrg: action.payload.org_id } )
+      return Object.assign({}, state, { currentUser: action.payload.jwt, currentOrg: action.payload.org_id , currentEvalCategories: action.payload.evaluation_categories} )
     case 'CLEAR_CURRENT_USER_AND_ORG':
       return Object.assign({}, state, { currentUser: '', currentOrg: '', users: [] } )
     
