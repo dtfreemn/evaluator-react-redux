@@ -1,28 +1,38 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { createEvalItem } from '../actions/evalItems'
+import { fetchAllEvaluationCategories } from '../actions/categoriesAndPossiblePoints'
 import EvalItemForm from './EvalItemForm'
 
-const NewEvalItemForm = (props) => {
+class NewEvalItemForm extends React.Component {
 
-  const handleSubmit = (evalItem) => {
-    props.submitNewEvalItem(evalItem)
+  componentDidMount() {
+    this.props.fetchEvalCategories()
+  }
+  
+  handleSubmit = (evalItem) => {
+    this.props.submitNewEvalItem(evalItem)
   }
 
-    if (!props.isDeletingItem) {
+
+
+    render() {
+    if (!this.props.isDeletingItem) {
       return (
-        <EvalItemForm name={''} description={''} handleSubmit={handleSubmit} {...props}/>
+        <EvalItemForm name={''} description={''} handleSubmit={this.handleSubmit} evalCategories={this.props.currentEvalCategories} {...this.props}/>
       )
     } else {
       return (
         <div></div>
       )
     }
+    }
 }
 
 function mapStateToProps(state) {
   return {
-    isDeletingItem: state.attemptingItemDelete
+    isDeletingItem: state.attemptingItemDelete,
+    currentEvalCategories: state.currentEvalCategories
   }
 }
 
@@ -30,6 +40,9 @@ function mapDispatchToProps(dispatch) {
   return {
     submitNewEvalItem: (state) => {
       dispatch(createEvalItem(state))
+    },
+    fetchEvalCategories: () => {
+      dispatch(fetchAllEvaluationCategories())
     }
   }
 }

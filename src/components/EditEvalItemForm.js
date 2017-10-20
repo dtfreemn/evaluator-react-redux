@@ -12,9 +12,15 @@ class EditEvalItemForm extends React.Component {
   render() {
     return (
       <div className='create-edit-form'>
-        <EvalItemForm handleSubmit={this.handleSubmit} name={this.props.name} description={this.props.description} {...this.props} />
+        <EvalItemForm handleSubmit={this.handleSubmit} name={this.props.name} description={this.props.description} evalCategories={this.props.evalCategories} {...this.props} />
       </div>
     )
+  }
+}
+
+function mapStateToProps(state) {
+  return {
+    evalCategories: state.currentEvalCategories
   }
 }
 

@@ -3,10 +3,10 @@ export function rootReducer(state = { currentUser: localStorage.getItem('jwt'), 
     //users actions
     case 'SET_ALL_USERS':
       return Object.assign({}, state, { users: action.payload } )
-    case 'SET_LOGGED_IN_USER_AND_ORG':
+    case 'SET_LOGGED_IN_USER_AND_ORG_AND_EVAL_CATS':
       return Object.assign({}, state, { currentUser: action.payload.jwt, currentOrg: action.payload.org_id , currentEvalCategories: action.payload.evaluation_categories} )
     case 'CLEAR_CURRENT_USER_AND_ORG':
-      return Object.assign({}, state, { currentUser: '', currentOrg: '', users: [] } )
+      return Object.assign({}, state, { currentUser: '', currentOrg: '', users: [], currentEvalCategories: [] } )
     
     //evalItems actions
     case 'SET_ALL_EVAL_ITEMS':
@@ -37,6 +37,10 @@ export function rootReducer(state = { currentUser: localStorage.getItem('jwt'), 
       return Object.assign({}, state, { isReviewingScore: true } )
     case 'IS_NOT_REVIEWING_SCORE':
       return Object.assign({}, state, { isReviewingScore: false } )
+
+    //eval categories
+    case 'SET_EVAL_CATEGORIES':
+      return Object.assign({}, state, { currentEvalCategories: action.payload })
 
     //default return current state
     default:

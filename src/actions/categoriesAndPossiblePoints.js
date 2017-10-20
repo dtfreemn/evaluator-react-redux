@@ -1,5 +1,19 @@
 import { baseURL } from '../urls'
 
+export function fetchAllEvaluationCategories() {
+  return function(dispatch) {
+    fetch(baseURL + '/evaluation_categories', {
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': localStorage.getItem('jwt')
+      }
+    })
+      .then(resp => resp.json())
+      .then(evalCategories => dispatch(setEvalCategories(evalCategories)))
+  }
+}
+
 export function createEvaluationCategory(name, possiblePoints) {
   return function(dispatch) {
     const payload = JSON.stringify({name: name})
@@ -32,4 +46,11 @@ export function createPossiblePoints(possiblePoints, categoryId) {
             .then(resp => resp.json())
             .then(possScore => console.log(possScore))
         }
+}
+
+export function setEvalCategories(payload) {
+  return {
+    type: 'SET_EVAL_CATEGORIES',
+    payload
+  }
 }

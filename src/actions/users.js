@@ -106,7 +106,7 @@ export function logInToApi(emailPassword, props) {
 
 export function setLoggedInUserAndOrg(payload) {
   return {
-    type: 'SET_LOGGED_IN_USER_AND_ORG',
+    type: 'SET_LOGGED_IN_USER_AND_ORG_AND_EVAL_CATS',
     payload
   }
 }
