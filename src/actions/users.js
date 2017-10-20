@@ -52,7 +52,7 @@ export function editUser(user, id, props) {
       .then(() => {
         props.history.push('/users/' + props.id + '/s')
       })
-}
+  }
 }
 
 export function deleteUser(user) {

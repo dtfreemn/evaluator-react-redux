@@ -18,13 +18,13 @@ class NewScoreForm extends React.Component {
   
   makeInputs = () => {
     if (this.state) {
-      return this.props.evalItems.map(item => <tr key={item.id}><td className='score-cell'>{item.name}</td><td className='score-cell'>{item.description}</td><td className='score-cell'><input className='score-cell-input'type='text' id={item.id} name='score' value={this.state.scores[`${item.id}`]['score']} onChange={this.handleChange}/></td><td className='score-cell'><textarea id={item.id} type='text' name='note' value={this.state.scores[`${item.id}`]['note']} onChange={this.handleChange}/></td></tr>)
+      return this.props.evalItems.map(item => <tr key={item.id}><td className='score-cell'>{item.name}</td><td className='score-cell'>{item.description}</td><td className='score-cell'><input className='score-cell-input'type='text' id={item.id} name='score' value={this.state.scores[`${item.id}`]['score']} onChange={this.handleScoreChange}/></td><td className='score-cell'><textarea id={item.id} type='text' name='note' value={this.state.scores[`${item.id}`]['note']} onChange={this.handleChange}/></td></tr>)
     } else {
       return null
     }
   }
 
-  handleChange = (e) => {
+  handleScoreChange = (e) => {
     let newScore = this.state.scores[e.target.id]
     newScore[e.target.name] = e.target.value
     this.setState({

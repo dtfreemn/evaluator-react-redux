@@ -54,6 +54,17 @@
   border: 1px solid darkgreen;
 }
 
+.remove-button {
+  background: red;
+  color: white;
+  border: 1px solid black;
+}
+
+.remove-button:hover {
+  background: #a30404;
+  color: white;
+}
+
 .grey-button:hover, button.grey-button:hover {
   background: darkgreen;
   color: white;
@@ -96,6 +107,7 @@ td.profile-button-col {
   border: none;
   font-size: 1em;
   font-family: 'Patua One', cursive;
+  max-height: 35px;
 }
 
 #nav-bar button:hover {
@@ -169,6 +181,14 @@ select#employeeID {
 }
 
 .new-score-form td.score-cell input {
+  width: 50px;
+  height: 50px;
+  border-radius: 15px;
+  font-size: 1.5em;
+  text-align: center;
+}
+
+.score-cell input {
   width: 50px;
   height: 50px;
   border-radius: 15px;

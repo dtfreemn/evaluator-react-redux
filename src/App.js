@@ -7,6 +7,7 @@ import NewUserForm from './components/NewUserForm'
 import NewEvalItemForm from './components/NewEvalItemForm'
 import EvalItemsContainer from './components/EvalItemsContainer'
 import NewScoreFormContainer from './components/NewScoreFormContainer'
+import NewEvalCategoryForm from './components/NewEvalCategoryForm'
 import MenuLeft from './components/MenuLeft'
 import ErrorPage from './components/ErrorPage'
 import LogInForm from './components/LogInForm'
@@ -21,6 +22,7 @@ class App extends Component {
     const AuthNewEvalItemForm = Authorize(NewEvalItemForm)
     const AuthEvalItemsContainer = Authorize(EvalItemsContainer)
     const AuthNewScoreFormContainer = Authorize(NewScoreFormContainer)
+    const AuthNewEvalCategoryForm = Authorize(NewEvalCategoryForm)
 
     return (
       <div className='App'>
@@ -34,6 +36,8 @@ class App extends Component {
             <Route exact path='/users/:id/edit' render={(props) => <div className='container'><AuthUsersContainer {...props}/></div>} />
             <Route exact path='/eval_items/new' render={(props) => <div className='container'><AuthNewEvalItemForm {...props}/><AuthEvalItemsContainer {...props}/></div>} />
             <Route exact path ='/eval_items' render={(props) => <div className='container'><AuthEvalItemsContainer {...props}/></div>} />
+            <Route exact path='/eval_items/:id/edit' render={(props) => <div className='container'><AuthEvalItemsContainer {...props}/></div>} />
+            <Route exact path='/eval_categories/new' render={(props) => <div className='container'><AuthNewEvalCategoryForm {...props}/></div>} />
             <Route exact path='/scores/new' render={(props) => <div className='container'><AuthNewScoreFormContainer {...props}/></div>} />
             <Route path='*' component={ErrorPage}/>
         </Switch>

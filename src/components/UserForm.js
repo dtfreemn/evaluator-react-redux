@@ -1,6 +1,6 @@
 import React from 'react'
 
-class Form extends React.Component {
+class UserForm extends React.Component {
   
   state = {
     firstName: this.props.firstName,
@@ -36,4 +36,4 @@ class Form extends React.Component {
   }
 }
 
-export default Form;
+export default UserForm;
