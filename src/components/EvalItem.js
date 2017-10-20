@@ -13,7 +13,7 @@ const EvalItem = (props) => {
     <tr className='bottom'>
       <td>{item.name}</td>
       <td>{item.description}</td>
-      <td><button className='green-white-button' onClick={handleDelete}>Remove Item</button></td>
+      <td><button className='green-white-button grey-button' onClick={handleDelete}>Remove Item</button></td>
     </tr>
   )
 }

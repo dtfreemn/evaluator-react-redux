@@ -44,8 +44,19 @@
 
 .profile-delete-edit-button:hover {
   color: darkgreen;
-  background: white;
+  background: #e3e5e8;
   border: 1px solid black;
+}
+
+.grey-button, button.grey-button {
+  background: #e3e5e8;
+  color: darkgreen;
+  border: 1px solid darkgreen;
+}
+
+.grey-button:hover, button.grey-button:hover {
+  background: darkgreen;
+  color: white;
 }
 
 td.profile-button-col {
@@ -68,12 +79,12 @@ td.profile-button-col {
 
 #nav-bar span.logo {
   grid-row: 1;
-  grid-column: 5/6;
+  grid-column: 5/7;
   margin-left: 40px;
   margin-top: 5px;
   color: white;
   font-family: 'Patua One', cursive;
-  font-size: 1.5em;
+  font-size: 1.2em;
 }
 
 #nav-bar button {
@@ -98,14 +109,19 @@ td.profile-button-col {
   grid-column: 1/2;
   /*border: 1px solid black;*/
   text-align: left;
-  margin-top: 100px;
+  padding-top: 200px;
   margin-left: 50px;
   grid-row: 2/3;
+  border-right: 1px solid #e3e5e8;
+  min-height: 700px;
 }
 
-a.menu-button {
-  width: 100px;
+hr {
+  border: thin solid #e3e5e8;
+  margin-right: 10px;
 }
+
+
 /*.menu-left a {
   text-decoration: none;
   background-color: darkgreen;
@@ -131,7 +147,7 @@ a.menu-button {
 
 .green-white-button:hover {
   color: darkgreen;
-  background: white;
+  background: #e3e5e8;
   border: 1px solid black;
 }
 
@@ -161,7 +177,7 @@ select#employeeID {
 }
 
 .new-score-form td.score-cell textarea {
-  width: 200px;
+  width: 250px;
   height: 100px;
   border-radius: 15px;
   font-size: 1em;

@@ -10,6 +10,7 @@ class EvalItemsContainer extends React.Component {
   state = {
     itemToDelete: null
   }
+  
   componentDidMount() {
     this.props.hideDeleteReview()
     this.props.fetchEvalItems()

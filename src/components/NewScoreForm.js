@@ -126,7 +126,7 @@ class NewScoreForm extends React.Component {
       return (
         <div className='container large new-score-form'>
           <form className='form fade-in'>
-            <select id='employeeID' onChange={this.handleEmployeeSelectChange} required>{this.makeEvalEmpSelectOptions()}</select><span className='table-header'>{this.employeeBeingReviewed()}</span>
+            <select id='employeeID' onChange={this.handleEmployeeSelectChange} required>{this.makeEvalEmpSelectOptions()}</select><span className='table-header'>{this.employeeBeingReviewed()}</span><span><button className='submit-score-button score-button float-right'onClick={this.handleSubmit}>Next</button></span>
             <table className='top-margin'>
               <thead>
                 <tr>
@@ -140,9 +140,9 @@ class NewScoreForm extends React.Component {
                 {this.makeInputs()}
               </tbody>
             </table>
-            <button className='green-white-button' onClick={this.incrementActionSteps}>Add Action Step</button><br/><br/>
+            <br/>
+            <button className='green-white-button grey-button' onClick={this.incrementActionSteps}>Add Action Step</button><br/><br/>
             {this.makeActionStepInputs()}
-            <button className='submit-score-button score-button float-right'onClick={this.handleSubmit}>Next</button>
           </form>
         </div>
       )
