@@ -15,10 +15,13 @@ const NewScoreReviewSubmit = (props) => {
 
   const makeScoresRows = () => {
     const scores = props.scores
+    console.log('making scores', scores)
     const scoresRows = []
     for (let key in scores) {
-      let evalItem = props.evalItems.filter(item => item.id === parseInt(key, 10))[0]
-      scoresRows.push(<tr className='bottom' key={key}><td>{evalItem['name']}</td><td>{scores[key]['score']}</td><td>{scores[key]['note']}</td></tr>)
+      if (scores[key]['score'] !== '' && scores[key]['score']) {
+        let evalItem = props.evalItems.filter(item => item.id === parseInt(key, 10))[0]
+        scoresRows.push(<tr className='bottom' key={key}><td>{evalItem['name']}</td><td>{scores[key]['score']}</td><td>{scores[key]['note']}</td></tr>)  
+      }
     }
     return scoresRows
   }
@@ -27,7 +30,9 @@ const NewScoreReviewSubmit = (props) => {
     const actionSteps = props.actionSteps
     const actionStepsRows = []
     for (let key in actionSteps) {
-      actionStepsRows.push(<tr className='bottom' key={key}><td>{actionSteps[key]}</td></tr>)
+      if (actionSteps[key] !== '') {
+        actionStepsRows.push(<tr className='bottom' key={key}><td>{actionSteps[key]}</td></tr>)
+      }
     }
     if (actionStepsRows.length === 0) {
       return <tr><td>No Action Steps</td></tr>

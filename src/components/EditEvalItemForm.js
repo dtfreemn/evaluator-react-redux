@@ -2,8 +2,14 @@ import React from 'react';
 import EvalItemForm from './EvalItemForm'
 import { connect } from 'react-redux'
 import { editEvalItem } from '../actions/evalItems'
+import { fetchAllEvaluationCategories } from '../actions/categoriesAndPossiblePoints'
+
 
 class EditEvalItemForm extends React.Component {
+
+  componentDidMount() {
+    this.props.fetchEvalCategories()
+  }
 
   handleSubmit = (item) => {
     this.props.editEvalItem(item, this.props.id, this.props)
@@ -28,6 +34,9 @@ function mapDispatchToProps(dispatch) {
   return {
     editEvalItem: (evalItem, evalItemId, props) => {
       dispatch(editEvalItem(evalItem, evalItemId, props))
+    },
+    fetchEvalCategories: () => {
+      dispatch(fetchAllEvaluationCategories())
     }
   }
 }

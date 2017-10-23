@@ -36,7 +36,7 @@ export function createEvalItem(evalItem) {
 
 export function editEvalItem(evalItem, id, props) {
   return function(dispatch) {
-    const payload = JSON.stringify({name: evalItem.name, description: evalItem.description})
+    const payload = JSON.stringify({name: evalItem.name, description: evalItem.description, evaluation_category_id: evalItem.evaluationCategoryId})
     fetch(baseURL + '/eval_items/' + id, {
       method: 'PATCH',
       body: payload,

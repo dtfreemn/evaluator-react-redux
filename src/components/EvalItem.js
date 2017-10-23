@@ -20,6 +20,7 @@ const EvalItem = (props) => {
 
   return (
     <tr className='bottom'>
+      <td>{item.evaluation_category.name}</td>
       <td>{item.name}</td>
       <td>{item.description}</td>
       <td>{removeButton()}{editButton()}</td>

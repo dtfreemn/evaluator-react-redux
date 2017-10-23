@@ -16,13 +16,12 @@ class EvalItemForm extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault()
-    console.log(this.state)
-    // this.props.handleSubmit(this.state)
-    // this.setState({
-    //   name: '',
-    //   description: '',
-    //   evalCategoryId: null
-    // })
+    this.props.handleSubmit(this.state)
+    this.setState({
+      name: '',
+      description: '',
+      evalCategoryId: null
+    })
   }
 
   handleSelectChange = (e) => {
@@ -34,7 +33,7 @@ class EvalItemForm extends React.Component {
   makeEvalCategoriesSelectOptions = () => {
     if (this.props.evalCategories) {
       let options = this.props.evalCategories.map(category => <option key={category.id} value={category.id}>{category.name}</option>)
-      options.push(<option key='defaultCategory' value={null}>Choose an evaluation group</option>)
+      options.unshift(<option key='defaultCategory' value=''>Choose an evaluation group</option>)
       return options
     }
   }
@@ -43,7 +42,7 @@ class EvalItemForm extends React.Component {
     return (
       <div className='create-edit-form'>
         <form onSubmit={this.handleSubmit} className='form fade-in'>
-          <select id='eval-category-select' onChange={this.handleSelectChange}>
+          <select id='eval-category-select' onChange={this.handleSelectChange} required>
               {this.makeEvalCategoriesSelectOptions()}
           </select><br/>
           <span className='create-edit-form-label'>Item Title: </span><input type="text" id='name' value={this.state.name} onChange={this.handleChange} required/>

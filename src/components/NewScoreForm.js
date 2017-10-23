@@ -1,24 +1,30 @@
 import React from 'react';
 import { connect } from 'react-redux'
 import { createNewScoresAndActionSteps, isReviewingScore, isNotReviewingScore } from '../actions/scores'
+import { fetchAllEvaluationCategories } from '../actions/categoriesAndPossiblePoints'
 import NewScoreReviewSubmit from './NewScoreReviewSubmit'
 
 class NewScoreForm extends React.Component {
 
   componentDidMount() {
     this.makeInitialState()
+    this.props.fetchEvalCategories()
   }
+
+
 
   makeInitialState = () => {
     let ids = this.props.evalItems.map(item => item.id)
-    let stateObj = { scores: {}, actionStepCount: 0 , actionSteps: {} , employeeId: ''}
+    let stateObj = { scores: {}, actionStepCount: 0 , actionSteps: {} , employeeId: '', evalCatFilter: ''}
     ids.forEach(id => stateObj.scores[id] = {score: '', note: ''})
     this.setState(stateObj)
   }
   
   makeInputs = () => {
-    if (this.state) {
-      return this.props.evalItems.map(item => <tr key={item.id}><td className='score-cell'>{item.name}</td><td className='score-cell'>{item.description}</td><td className='score-cell'><input className='score-cell-input'type='text' id={item.id} name='score' value={this.state.scores[`${item.id}`]['score']} onChange={this.handleScoreChange}/></td><td className='score-cell'><textarea id={item.id} type='text' name='note' value={this.state.scores[`${item.id}`]['note']} onChange={this.handleChange}/></td></tr>)
+    if (this.state && this.state.evalCatFilter === '') {
+      return this.props.evalItems.map(item => <tr key={item.id}><td className='score-cell'>{item.name}<br/>({item.evaluation_category.name})</td><td className='score-cell'>{item.description}</td><td className='score-cell'><input className='score-cell-input'type='text' id={item.id} name='score' value={this.state.scores[`${item.id}`]['score']} onChange={this.handleScoreChange}/></td><td className='score-cell'><textarea id={item.id} type='text' name='note' value={this.state.scores[`${item.id}`]['note']} onChange={this.handleScoreChange}/></td></tr>)
+    } else if (this.state){
+      return this.props.evalItems.filter(item => item.evaluation_category.id === parseInt(this.state.evalCatFilter,10)).map(item => <tr key={item.id}><td className='score-cell'>{item.name}<br/>({item.evaluation_category.name})</td><td className='score-cell'>{item.description}</td><td className='score-cell'><input className='score-cell-input'type='text' id={item.id} name='score' value={this.state.scores[`${item.id}`]['score']} onChange={this.handleScoreChange}/></td><td className='score-cell'><textarea id={item.id} type='text' name='note' value={this.state.scores[`${item.id}`]['note']} onChange={this.handleScoreChange}/></td></tr>)
     } else {
       return null
     }
@@ -89,6 +95,20 @@ class NewScoreForm extends React.Component {
     return options
   }
 
+  makeEvalCategoriesSelectOptions = () => {
+    if (this.props.evalCategories) {
+      let options = this.props.evalCategories.map(category => <option key={category.id} value={category.id}>{category.name}</option>)
+      options.unshift(<option key='defaultCategory' value=''>Choose an evaluation group</option>)
+      return options
+    }
+  }
+
+  handleEvalCategorySelectChange = (e) => {
+    this.setState({
+      evalCatFilter: e.target.value
+    })
+  }
+
   incrementActionSteps = (e) => {
     e.preventDefault()
     this.setState({
@@ -126,7 +146,9 @@ class NewScoreForm extends React.Component {
       return (
         <div className='container large new-score-form'>
           <form className='form fade-in'>
-            <select id='employeeID' onChange={this.handleEmployeeSelectChange} required>{this.makeEvalEmpSelectOptions()}</select><span className='table-header'>{this.employeeBeingReviewed()}</span><span><button className='submit-score-button score-button float-right'onClick={this.handleSubmit}>Next</button></span>
+            <select id='employeeID' onChange={this.handleEmployeeSelectChange} required>{this.makeEvalEmpSelectOptions()}</select><span className='table-header'>{this.employeeBeingReviewed()}</span><br/>
+            <select id='eval-category-select' onChange={this.handleEvalCategorySelectChange}>{this.makeEvalCategoriesSelectOptions()}</select>
+            <span><button className='submit-score-button score-button float-right'onClick={this.handleSubmit}>Next</button></span>
             <table className='top-margin'>
               <thead>
                 <tr>
@@ -168,6 +190,9 @@ function mapDispatchToProps(dispatch) {
     },
     hideScoreReviewPage: () => {
       dispatch(isNotReviewingScore())
+    },
+    fetchEvalCategories: () => {
+      dispatch(fetchAllEvaluationCategories())
     }
   }
 }
@@ -175,7 +200,8 @@ function mapDispatchToProps(dispatch) {
 function mapStateToProps(state) {
   return {
     isReviewingScore: state.isReviewingScore,
-    employees: state.users
+    employees: state.users,
+    evalCategories: state.currentEvalCategories
   }
 }
 

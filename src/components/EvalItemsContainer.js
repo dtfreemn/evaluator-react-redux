@@ -48,6 +48,7 @@ class EvalItemsContainer extends React.Component {
           <table className='eval-items-table'>
             <thead>
               <tr>
+                <td className='table-header'>Evaluation Category</td>
                 <td className='table-header'>Evaluation Item</td>
                 <td className='table-header'>Item Description</td>
               </tr>
