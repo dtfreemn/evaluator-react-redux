@@ -257,13 +257,16 @@ select.score-cell-input {
 table thead tr td.table-header {
   font-family: 'Varela', sans-serif;
   font-size: 2em;
-  text-decoration: underline;
+  background: #F5F5F5;
+  padding: 3px;
 }
 
 .table-header {
   font-family: 'Varela', sans-serif;
   font-size: 2em;
-  text-decoration: underline;
+  background: #F5F5F5;
+  padding: 5px;
+  margin-bottom: 5px;
 }
 
 span.table-header {
@@ -559,6 +562,34 @@ tr.bottom td {
 /* START SCORE RUBRIC MODAL*/
 .score-rubric-modal {
   z-index: 999;
+  background: rgba(0,0,0,0.8);
+  color: white;
+  border-radius: 15px;
+  padding: 15px;
+  /*border: 1px solid #e3e5e8;*/
+  max-width: 1000px;
+  max-height: 1000px;
+  font-family: 'Varela', sans-serif;
+  font-size: 1.5em;
+}
+
+.modal-hover {
+  max-width: 150px;
+  border: 1px solid #e3e5e8;
+  font-size: 2em;
+  font-family: 'Varela', sans-serif;
+  border-radius: 15px;
+  padding: 15px;
+  color: darkgreen;
+  background: #e3e5e8;
+}
+
+.white-back {
+  background: none;
 }
 
 /* END SCORE RUBRIC MODAL*/
+
+textarea {
+  padding: 15px;
+}

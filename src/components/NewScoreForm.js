@@ -4,6 +4,7 @@ import { createNewScoresAndActionSteps, isReviewingScore, isNotReviewingScore } 
 import { fetchAllEvaluationCategories } from '../actions/categoriesAndPossiblePoints'
 import NewScoreReviewSubmit from './NewScoreReviewSubmit'
 import PossibleScoreModal from './PossibleScoreModal'
+import ReactHover from 'react-hover'
 
 class NewScoreForm extends React.Component {
 
@@ -57,7 +58,11 @@ class NewScoreForm extends React.Component {
       return null
     }
     function makeOptions(item) {
-      let options = item.evaluation_category.possible_points.map(point => <option key={point.id} value={point.score}>{point.score}</option>)
+      let options = item.evaluation_category.possible_points.sort(function(a,b) {
+        if (a.score < b.score) return -1;
+        if (a.score > b.score) return 1;
+        return 0
+      }).map(point => <option key={point.id} value={point.score}>{point.score}</option>)
       options.unshift(<option key={'default-score-option'} value=''> </option>)
       return options
     }
@@ -170,13 +175,13 @@ class NewScoreForm extends React.Component {
       let employee = this.props.employees.filter(employee => employee.id === parseInt(this.state.employeeId,10))[0]
       return `${employee.first_name} ${employee.last_name}`
     } else {
-      return ''
+      return <span></span>
     }
   }
 
   clearForm = (e) => {
     e.preventDefault()
-    this.makeInitialState()
+    this.props.history.push('/scores/new')
   }
 
   getCurrentGroup = () => {
@@ -187,12 +192,20 @@ class NewScoreForm extends React.Component {
     if (this.state && !this.props.isReviewingScore) {
       return (
         <div className='container large new-score-form'>
-          <PossibleScoreModal group={this.getCurrentGroup()}/>
           <form className='form fade-in'>
             <select id='eval-category-select' onChange={this.handleEvalCategorySelectChange}>{this.makeEvalCategoriesSelectOptions()}</select>
-            <span><select id='employeeID' onChange={this.handleEmployeeSelectChange} required>{this.makeEvalEmpSelectOptions()}</select></span><span className='table-header'>{this.employeeBeingReviewed()}</span><br/>
+            <span><select id='employeeID' onChange={this.handleEmployeeSelectChange} required>{this.makeEvalEmpSelectOptions()}</select></span><span className='table-header white-back'>{this.employeeBeingReviewed()}</span><button className='green-white-button' onClick={this.clearForm}>Clear Form</button><br/>
             <span><button className='submit-score-button score-button float-right'onClick={this.handleSubmit}>Next</button></span><br/>
-            <button className='green-white-button' onClick={this.clearForm}>Clear Form</button>
+            <ReactHover options={ { followCursor: true, shiftX: 20, shiftY: 0 } }>
+              <ReactHover.Trigger type='trigger'>
+                <span style={{width: '450px'}}className='modal-hover'>Score Rubric Reminder</span>
+              </ReactHover.Trigger>
+              <ReactHover.Hover type='hover'>
+                <div className='score-rubric-modal'>
+                  <PossibleScoreModal group={this.getCurrentGroup()}/>
+                </div>
+              </ReactHover.Hover>
+            </ReactHover>
             <table className='top-margin'>
               <thead>
                 <tr>

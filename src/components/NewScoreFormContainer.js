@@ -19,7 +19,7 @@ class NewScoreFormContainer extends React.Component {
   render() {
     if (this.props.evalItems.length > 0 && this.props.users.length > 0) {
       return (
-        <NewScoreForm evalItems={this.props.evalItems} users={this.props.users} />
+        <NewScoreForm evalItems={this.props.evalItems} users={this.props.users} {...this.props}/>
       )
     } else {
       return (

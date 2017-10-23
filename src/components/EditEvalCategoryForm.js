@@ -7,7 +7,12 @@ class EditEvalCategoryForm extends React.Component {
 
   makeCurrentScores = () => {
     let currentScores = {}
-    this.props.possibleScores.forEach((score, index) => {
+    let sortedScores = this.props.possibleScores.sort(function(a,b) {
+      if (a.score < b.score) return -1;
+      if (a.score > b.score) return 1;
+      return 0
+    })
+    sortedScores.forEach((score, index) => {
       currentScores[index] = score
     })
     return currentScores
