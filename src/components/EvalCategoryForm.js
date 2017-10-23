@@ -98,7 +98,7 @@ class EvalCategoryForm extends React.Component {
         <button className='green-white-button grey-button' onClick={this.incrementPossibleScores}>Add Possible Score</button>
         {this.makeCurrentScoreEditInputs()}
         {this.makePossibleScoresInputs()}
-        <input type='submit' value='Submit'/>
+        <input className='green-white-button' type='submit' value='Submit'/>
       </form>
     )
   }

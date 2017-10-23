@@ -23,7 +23,7 @@ class EvalCategoriesContainer extends React.Component {
     if (!this.props.location.pathname.split('/').includes('edit')) {
       return (
       <div className='container large fade-in'>
-        <table className='eval-items-table'>
+        <table>
           <thead>
             <tr>
               <td className='table-header'>Evaluation Group</td>

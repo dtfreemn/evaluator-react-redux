@@ -5,7 +5,7 @@ class EvalItemForm extends React.Component {
   state = {
     name: this.props.name,
     description: this.props.description,
-    evalCategoryId: null
+    evaluationCategoryId: null
   }
 
   handleChange = (e) => {
@@ -16,16 +16,18 @@ class EvalItemForm extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault()
-    this.props.handleSubmit(this.state)
-    this.setState({
-      name: '',
-      description: ''
-    })
+    console.log(this.state)
+    // this.props.handleSubmit(this.state)
+    // this.setState({
+    //   name: '',
+    //   description: '',
+    //   evalCategoryId: null
+    // })
   }
 
   handleSelectChange = (e) => {
     this.setState({
-      evalCategoryId: e.target.value
+      evaluationCategoryId: e.target.value
     })
   }
 

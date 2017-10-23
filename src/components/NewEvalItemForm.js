@@ -38,8 +38,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    submitNewEvalItem: (state) => {
-      dispatch(createEvalItem(state))
+    submitNewEvalItem: (evalItem) => {
+      dispatch(createEvalItem(evalItem))
     },
     fetchEvalCategories: () => {
       dispatch(fetchAllEvaluationCategories())
