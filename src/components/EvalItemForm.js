@@ -43,7 +43,7 @@ class EvalItemForm extends React.Component {
         <form onSubmit={this.handleSubmit} className='form fade-in'>
           <select id='eval-category-select' onChange={this.handleSelectChange}>
               {this.makeEvalCategoriesSelectOptions()}
-          </select>
+          </select><br/>
           <span className='create-edit-form-label'>Item Title: </span><input type="text" id='name' value={this.state.name} onChange={this.handleChange} required/>
           <span className='create-edit-form-label'>Item Description: </span><input type="text" id='description' value={this.state.description} onChange={this.handleChange} required/>
           <input className='green-white-button' type="submit" value={this.props.location.pathname.includes('edit') ? 'Edit' : 'Create New Item' }/>

@@ -32,4 +32,4 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-export default connect(null, mapDispatchToProps)(EditEvalItemForm);
+export default connect(mapStateToProps, mapDispatchToProps)(EditEvalItemForm);

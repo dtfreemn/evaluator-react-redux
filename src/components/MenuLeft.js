@@ -26,6 +26,7 @@ class MenuLeft extends React.Component {
          <NavLink className='green-white-button' to='/users'>Employees</NavLink><br/><br/>
          <hr/>
          <br/>
+         <NavLink className='green-white-button' to='/eval_categories'>Your Groups</NavLink><br/><br/>
          <NavLink className='green-white-button' to='/eval_categories/new'>New Group</NavLink><br/><br/>
          <hr/>
          <br/>

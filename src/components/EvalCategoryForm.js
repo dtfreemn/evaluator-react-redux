@@ -3,9 +3,10 @@ import React from 'react';
 class EvalCategoryForm extends React.Component {
 
   state = {
-    name: '',
+    name: this.props.name,
     possibleScoresCount: 0,
-    possibleScores: {}
+    possibleScores: {},
+    currentScores: this.props.currentScores
   }
 
   handleNameInputChange = (e) => {
@@ -16,12 +17,34 @@ class EvalCategoryForm extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault()
-    this.props.createCategoryAndPossiblePoints(this.state.name, this.state.possibleScores)
-    this.setState({
-      name: '',
-      possibleScoresCount: 0,
-      possibleScores: {}
-    })
+    if (this.state.name === '') {
+      alert('Your new group must have a name')
+      return
+    }
+    let scores = this.state.possibleScores
+    let finalPossibleScores = {}
+    
+    for (let key in scores) {
+      if (isNaN(scores[key]['score'])) {
+        alert('All scores must be numbers.')
+        return
+      }
+
+      if ((scores[key]['score'] === '' && scores[key]['description'] !== '') ||  (scores[key]['score'] !== '' && scores[key]['description'] === '' )) {
+        alert('Each new possible score must have a score AND a description.')
+        return
+      }  
+
+      finalPossibleScores[key] = scores[key]
+    }
+
+    if ((Object.keys(finalPossibleScores).length < 2) && (Object.keys(this.state.currentScores).length < 2)) {
+      alert('Your new evaluation group must have at least 2 possible scores.')
+      return
+    }
+
+    
+    this.props.handleSubmit(this.state.name, finalPossibleScores, this.props, this.state.currentScores)
   }
 
   incrementPossibleScores = (e) => {
@@ -36,15 +59,33 @@ class EvalCategoryForm extends React.Component {
     let newPossibleScore = this.state.possibleScores[e.target.id]
     newPossibleScore[e.target.name] = e.target.value
     this.setState({
-      actionSteps: Object.assign({}, this.state.possibleScores, { [e.target.id]: newPossibleScore})
+      possibleScores: Object.assign({}, this.state.possibleScores, { [e.target.id]: newPossibleScore})
     })
   }
 
   makePossibleScoresInputs = () => {
-    let num = this.state.possibleScoresCount
+      let inputs = []
+      let num = this.state.possibleScoresCount
+      for (let i = 0; i < num; i++) {
+        let newInput = <div className='score-cell' key={i}><span className='table-header'>Possible Score {i+1}</span><br/><input className='action-step-entry' id={i} name='score' onChange={this.handlePossibleScoresScoreInputChange} value={this.state.possibleScores[i]['score']}/><br/><span className='table-header'>Description</span><br/><textarea className='action-step-entry' id={i} name='description' onChange={this.handlePossibleScoresScoreInputChange} value={this.state.possibleScores[i]['description']}/></div>
+        inputs.push(newInput)
+    }
+    return inputs
+  }
+
+  handleCurrentScoresScoreInputChange = (e) => {
+    let updatedScore = Object.assign({}, this.state.currentScores[e.target.id], {[e.target.name]: e.target.value})
+    
+    this.setState({
+      currentScores: Object.assign({}, this.state.currentScores, { [e.target.id]: updatedScore})
+    })
+  }
+
+  makeCurrentScoreEditInputs = () => {
+    let currScores = this.state.currentScores
     let inputs = []
-    for (let i = 0; i < num; i++) {
-      let newInput = <div className='score-cell' key={i}><span className='table-header'>Possible Score {i+1}</span><br/><input className='action-step-entry' id={i} name='score' onChange={this.handlePossibleScoresScoreInputChange} value={this.state.possibleScores[i]['name']}/><br/><span className='table-header'>Description</span><br/><textarea className='action-step-entry' id={i} name='description' onChange={this.handlePossibleScoresScoreInputChange} value={this.state.possibleScores[i]['description']}/></div>
+    for (let currKey in currScores) {
+      let newInput = <div className='score-cell' key={currKey}><span className='table-header'>Current Possible Score {parseInt(currKey,10) + 1}</span><br/><input className='action-step-entry' id={currKey} name='score' onChange={this.handleCurrentScoresScoreInputChange} value={this.state.currentScores[currKey]['score']}/><br/><span className='table-header'>Description</span><br/><textarea className='action-step-entry' id={currKey} name='description' onChange={this.handleCurrentScoresScoreInputChange} value={this.state.currentScores[currKey]['description']}/></div>
       inputs.push(newInput)
     }
     return inputs
@@ -55,6 +96,7 @@ class EvalCategoryForm extends React.Component {
       <form className='form fade-in' onSubmit={this.handleSubmit}>
         <span className='create-edit-form-label'>Name: </span><input type="text" placeholder='name of group' onChange={this.handleNameInputChange} value={this.state.name}/>
         <button className='green-white-button grey-button' onClick={this.incrementPossibleScores}>Add Possible Score</button>
+        {this.makeCurrentScoreEditInputs()}
         {this.makePossibleScoresInputs()}
         <input type='submit' value='Submit'/>
       </form>
