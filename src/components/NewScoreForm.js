@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { createNewScoresAndActionSteps, isReviewingScore, isNotReviewingScore } from '../actions/scores'
 import { fetchAllEvaluationCategories } from '../actions/categoriesAndPossiblePoints'
 import NewScoreReviewSubmit from './NewScoreReviewSubmit'
+import PossibleScoreModal from './PossibleScoreModal'
 
 class NewScoreForm extends React.Component {
 
@@ -11,22 +12,54 @@ class NewScoreForm extends React.Component {
     this.props.fetchEvalCategories()
   }
 
-
-
   makeInitialState = () => {
     let ids = this.props.evalItems.map(item => item.id)
-    let stateObj = { scores: {}, actionStepCount: 0 , actionSteps: {} , employeeId: '', evalCatFilter: ''}
+    let stateObj = { scores: {}, actionStepCount: 0 , actionSteps: {} , employeeId: '', evalCatFilter: '', showRubric: true}
     ids.forEach(id => stateObj.scores[id] = {score: '', note: ''})
     this.setState(stateObj)
   }
   
   makeInputs = () => {
     if (this.state && this.state.evalCatFilter === '') {
-      return this.props.evalItems.map(item => <tr key={item.id}><td className='score-cell'>{item.name}<br/>({item.evaluation_category.name})</td><td className='score-cell'>{item.description}</td><td className='score-cell'><input className='score-cell-input'type='text' id={item.id} name='score' value={this.state.scores[`${item.id}`]['score']} onChange={this.handleScoreChange}/></td><td className='score-cell'><textarea id={item.id} type='text' name='note' value={this.state.scores[`${item.id}`]['note']} onChange={this.handleScoreChange}/></td></tr>)
+      return (
+        <tr key='blank'>
+          <td className='score-cell'>
+            -
+          </td>
+          <td className='score-cell'>
+            -
+          </td>
+          <td className='score-cell'>
+            -
+          </td>
+          <td className='score-cell'>
+            -
+          </td>
+        </tr>
+        )
     } else if (this.state){
-      return this.props.evalItems.filter(item => item.evaluation_category.id === parseInt(this.state.evalCatFilter,10)).map(item => <tr key={item.id}><td className='score-cell'>{item.name}<br/>({item.evaluation_category.name})</td><td className='score-cell'>{item.description}</td><td className='score-cell'><input className='score-cell-input'type='text' id={item.id} name='score' value={this.state.scores[`${item.id}`]['score']} onChange={this.handleScoreChange}/></td><td className='score-cell'><textarea id={item.id} type='text' name='note' value={this.state.scores[`${item.id}`]['note']} onChange={this.handleScoreChange}/></td></tr>)
+      return this.props.evalItems.filter(item => item.evaluation_category.id === parseInt(this.state.evalCatFilter,10)).map(item =>
+        <tr key={item.id}>
+          <td className='score-cell'>
+            {item.name}<br/>({item.evaluation_category.name})
+          </td>
+          <td className='score-cell'>
+            {item.description}
+          </td>
+          <td className='score-cell'>
+            <select className='score-cell-input' type='text' id={item.id} name='score' onChange={this.handleScoreChange}>{makeOptions(item)}</select><span className='yellow-highlight'>{this.state.scores[item.id]['score']}</span>
+          </td>
+          <td className='score-cell'>
+            <textarea id={item.id} type='text' name='note' value={this.state.scores[`${item.id}`]['note']} onChange={this.handleScoreChange}/>
+          </td>
+        </tr>)
     } else {
       return null
+    }
+    function makeOptions(item) {
+      let options = item.evaluation_category.possible_points.map(point => <option key={point.id} value={point.score}>{point.score}</option>)
+      options.unshift(<option key={'default-score-option'} value=''> </option>)
+      return options
     }
   }
 
@@ -141,14 +174,25 @@ class NewScoreForm extends React.Component {
     }
   }
 
+  clearForm = (e) => {
+    e.preventDefault()
+    this.makeInitialState()
+  }
+
+  getCurrentGroup = () => {
+    return this.props.evalCategories.filter(group => group.id === parseInt(this.state.evalCatFilter, 10))[0]
+  }
+
   render() {
     if (this.state && !this.props.isReviewingScore) {
       return (
         <div className='container large new-score-form'>
+          <PossibleScoreModal group={this.getCurrentGroup()}/>
           <form className='form fade-in'>
-            <select id='employeeID' onChange={this.handleEmployeeSelectChange} required>{this.makeEvalEmpSelectOptions()}</select><span className='table-header'>{this.employeeBeingReviewed()}</span><br/>
             <select id='eval-category-select' onChange={this.handleEvalCategorySelectChange}>{this.makeEvalCategoriesSelectOptions()}</select>
-            <span><button className='submit-score-button score-button float-right'onClick={this.handleSubmit}>Next</button></span>
+            <span><select id='employeeID' onChange={this.handleEmployeeSelectChange} required>{this.makeEvalEmpSelectOptions()}</select></span><span className='table-header'>{this.employeeBeingReviewed()}</span><br/>
+            <span><button className='submit-score-button score-button float-right'onClick={this.handleSubmit}>Next</button></span><br/>
+            <button className='green-white-button' onClick={this.clearForm}>Clear Form</button>
             <table className='top-margin'>
               <thead>
                 <tr>

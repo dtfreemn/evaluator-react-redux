@@ -6,7 +6,7 @@ const EvalCategoryItem = (props) => {
   let category = props.category
 
   return (
-  <tr>
+  <tr className='bottom'>
     <td>{category.name}</td>
     <td><NavLink className='profile-delete-edit-button grey-button' to={'/eval_categories/' + category.id + '/edit'}>Edit</NavLink></td>
   </tr>

@@ -20,7 +20,9 @@ class EditEvalCategoryForm extends React.Component {
 
   render() {
     return (
-      <EvalCategoryForm name={this.props.name} currentScores={this.makeCurrentScores()} {...this.props} handleSubmit={this.handleSubmit}/>
+      <div className='create-edit-form'>
+        <EvalCategoryForm name={this.props.name} currentScores={this.makeCurrentScores()} {...this.props} handleSubmit={this.handleSubmit}/>
+      </div>
     )
   }
 }

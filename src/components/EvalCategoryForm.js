@@ -67,7 +67,7 @@ class EvalCategoryForm extends React.Component {
       let inputs = []
       let num = this.state.possibleScoresCount
       for (let i = 0; i < num; i++) {
-        let newInput = <div className='score-cell' key={i}><span className='table-header'>Possible Score {i+1}</span><br/><input className='action-step-entry' id={i} name='score' onChange={this.handlePossibleScoresScoreInputChange} value={this.state.possibleScores[i]['score']}/><br/><span className='table-header'>Description</span><br/><textarea className='action-step-entry' id={i} name='description' onChange={this.handlePossibleScoresScoreInputChange} value={this.state.possibleScores[i]['description']}/></div>
+        let newInput = <div className='score-cell' key={i}><span className='table-header'>New Possible Score {i+1}</span><input className='action-step-entry' id={i} name='score' onChange={this.handlePossibleScoresScoreInputChange} value={this.state.possibleScores[i]['score']}/><br/><span className='table-header'>Description</span><br/><textarea className='action-step-entry' id={i} name='description' onChange={this.handlePossibleScoresScoreInputChange} value={this.state.possibleScores[i]['description']}/><hr/></div>
         inputs.push(newInput)
     }
     return inputs
@@ -85,7 +85,7 @@ class EvalCategoryForm extends React.Component {
     let currScores = this.state.currentScores
     let inputs = []
     for (let currKey in currScores) {
-      let newInput = <div className='score-cell' key={currKey}><span className='table-header'>Current Possible Score {parseInt(currKey,10) + 1}</span><br/><input className='action-step-entry' id={currKey} name='score' onChange={this.handleCurrentScoresScoreInputChange} value={this.state.currentScores[currKey]['score']}/><br/><span className='table-header'>Description</span><br/><textarea className='action-step-entry' id={currKey} name='description' onChange={this.handleCurrentScoresScoreInputChange} value={this.state.currentScores[currKey]['description']}/></div>
+      let newInput = <div className='score-cell' key={currKey}><span className='table-header'>Current Possible Score {parseInt(currKey,10) + 1}</span><input className='action-step-entry' id={currKey} name='score' onChange={this.handleCurrentScoresScoreInputChange} value={this.state.currentScores[currKey]['score']}/><br/><span className='table-header'>Description</span><br/><textarea className='action-step-entry' id={currKey} name='description' onChange={this.handleCurrentScoresScoreInputChange} value={this.state.currentScores[currKey]['description']}/><hr/></div>
       inputs.push(newInput)
     }
     return inputs
