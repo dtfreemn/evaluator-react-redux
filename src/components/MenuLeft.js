@@ -40,7 +40,7 @@ class MenuLeft extends React.Component {
       )
     } else {
       return (
-        <div> </div>
+        <div className='menu-left'> </div>
       )
     }
   }
