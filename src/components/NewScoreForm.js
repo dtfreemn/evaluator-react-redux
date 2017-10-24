@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux'
-import { createNewScoresAndActionSteps, isReviewingScore, isNotReviewingScore } from '../actions/scores'
+import { createNewScoresAndActionSteps } from '../actions/scores'
 import { fetchAllEvaluationCategories } from '../actions/categoriesAndPossiblePoints'
 import NewScoreReviewSubmit from './NewScoreReviewSubmit'
 import PossibleScoreModal from './PossibleScoreModal'
@@ -15,7 +15,7 @@ class NewScoreForm extends React.Component {
 
   makeInitialState = () => {
     let ids = this.props.evalItems.map(item => item.id)
-    let stateObj = { scores: {}, actionStepCount: 0 , actionSteps: {} , employeeId: '', evalCatFilter: '', showRubric: true}
+    let stateObj = { scores: {}, actionStepCount: 0 , actionSteps: {} , employeeId: '', evalCatFilter: '', showRubric: true, isReviewing: false}
     ids.forEach(id => stateObj.scores[id] = {score: '', note: ''})
     this.setState(stateObj)
   }
@@ -117,11 +117,13 @@ class NewScoreForm extends React.Component {
       }
     }
     
-    if (!this.props.isReviewingScore) {
-      this.props.showScoreReviewPage()
+    if (!this.state.isReviewing) {
+      this.setState({
+        isReviewing: true
+      })
     } else {
       this.props.submitNewScore(finalScoresObj, finalActionStepsObj, employeeId)
-      this.props.hideScoreReviewPage()
+      this.hideScoreReviewPage()
       this.makeInitialState()
     }
 
@@ -164,7 +166,7 @@ class NewScoreForm extends React.Component {
     let num = this.state.actionStepCount
     let inputs = []
     for (let i = 0; i < num; i++) {
-      let newInput = <div key={i}><span className='table-header'>Action Step {i+1} </span><br/><textarea className='action-step-entry' id={i} onChange={this.handleActionStepInputChange} value={this.state.actionSteps[i]}/><br/><br/></div>
+      let newInput = <div key={i}><span className='table-header white-back'>Action Step {i+1} </span><br/><textarea className='action-step-entry' id={i} onChange={this.handleActionStepInputChange} value={this.state.actionSteps[i]}/><br/><br/></div>
       inputs.push(newInput)
     }
     return inputs
@@ -188,8 +190,14 @@ class NewScoreForm extends React.Component {
     return this.props.evalCategories.filter(group => group.id === parseInt(this.state.evalCatFilter, 10))[0]
   }
 
+  hideScoreReviewPage = () => {
+    this.setState({
+      isReviewing: false
+    })
+  }
+
   render() {
-    if (this.state && !this.props.isReviewingScore) {
+    if (this.state && !this.state.isReviewing) {
       return (
         <div className='container large new-score-form'>
           <form className='form fade-in'>
@@ -198,7 +206,7 @@ class NewScoreForm extends React.Component {
             <span><button className='submit-score-button score-button float-right'onClick={this.handleSubmit}>Next</button></span><br/>
             <ReactHover options={ { followCursor: true, shiftX: 20, shiftY: 0 } }>
               <ReactHover.Trigger type='trigger'>
-                <span style={{width: '450px'}}className='modal-hover'>Score Rubric Reminder</span>
+                <span style={{width: '450px'}}className='modal-hover'>Scoring Rubric Reminder</span>
               </ReactHover.Trigger>
               <ReactHover.Hover type='hover'>
                 <div className='score-rubric-modal'>
@@ -225,9 +233,10 @@ class NewScoreForm extends React.Component {
           </form>
         </div>
       )
-    } else if (this.state && this.props.isReviewingScore){
+    } else if (this.state && this.state.isReviewing){
+      console.log('rendering')
       return (
-        <NewScoreReviewSubmit showFormAgain={this.props.hideScoreReviewPage} submitNewScore={this.handleSubmit} scores={this.state.scores} actionSteps={this.state.actionSteps} evalItems={this.props.evalItems} employee={this.employeeBeingReviewed()}/>
+        <NewScoreReviewSubmit showFormAgain={this.hideScoreReviewPage} submitNewScore={this.handleSubmit} scores={this.state.scores} actionSteps={this.state.actionSteps} evalItems={this.props.evalItems} employee={this.employeeBeingReviewed()}/>
       )
     } else {
       return (
@@ -242,12 +251,6 @@ function mapDispatchToProps(dispatch) {
     submitNewScore: (scores, actionSteps, employeeID) => {
       dispatch(createNewScoresAndActionSteps(scores, actionSteps, employeeID))
     },
-    showScoreReviewPage: () => {
-      dispatch(isReviewingScore())
-    },
-    hideScoreReviewPage: () => {
-      dispatch(isNotReviewingScore())
-    },
     fetchEvalCategories: () => {
       dispatch(fetchAllEvaluationCategories())
     }
@@ -256,7 +259,6 @@ function mapDispatchToProps(dispatch) {
 
 function mapStateToProps(state) {
   return {
-    isReviewingScore: state.isReviewingScore,
     employees: state.users,
     evalCategories: state.currentEvalCategories
   }

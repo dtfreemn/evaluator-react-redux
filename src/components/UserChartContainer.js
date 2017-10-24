@@ -4,6 +4,7 @@ import LineGraph from './LineGraph'
 import ChartFilter from './ChartFilter'
 import UserScoresList from './UserScoresList'
 import UserActionStepsList from './UserActionStepsList'
+import { editActionStep } from '../actions/actionSteps'
 import { connect } from 'react-redux'
 
 const UserChartContainer = (props) => {
@@ -46,6 +47,10 @@ const UserChartContainer = (props) => {
     }
   }
 
+  const toggleActionStepStatus = (id, newStatus) => {
+    props.toggleStatus(id, newStatus)
+  }
+
   if (props.user.length > 0 && props.user[0].scores.length > 0) {
   return (
     <div className='container charts-container'>
@@ -77,7 +82,7 @@ const UserChartContainer = (props) => {
             <th className='underline'>Status</th>
           </tr>
         </thead>
-        <UserActionStepsList actionSteps={props.user[0].action_steps}/>
+        <UserActionStepsList actionStepStatusToggle={toggleActionStepStatus} actionSteps={props.user[0].action_steps}/>
       </table>
     </div>
   )} else if (props.user.length > 0) {
@@ -99,4 +104,12 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps)(UserChartContainer);
+function mapDispatchToProps(dispatch) {
+  return {
+    toggleStatus: (id, newStatus) => {
+      dispatch(editActionStep(id, newStatus))
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(UserChartContainer);

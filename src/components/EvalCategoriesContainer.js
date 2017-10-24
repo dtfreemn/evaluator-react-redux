@@ -27,7 +27,7 @@ class EvalCategoriesContainer extends React.Component {
           <thead>
             <tr>
               <td className='table-header'>Evaluation Group</td>
-              <td className='table-header'>Edit</td>
+              <td className='table-header'></td>
             </tr>
           </thead>
           <EvalCategoriesList categories={this.props.evalCategories}/>

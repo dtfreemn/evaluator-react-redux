@@ -9,6 +9,7 @@ import EvalItemsContainer from './components/EvalItemsContainer'
 import NewScoreFormContainer from './components/NewScoreFormContainer'
 import NewEvalCategoryForm from './components/NewEvalCategoryForm'
 import EvalCategoriesContainer from './components/EvalCategoriesContainer'
+import Footer from './components/Footer'
 import MenuLeft from './components/MenuLeft'
 import ErrorPage from './components/ErrorPage'
 import LogInForm from './components/LogInForm'
@@ -46,6 +47,7 @@ class App extends Component {
             <Route exact path='/scores/new' render={(props) => <div className='container'><AuthNewScoreFormContainer {...props}/></div>} />
             <Route path='*' component={ErrorPage}/>
         </Switch>
+        <Route path='/' render={(props) => <Footer {...props}/>}/>
       </div>
     );
   }

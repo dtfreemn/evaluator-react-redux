@@ -7,9 +7,7 @@ import NewScoreForm from './NewScoreForm'
 class NewScoreFormContainer extends React.Component {
   
   componentDidMount() {
-    if (this.props.evalItems.length === 0) {
-      this.props.fetchEvalItems()
-    }
+    this.props.fetchEvalItems()
     if (this.props.users.length === 0) {
       this.props.fetchAllUsers(this.props.currentUser)
     }

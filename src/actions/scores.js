@@ -33,15 +33,3 @@ export function createNewScoresAndActionSteps(scores, actionSteps, employeeId) {
     }
   }
 }
-
-export function isReviewingScore() {
-  return {
-    type: 'IS_REVIEWING_SCORE'
-  }
-}
-
-export function isNotReviewingScore() {
-  return {
-    type: 'IS_NOT_REVIEWING_SCORE'
-  }
-}

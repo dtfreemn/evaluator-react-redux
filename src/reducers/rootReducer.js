@@ -32,12 +32,6 @@ export function rootReducer(state = { currentUser: localStorage.getItem('jwt'), 
     case 'CANCEL_ERROR':
       return Object.assign({}, state, { isError: false })
 
-    //scores review page
-    case 'IS_REVIEWING_SCORE':
-      return Object.assign({}, state, { isReviewingScore: true } )
-    case 'IS_NOT_REVIEWING_SCORE':
-      return Object.assign({}, state, { isReviewingScore: false } )
-
     //eval categories
     case 'SET_EVAL_CATEGORIES':
       return Object.assign({}, state, { currentEvalCategories: action.payload })

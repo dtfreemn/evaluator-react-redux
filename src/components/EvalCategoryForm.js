@@ -95,10 +95,9 @@ class EvalCategoryForm extends React.Component {
     return (
       <form className='form fade-in' onSubmit={this.handleSubmit}>
         <span className='create-edit-form-label'>Name: </span><input type="text" placeholder='name of group' onChange={this.handleNameInputChange} value={this.state.name}/>
-        <button className='green-white-button grey-button' onClick={this.incrementPossibleScores}>Add Possible Score</button>
         {this.makeCurrentScoreEditInputs()}
         {this.makePossibleScoresInputs()}
-        <input className='green-white-button' type='submit' value='Submit'/>
+        <input className='green-white-button' type='submit' value='Submit'/><span><button className='green-white-button grey-button' onClick={this.incrementPossibleScores}>Add Possible Score</button></span>
       </form>
     )
   }

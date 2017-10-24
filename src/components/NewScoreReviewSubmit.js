@@ -5,7 +5,6 @@ const NewScoreReviewSubmit = (props) => {
   console.log(props)
 
   const handleSubmit = (e) => {
-    console.log('submitting score')
     props.submitNewScore(e)
   }
 
@@ -15,7 +14,6 @@ const NewScoreReviewSubmit = (props) => {
 
   const makeScoresRows = () => {
     const scores = props.scores
-    console.log('making scores', scores)
     const scoresRows = []
     for (let key in scores) {
       if (scores[key]['score'] !== '' && scores[key]['score']) {

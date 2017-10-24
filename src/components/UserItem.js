@@ -15,7 +15,7 @@ const UserItem = (props) => {
   }
 
   const profileOrDeleteButton = () => {
-    return !props.windowProps.location.pathname.includes(user.id) ? <NavLink className='profile-delete-edit-button grey-button' to={'/users/' + user.id + '/s'}>Data</NavLink> : <button className='profile-delete-edit-button' onClick={handleDelete}>Delete</button>
+    return !props.windowProps.location.pathname.includes(user.id) ? <NavLink className='profile-delete-edit-button grey-button' to={'/users/' + user.id + '/s'}>Profile</NavLink> : <button className='profile-delete-edit-button' onClick={handleDelete}>Delete</button>
   }
 
   const editUserButton = () => {
@@ -31,10 +31,10 @@ const UserItem = (props) => {
 
   return (
     <tr className='bottom' data-id={user.id}>
-      <td className='profile-button-col'>{profileOrDeleteButton()}</td>
       <td>{user.first_name} {editUserButton()}</td>
       <td>{user.last_name}</td>
       <td>{user.email}</td>
+      <td className='profile-button-col'>{profileOrDeleteButton()}</td>
     </tr>
   )
 }

@@ -63,10 +63,10 @@ class UsersContainer extends React.Component {
         <table className='fade-in'>
           <thead>
             <tr>
-              <td className='profile-button-col'></td>
               <td className='table-header'>First Name</td>
               <td className='table-header'>Last Name</td>
               <td className='table-header'>Email</td>
+              <td className='table-header profile-button-col'></td>
             </tr>
           </thead>
           <UsersList users={this.filterUsers()} windowProps={this.props}/>

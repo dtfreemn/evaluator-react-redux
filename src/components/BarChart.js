@@ -65,7 +65,7 @@ class BarChart extends React.Component {
     return (
         <Bar
           data={ this.makeDataset() }
-          options={ { legend: { display: false }, scales: { yAxes: [ { ticks: { beginAtZero: true, suggestedMax: 5 } } ] },
+          options={ { legend: { display: false }, scales: { yAxes: [ { ticks: { beginAtZero: true, suggestedMax: 5, maxRotation: 60 } } ] },
             tooltips: {
               callbacks: {
                 label: function(tooltipItem, data) {
