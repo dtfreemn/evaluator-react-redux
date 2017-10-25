@@ -37,7 +37,7 @@ class NewScoreForm extends React.Component {
           <td className='score-cell'>{item.name}<br/>({item.evaluation_category.name})</td>
           <td className='score-cell'>{item.description}</td>
           <td className='score-cell'>
-            <select className='score-cell-input' type='text' id={item.id} name='score' onChange={this.handleScoreChange}>{makeOptions(item)}</select><span className='yellow-highlight'>{this.state.scores[item.id]['score']}</span>
+            <select className='score-cell-input' type='text' id={item.id} name='score' onChange={this.handleScoreChange}>{makeOptions(item)}</select><span className='yellow-highlight'>{this.state.scores[item.id]['score'] === '' ? '-' : this.state.scores[item.id]['score']}</span>
           </td>
           <td className='score-cell'>
             <textarea id={item.id} type='text' name='note' value={this.state.scores[`${item.id}`]['note']} onChange={this.handleScoreChange}/>

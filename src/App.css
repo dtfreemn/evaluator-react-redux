@@ -42,6 +42,10 @@
   padding: 3px 10px 3px 10px;
 }
 
+button.hover-white:hover {
+  color: white;
+}
+
 .profile-delete-edit-button:hover {
   color: darkgreen;
   background: #e3e5e8;
