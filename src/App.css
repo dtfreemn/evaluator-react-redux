@@ -352,7 +352,7 @@ span.table-header {
   grid-row: 2;
   margin-top: 2%;
   margin-bottom: 10%;
-  margin-left: 5%;
+  /*margin-left: 5%;*/
   max-width: 90%;
   max-height: 90%;
 }
@@ -377,12 +377,18 @@ span.table-header {
 /* END ERROR PAGE */
 
 /* Position of lists on chart page...need to probably change to make chart container display grid with 2 rows and 2 columns*/
+.bottom-tables {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr
+}
+
 #action-steps {
   /*margin-left: 10%;*/
   display: inline-block;
   width: 450px;
   margin-bottom: 50px;
-  float: right;
+  /*float: right;*/
+  grid-column: 5/8;
 }
 
 #action-steps td {
@@ -391,7 +397,9 @@ span.table-header {
 }
 
 #scores-list {
-  float:left;
+  /*float:left;*/
+  margin-left: 50px;
+  grid-column: 1/3;
   display: inline-block;
   width: 450px;
   margin-left: 2%;

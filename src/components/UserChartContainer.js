@@ -62,6 +62,7 @@ const UserChartContainer = (props) => {
       <div className='chart'>
         {graphToRender()}
       </div>
+      <div className='bottom-tables'>
       <table id='scores-list'>
         <thead>
           <tr>
@@ -88,6 +89,7 @@ const UserChartContainer = (props) => {
         </thead>
         <UserActionStepsList actionStepStatusToggle={toggleActionStepStatus} actionSteps={props.user[0].action_steps}/>
       </table>
+      </div>
     </div>
   )} else if (props.user.length > 0) {
     return (
