@@ -6,6 +6,7 @@ import NewScoreReviewSubmit from './NewScoreReviewSubmit'
 import PossibleScoreModal from './PossibleScoreModal'
 import ReactHover from 'react-hover'
 
+//Rendered by NewScoreFormContainer
 class NewScoreForm extends React.Component {
 
   componentDidMount() {
@@ -24,29 +25,17 @@ class NewScoreForm extends React.Component {
     if (this.state && this.state.evalCatFilter === '') {
       return (
         <tr key='blank'>
-          <td className='score-cell'>
-            -
-          </td>
-          <td className='score-cell'>
-            -
-          </td>
-          <td className='score-cell'>
-            -
-          </td>
-          <td className='score-cell'>
-            -
-          </td>
+          <td className='score-cell'>-</td>
+          <td className='score-cell'>-</td>
+          <td className='score-cell'>-</td>
+          <td className='score-cell'>-</td>
         </tr>
         )
-    } else if (this.state){
+    } else if (this.state) {
       return this.props.evalItems.filter(item => item.evaluation_category.id === parseInt(this.state.evalCatFilter,10)).map(item =>
         <tr key={item.id}>
-          <td className='score-cell'>
-            {item.name}<br/>({item.evaluation_category.name})
-          </td>
-          <td className='score-cell'>
-            {item.description}
-          </td>
+          <td className='score-cell'>{item.name}<br/>({item.evaluation_category.name})</td>
+          <td className='score-cell'>{item.description}</td>
           <td className='score-cell'>
             <select className='score-cell-input' type='text' id={item.id} name='score' onChange={this.handleScoreChange}>{makeOptions(item)}</select><span className='yellow-highlight'>{this.state.scores[item.id]['score']}</span>
           </td>

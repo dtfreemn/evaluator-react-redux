@@ -1,12 +1,13 @@
 import React from 'react';
 
+//Rendered by UserActionStepsList inside UserChartContainer
 class UserActionStepItem extends React.Component {
   
   state = {
     status: this.props.actionStep.completed
   }
 
-
+  //saves new status on the backend
   onCompleteClick = (e) => {
     e.preventDefault()
     this.props.toggleStatus(e.target.id, !this.state.status)

@@ -1,7 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux'
-import { logInToApi, clearCurrentUserAndOrg } from '../actions/users'
+import { logInToApi } from '../actions/users'
 
+//Rendered in App
 class LogInForm extends React.Component {
 
   state = {
@@ -9,16 +10,9 @@ class LogInForm extends React.Component {
     password: ''
   }
 
-  // componentDidMount() {
-  //   if (!localStorage.getItem('jwt') && this.props) {
-  //     this.props.logOutOfFrontEnd()
-  //   }
-  // }
-
   handleSubmit = (e) => {
     e.preventDefault()
-    this.props.submitLogin(this.state, this.props)
-    
+    this.props.submitLogin(this.state, this.props) 
   }
 
   handleChange = (e) => {
@@ -29,7 +23,7 @@ class LogInForm extends React.Component {
 
   errorMessage = () => {
     if (this.props.error) {
-      return <div className='error-message'>User not found</div>
+      return <div className='error-message fade-in'>User not found</div>
     }
   }
 
@@ -57,9 +51,6 @@ function mapDispatchToProps(dispatch) {
   return {
     submitLogin: (emailPassword, props) => {
       dispatch(logInToApi(emailPassword, props))
-    },
-    logOutOfFrontEnd: () => {
-      dispatch(clearCurrentUserAndOrg())
     }
   }
 }

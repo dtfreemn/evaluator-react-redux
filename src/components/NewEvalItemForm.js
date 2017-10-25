@@ -4,6 +4,7 @@ import { createEvalItem } from '../actions/evalItems'
 import { fetchAllEvaluationCategories } from '../actions/categoriesAndPossiblePoints'
 import EvalItemForm from './EvalItemForm'
 
+//Rendered in App
 class NewEvalItemForm extends React.Component {
 
   componentDidMount() {
@@ -15,8 +16,8 @@ class NewEvalItemForm extends React.Component {
   }
 
 
-
-    render() {
+  //passes in blank name and description because the form expects those props so that it can be compatible with both the new and edit parents
+  render() {
     if (!this.props.isDeletingItem) {
       return (
         <EvalItemForm name={''} description={''} handleSubmit={this.handleSubmit} evalCategories={this.props.currentEvalCategories} {...this.props}/>
@@ -26,7 +27,7 @@ class NewEvalItemForm extends React.Component {
         <div></div>
       )
     }
-    }
+  }
 }
 
 function mapStateToProps(state) {

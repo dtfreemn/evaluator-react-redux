@@ -1,5 +1,6 @@
 import React from 'react'
 
+//Rendered by either NewEvalItemForm or EditEvalItemForm
 class EvalItemForm extends React.Component {
   
   state = {
@@ -30,6 +31,7 @@ class EvalItemForm extends React.Component {
     })
   }
 
+  //uses eval categories passed down from either NewEvalItemForm or EditEvalItemForm
   makeEvalCategoriesSelectOptions = () => {
     if (this.props.evalCategories) {
       let options = this.props.evalCategories.map(category => <option key={category.id} value={category.id}>{category.name}</option>)

@@ -7,8 +7,10 @@ import UserActionStepsList from './UserActionStepsList'
 import { editActionStep } from '../actions/actionSteps'
 import { connect } from 'react-redux'
 
+//Rendered by UsersContainer
 const UserChartContainer = (props) => {
 
+  //gets all items that employee has been scored on to pass to the chart filter
   const getUniqueEvalItems = () => {
     if (props.user.length > 0) {
       let user = props.user[0]
@@ -30,6 +32,7 @@ const UserChartContainer = (props) => {
     }
   }
 
+  //extracts scores from user and sorts them by date in descending order. returns either all scores or just the scores that correspond with the line graph displayed that is determined by the filter selected by the user
   const filterScores = () => {
     if (props.currentChartFilter === 'default') { 
       return props.user[0].scores.sort(function(a,b) {
@@ -47,6 +50,7 @@ const UserChartContainer = (props) => {
     }
   }
 
+  //passed down to UserActionStepsList and then to UserActionStepItem to toggle itself to/from complete/incomplete
   const toggleActionStepStatus = (id, newStatus) => {
     props.toggleStatus(id, newStatus)
   }

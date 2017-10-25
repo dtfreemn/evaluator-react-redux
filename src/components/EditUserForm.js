@@ -3,6 +3,7 @@ import UserForm from './UserForm'
 import { editUser } from '../actions/users'
 import { connect } from 'react-redux'
 
+//Rendered by UsersContainer. Sends employee's information to the form
 class EditUserForm extends React.Component {
 
   handleSubmit = (user) => {

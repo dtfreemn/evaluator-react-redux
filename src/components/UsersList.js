@@ -1,6 +1,7 @@
 import React from 'react'
 import UserItem from './UserItem'
 
+//Rendered by UsersContainer
 const UsersList = (props) => {
 
   const createUsers = () => {

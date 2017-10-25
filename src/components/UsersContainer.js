@@ -5,7 +5,7 @@ import UsersList from './UsersList'
 import UserChartContainer from './UserChartContainer'
 import EditUserForm from './EditUserForm'
 
-
+//Rendered in App
 class UsersContainer extends React.Component {
   
   state = {
@@ -17,20 +17,23 @@ class UsersContainer extends React.Component {
   }
   
   filterUsers = () => {
+    let filter = this.state.searchFilter.toLowerCase()
     if (this.props.location.pathname === '/users' || this.props.location.pathname === '/users/new') {
-      return this.props.users.filter(user => user.first_name.toLowerCase().includes(this.state.searchFilter.toLowerCase()) || user.last_name.toLowerCase().includes(this.state.searchFilter.toLowerCase()) || user.email.toLowerCase().includes(this.state.searchFilter.toLowerCase()))
+      return this.props.users.filter(user => user.first_name.toLowerCase().includes(filter) || user.last_name.toLowerCase().includes(filter) || user.email.toLowerCase().includes(filter))
     } else if (this.props.match.params.id && !isNaN(this.props.match.params.id)) {
       let id = this.props.match.params.id
       return this.props.users.filter(user => user.id === parseInt(id, 10))
     }
   }
 
+  //only renders chart container if you're on the individual employee's page
   chartContainer = () => {
     if (this.props.match.params.id && this.props.match.params.id !== 'new' && this.props.users.length > 0) {
       return <UserChartContainer user={this.filterUsers()} />
     }
   }
 
+  //since UsersContainer is rendered in a few different situations, need to dynamically create the search bar only if user is on users index
   userSearch = () => {
     if (this.props.location.pathname === '/users') {
       return <div className='create-edit-form users-search'><input type='text' placeholder='search for employee' value={this.state.searchFilter} onChange={this.handleSearchChange} /></div>
@@ -45,7 +48,7 @@ class UsersContainer extends React.Component {
     })
   }
   
-
+  //renders edit user form above users container only if on edit path
   editUserForm = () => {
     if (this.props.location.pathname.split('/').includes('edit') && this.props.users.length > 0) {
       if (this.filterUsers().length > 0) {

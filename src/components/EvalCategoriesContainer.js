@@ -4,6 +4,7 @@ import EvalCategoriesList from './EvalCategoriesList'
 import EditEvalCategoryForm from './EditEvalCategoryForm'
 import { connect } from 'react-redux'
 
+//Rendered in App
 class EvalCategoriesContainer extends React.Component {
 
   componentDidMount() {
@@ -37,7 +38,7 @@ class EvalCategoriesContainer extends React.Component {
     } else {
       return (
         <div className='container large fade-in'>
-          {this.editEvalCategoryForm()}
+          {this.editEvalCategoryForm()} {/* renders by itself because of how big the form is. other edit forms render with their container below them, but this one is too large. */}
         </div>
       )
     }

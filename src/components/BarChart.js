@@ -2,8 +2,11 @@ import React from 'react';
 import { Bar } from 'react-chartjs-2'
 import { makeArrayOfColors } from '../chartHelpers/chartHelpers'
 
+//Rendered by UserChartContainer
 class BarChart extends React.Component {
   
+  //Pulls out the unique items that individual employee has been scored on to establish the columns of their graph
+  //Used in #getAverageScores
   getUniqueEvalItems = () => {
     let finalItems = {}
     this.props.user.scores.map(score => score.eval_item.name).forEach(name => {
@@ -14,6 +17,8 @@ class BarChart extends React.Component {
     return finalItems
   }
 
+  //Calculates average scores of each unique eval item on which the employee has been scored
+  //Used in #makeDataSet
   getAverageScores = () => {
     let items = this.getUniqueEvalItems()
     let finalItems = {}
@@ -27,25 +32,16 @@ class BarChart extends React.Component {
     return finalItems
   }
 
-  setGraphMax = () => {
-    let max = 0
-    this.props.user.scores.forEach(score => {
-      if (score.score > max) {
-        max = score.score
-      }
-    })
-    max = (max + (max*0.1))
-    return max
-  }
-
+  //Dynamically creates a color for each of the unique columns (using the number of unique eval items). Needed bc we can't hard code the number of columns
   setGraphColors = () => {
-    const colorsArray = makeArrayOfColors()
+    const colorsArray = makeArrayOfColors() //helper function that creates an array of 100 colors to be selected from randomly
     const numberNeeded = Object.keys(this.getUniqueEvalItems())
     const finalColors = []
     numberNeeded.forEach(el => finalColors.push(colorsArray[Math.floor(Math.random() * colorsArray.length)]))
     return finalColors
   }
 
+  //Puts data into format used by chartjs-2
   makeDataset = () => {
     let scoresObj = this.getAverageScores()
     let data = {labels: [], datasets: [{data: [], backgroundColor: this.setGraphColors()}]}
@@ -56,11 +52,8 @@ class BarChart extends React.Component {
     return data
   }
 
-  makeOptions = () => {
-    return 
-  }
-
   render() {
+    //Preserves 'this' for use in the tooltip callback function
     let that = this
     return (
         <Bar
@@ -79,7 +72,5 @@ class BarChart extends React.Component {
     )
   }
 }
-
-// function mapStateToProps
 
 export default BarChart;

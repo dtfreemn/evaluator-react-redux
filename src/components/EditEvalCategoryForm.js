@@ -3,8 +3,10 @@ import EvalCategoryForm from './EvalCategoryForm'
 import { editEvalCategory } from '../actions/categoriesAndPossiblePoints'
 import { connect } from 'react-redux'
 
+//Rendered by EvalCategoriesContainer
 class EditEvalCategoryForm extends React.Component {
 
+  //Extracts and sorts the current possible scores associated with the category and puts them into an object  
   makeCurrentScores = () => {
     let currentScores = {}
     let sortedScores = this.props.possibleScores.sort(function(a,b) {
@@ -18,9 +20,9 @@ class EditEvalCategoryForm extends React.Component {
     return currentScores
   }
 
+  //Handles the fetches that update the name of the category, any of its current possible points, and creates any new possible points for the category
   handleSubmit = (name, possiblePoints, windowProps, currentScores) => {
     this.props.editCategory(name, this.props.match.params.id, possiblePoints, windowProps, currentScores)
-    // this.props.createNewPoints(possiblePoints, this.props.match.params.id, windowProps)
   }
 
   render() {
@@ -36,7 +38,6 @@ function mapDispatchToProps(dispatch) {
   return {
     editCategory: (name, id, possiblePoints, windowProps, currentScores) => {
       dispatch(editEvalCategory(name, id, possiblePoints, windowProps, currentScores))
-      // console.log(name, id, possiblePoints, windowProps, currentScores)
     }
   }
 }

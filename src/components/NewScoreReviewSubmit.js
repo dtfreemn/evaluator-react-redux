@@ -1,22 +1,23 @@
 import React from 'react';
 
+//Rendered by NewScoreForm -- displays entered scores, notes, and action steps pre-submit so user has chance to review and edit
 const NewScoreReviewSubmit = (props) => {
-
-  console.log(props)
 
   const handleSubmit = (e) => {
     props.submitNewScore(e)
   }
 
+  //switches internal state on parent so that it hides this review page
   const handleBack = (e) => {
     props.showFormAgain()
   }
 
+  //creates display rows for all scores that have been entered by the user...passed here by NewScoreForm
   const makeScoresRows = () => {
     const scores = props.scores
     const scoresRows = []
     for (let key in scores) {
-      if (scores[key]['score'] !== '' && scores[key]['score']) {
+      if (scores[key]['score'] && scores[key]['score'] !== '') {
         let evalItem = props.evalItems.filter(item => item.id === parseInt(key, 10))[0]
         scoresRows.push(<tr className='bottom' key={key}><td>{evalItem['name']}</td><td>{scores[key]['score']}</td><td>{scores[key]['note']}</td></tr>)  
       }
@@ -24,6 +25,7 @@ const NewScoreReviewSubmit = (props) => {
     return scoresRows
   }
 
+  //creates display rows for all action steps that have been entered by the user...passed here by NewScoreForm
   const makeActionStepsRows = () => {
     const actionSteps = props.actionSteps
     const actionStepsRows = []
@@ -45,7 +47,6 @@ const NewScoreReviewSubmit = (props) => {
     <div><span className='table-header highlight'>{props.employee}</span><br/><button className='edit-score-button score-button' onClick={handleBack}>I Want To Edit My Submission</button></div><br/><br/>
     <table className='score-review-table'>
       <thead>
-
         <tr>
           <th className='align-left'>Evaluation Item</th>
           <th className='align-left'>Your Score</th>

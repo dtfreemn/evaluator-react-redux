@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { editEvalItem } from '../actions/evalItems'
 import { fetchAllEvaluationCategories } from '../actions/categoriesAndPossiblePoints'
 
-
+//Rendered by EvalItemsContainer. Just takes the eval items, fetches the categories and then passes everything down to the form component
 class EditEvalItemForm extends React.Component {
 
   componentDidMount() {

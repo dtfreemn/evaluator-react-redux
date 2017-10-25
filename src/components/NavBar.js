@@ -3,6 +3,7 @@ import { clearCurrentUserAndOrg } from '../actions/users'
 import { clearAllEvalItems } from '../actions/evalItems'
 import { connect } from 'react-redux'
 
+//Rendered on '/' in App
 const NavBar = (props) => {
   
   const handleClick = () => {

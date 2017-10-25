@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom'
 
-
+//Rendered by EvalItemsList
 const EvalItem = (props) => {
   
   const item = props.info

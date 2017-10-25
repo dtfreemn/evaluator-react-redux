@@ -4,14 +4,15 @@ import { fetchAllEvalItems } from '../actions/evalItems'
 import { fetchAllUsers } from '../actions/users'
 import NewScoreForm from './NewScoreForm'
 
+//Rendered in App
 class NewScoreFormContainer extends React.Component {
   
   componentDidMount() {
+    //needs to happen every time so that it picks up any newly created items. otherwise, it will break
     this.props.fetchEvalItems()
     if (this.props.users.length === 0) {
-      this.props.fetchAllUsers(this.props.currentUser)
+      this.props.fetchAllUsers()
     }
-
   }
 
   render() {
@@ -40,8 +41,8 @@ function mapDispatchToProps(dispatch) {
     fetchEvalItems: () => {
       dispatch(fetchAllEvalItems())
     },
-    fetchAllUsers: (user) => {
-      dispatch(fetchAllUsers(user))
+    fetchAllUsers: () => {
+      dispatch(fetchAllUsers())
     }
   }
 }

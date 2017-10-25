@@ -1,5 +1,6 @@
 import React from 'react';
 
+//Rendered by UserScoresList from UserChartContainer
 const UserScoreItem = (props) => {
   let score = props.score
   

@@ -1,6 +1,7 @@
 import React from 'react';
 import EvalItem from './EvalItem'
 
+//Rendered by EvalItemsContainer
 const EvalItemsList = (props) => {
 
   const createEvalItems = () => {

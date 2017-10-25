@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux'
 import { setChartFilter } from '../actions/chartFilter'
 
+//Rendered by UserChartContainer. Saves current filter in the store to know which graph to render
 class ChartFilter extends React.Component {
   
   componentDidMount() {
@@ -11,7 +12,6 @@ class ChartFilter extends React.Component {
   makeEvalItemOptions = () => {
     let options = this.props.items.map(name => <option key={name} value={name}>See Timeline Graph for "{name}"</option>)
     options.unshift(<option key='average' value='default'>Average Scores Summary Graph</option>)
-    // options.unshift(<option key='default' value='default'>Select Different Graph</option>)
     return options
   }
 

@@ -7,6 +7,8 @@ import EditEvalItemForm from './EditEvalItemForm'
 import { deleteEvalItem, startEvalItemDelete, endEvalItemDelete } from '../actions/evalItems'
 import { fetchAllEvaluationCategories } from '../actions/categoriesAndPossiblePoints'
 
+
+//Rendered in App
 class EvalItemsContainer extends React.Component {
   
   state = {
@@ -15,12 +17,13 @@ class EvalItemsContainer extends React.Component {
   }
   
   componentDidMount() {
+    //Makes sure base component is shown and not the review page
     this.props.hideDeleteReview()
     this.props.fetchEvalItems()
     this.props.fetchCategories()
   }
 
-
+  //First dispatches to show review page. If review page is already displaying and this function is called, deletes item
   handleDeleteItem = (item) => {
     if (!this.props.isDeletingItem) {
       this.setState({
@@ -48,6 +51,7 @@ class EvalItemsContainer extends React.Component {
     })
   }
 
+  //Shows edit item form at top of page if path is edit
   editEvalItemForm = () => {
     if (this.props.location.pathname.split('/').includes('edit') && this.props.evalItems.length > 0) {
       if (this.props.evalItems.length > 0) {
@@ -61,6 +65,7 @@ class EvalItemsContainer extends React.Component {
     }
   }
 
+  //Shows items based on select filter or shows only the item being edited
   filterEvalItems = () => {
     let items
     if (this.props.evalItems.length > 0) {  
@@ -83,8 +88,8 @@ class EvalItemsContainer extends React.Component {
     if (!this.props.isDeletingItem) {
       return (
         <div className='container large fade-in'>
-          {this.editEvalItemForm()}
-          {this.props.location.pathname.includes('edit') ? null : <select id='eval-category-select' onChange={this.handleFilterChange}>{this.makeEvalCategoriesSelectOptions()}</select>}
+          {this.editEvalItemForm()} {/*only renders on edit path*/}
+          {this.props.location.pathname.includes('edit') ? null : <select id='eval-category-select' onChange={this.handleFilterChange}>{this.makeEvalCategoriesSelectOptions()}</select>} {/*doesn't render on edit page*/}
           <table className='eval-items-table'>
             <thead>
               <tr>

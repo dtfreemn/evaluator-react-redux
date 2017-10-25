@@ -177,6 +177,11 @@ select#employeeID {
   border-radius: .2em;
 }
 
+select {
+  border: thin solid darkgreen;
+  background: white;
+}
+
 select#eval-category-select {
   font-family: 'Varela', sans-serif;
   font-size: 1em;
@@ -298,7 +303,7 @@ span.table-header {
   grid-template-columns: 1fr 1fr 1fr
 }
 .log-in-form {
-  grid-row: 2;
+  grid-row: 1;
   grid-column: 2/3; 
 }
 
@@ -557,7 +562,8 @@ tr.bottom td {
   padding: 10px;
   margin: 10px;
   border: 1px solid #e3e5e8;
-  font-size: 2em;
+  font-size: 1.5em;
+  width: 210px;
 }
 
 /* START SCORE RUBRIC MODAL*/

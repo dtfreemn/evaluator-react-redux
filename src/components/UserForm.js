@@ -1,5 +1,6 @@
 import React from 'react'
 
+//Rendered by NewUserForm or EditUserForm
 class UserForm extends React.Component {
   
   state = {

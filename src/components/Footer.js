@@ -1,5 +1,6 @@
 import React from 'react'
 
+//Rendered on '/' in App
 const Footer = (props) => {
 
 

@@ -1,6 +1,7 @@
 import React from 'react';
 import EvalCategoryItem from './EvalCategoryItem'
 
+//Rendered by EvalCategoriesContainer
 const EvalCategoriesList = (props) => {
 
   const createEvalCategories = () => {

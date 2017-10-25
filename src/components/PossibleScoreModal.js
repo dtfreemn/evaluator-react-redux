@@ -1,5 +1,6 @@
 import React from 'react'
 
+//Rendered on hover in NewScoreForm
 const PossibleScoreModal = (props) => {
 
   let rows

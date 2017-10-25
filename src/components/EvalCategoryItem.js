@@ -1,6 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom'
 
+//Rendered by EvalCategoriesList
 const EvalCategoryItem = (props) => {
   
   let category = props.category
