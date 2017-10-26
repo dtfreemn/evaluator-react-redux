@@ -16,24 +16,24 @@ const DeleteEvalItemConfirm = (props) => {
   
     return (
       <div className='container large fade-in'>
-        <div className='review-warning'>Please make sure you are certain that you want to delete this item. Once deleted, the item and all of its associated scores will no longer be accessible to you and will be irretrievable.</div><br/><br/>
+        <div className='review-warning'>Please make sure you are certain that you want to delete this value. Once deleted, the value and all of its associated scores will no longer be accessible to you and will be irretrievable.</div><br/><br/>
         <table className='eval-items-table'>
           <thead>      
             <tr>
-              <td className='table-header'>Evaluation Item</td>
-              <td className='table-header'>Item Description</td>
+              <td className='table-header'>Value</td>
+              <td className='table-header'>Value Description</td>
             </tr>
           </thead>
           <tbody>  
             <tr>
               <td>{props.item.name}</td>
               <td>{props.item.description}</td>
-              <td><button className='submit-score-button score-button' onClick={handleDelete}>Yes, I am sure. Please delete this item.</button></td>
+              <td><button className='submit-score-button score-button' onClick={handleDelete}>Yes, I am sure. Please delete this value.</button></td>
             </tr>
           </tbody>
         </table>
         <br/><br/>
-      <button className='edit-score-button score-button' onClick={handleCancel}>Never mind. I do not want to delete this item.</button>
+      <button className='edit-score-button score-button' onClick={handleCancel}>Never mind. I do not want to delete this value.</button>
       </div>
     )
 }
