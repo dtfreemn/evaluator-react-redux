@@ -403,6 +403,10 @@ span.table-header {
   border-radius: 15px;
 }
 
+textarea {
+  padding: 15px;
+}
+
 .log-in-grid {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr
@@ -711,10 +715,7 @@ tr.bottom td {
 
 /* END SCORE RUBRIC MODAL*/
 
-textarea {
-  padding: 15px;
-}
-
+/* START LOADER */
 .loading-screen {
   min-width: 100%;
   min-height: 100%;
@@ -724,3 +725,5 @@ textarea {
 .loading-screen img {
   padding-top: 10%;
 }
+
+/* END LOADER */

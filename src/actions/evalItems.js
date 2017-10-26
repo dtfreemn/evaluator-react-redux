@@ -11,7 +11,6 @@ export function fetchAllEvalItems() {
     })
       .then(resp => resp.json())
       .then(eval_items => {
-        // dispatch(clearAllEvalItems())
         dispatch(setAllEvalItems(eval_items))
       })
   }
