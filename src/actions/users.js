@@ -1,94 +1,41 @@
-import { baseURL } from '../urls'
 import { isError, cancelError } from './loadingAndErrors'
+import api from '../api'
+
 
 export function fetchAllUsers() {
   return function(dispatch) {
-    fetch(baseURL + '/users', {
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-        'Authorization': localStorage.getItem('jwt')
-      }
-    })
-      .then(resp => resp.json())
-      .then(users => dispatch(setAllUsers(users)))
+    api.getUsers()
+      .then(users => dispatch(setAllUsers(users)) )
   }
 }
 
 export function createUser(user, props) {
   return function(dispatch) {
-    const payload = JSON.stringify({first_name: user.firstName, last_name: user.lastName, email: user.email})
-    fetch(baseURL + '/users', {
-      method: 'post',
-      body: payload,
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-        'Authorization': localStorage.getItem('jwt')
-      }
-    })
-      .then(resp => resp.json())
+    api.createUser(user)
       .then(users => dispatch(setAllUsers(users)))
-      .then( () => {
-        props.history.push('/users')
-      })
+      .then( () =>  props.history.push('/users') )
   }
 }
 
 export function editUser(user, id, props) {
   return function(dispatch) {
-    const payload = JSON.stringify({first_name: user.firstName, last_name: user.lastName, email: user.email})
-    fetch(baseURL + '/users/' + id, {
-      method: 'PATCH',
-      body: payload,
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-        'Authorization': localStorage.getItem('jwt')
-      }
-    })
-      .then(resp => resp.json())
+    api.editUser(user, id)
       .then(users => dispatch(setAllUsers(users)))
-      .then(() => {
-        props.history.push('/users/' + props.id + '/s')
-      })
+      .then(() => props.history.push('/users/' + props.id + '/s') )
   }
 }
 
-export function deleteUser(user) {
+export function deleteUser(user, props) {
   return function(dispatch) {
-    fetch(baseURL + '/users/' + user.id, {
-      method: 'delete',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-        'Authorization': localStorage.getItem('jwt')
-      }
-    })
-      .then(resp => resp.json())
+    api.deleteUser(user.id)
       .then(users => dispatch(setAllUsers(users)))
-  }
-}
-
-export function setAllUsers(payload) {
-  return {
-    type: 'SET_ALL_USERS',
-    payload
+      .then(() => props.history.push('/users'))
   }
 }
 
 export function logInToApi(emailPassword, props) {
   return function(dispatch) {
-    const payload = JSON.stringify({email: emailPassword.email, password: emailPassword.password})
-    fetch(baseURL + '/login', {
-      method: 'post',
-      body: payload,
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      }
-    })
-      .then(resp => resp.json())
+    api.logInUser(emailPassword)
       .then(loggedInUserInfo => {
         if (loggedInUserInfo.admin) {
           localStorage.setItem('jwt', loggedInUserInfo.jwt)
@@ -101,6 +48,13 @@ export function logInToApi(emailPassword, props) {
         dispatch(isError())
       }
       })
+  }
+}
+
+export function setAllUsers(payload) {
+  return {
+    type: 'SET_ALL_USERS',
+    payload
   }
 }
 

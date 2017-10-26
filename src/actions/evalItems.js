@@ -1,69 +1,32 @@
-import { baseURL } from '../urls'
+import api from '../api'
 
 export function fetchAllEvalItems() {
   return function(dispatch) {
-    fetch(baseURL + '/eval_items', {
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-        'Authorization': localStorage.getItem('jwt')
-      }
-    })
-      .then(resp => resp.json())
+    api.getEvalItems()
       .then(eval_items => {
-        dispatch(setAllEvalItems(eval_items))
+        dispatch(setAllEvalItems(eval_items) )
       })
   }
 }
 
 export function createEvalItem(evalItem) {
   return function(dispatch) {
-    const payload = JSON.stringify({name: evalItem.name, description: evalItem.description, evaluation_category_id: evalItem.evaluationCategoryId})
-    fetch(baseURL + '/eval_items', {
-      method: 'post',
-      body: payload,
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-        'Authorization': localStorage.getItem('jwt')
-      }
-    })
-      .then(resp => resp.json())
-      .then((eval_items) => dispatch(setAllEvalItems(eval_items)))
+    api.createEvalItem(evalItem)
+      .then((eval_items) => dispatch(setAllEvalItems(eval_items)) )
   }
 }
 
 export function editEvalItem(evalItem, id, props) {
   return function(dispatch) {
-    const payload = JSON.stringify({name: evalItem.name, description: evalItem.description, evaluation_category_id: evalItem.evaluationCategoryId})
-    fetch(baseURL + '/eval_items/' + id, {
-      method: 'PATCH',
-      body: payload,
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-        'Authorization': localStorage.getItem('jwt')
-      }
-    })
-      .then(resp => resp.json())
-      .then(evalItems => dispatch(setAllEvalItems(evalItems)))
-      .then(() => {
-        props.history.push('/eval_items')
-      })
+    api.editEvalItem(evalItem, id)
+      .then(evalItems => dispatch(setAllEvalItems(evalItems)) )
+      .then(() =>  props.history.push('/eval_items') )
   }
 }
 
 export function deleteEvalItem(item) {
   return function (dispatch) {
-    fetch(baseURL + '/eval_items/' + item.id, {
-      method: 'delete',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-        'Authorization': localStorage.getItem('jwt')
-      }
-    })
-      .then(resp => resp.json())
+    api.deleteEvalItem(item.id)
       .then(evalItems => dispatch(setAllEvalItems(evalItems)))
   }
 }

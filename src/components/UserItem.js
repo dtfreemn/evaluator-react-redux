@@ -9,8 +9,8 @@ const UserItem = (props) => {
   const user = props.info  
 
   const handleDelete = (e) => {
-    props.deleteUserItem(user)
-    props.windowProps.history.push('/users')
+    props.deleteUserItem(user, props.windowProps)
+    // props.windowProps.history.push('/users')
   }
 
   const profileButton = () => {
@@ -39,8 +39,8 @@ const UserItem = (props) => {
 
 function mapDispatchToProps(dispatch) {
   return {
-    deleteUserItem: (user) => {
-      dispatch(deleteUser(user))
+    deleteUserItem: (user, props) => {
+      dispatch(deleteUser(user, props))
     }
   }
 }

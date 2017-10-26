@@ -1,97 +1,47 @@
-import { baseURL } from '../urls'
+import api from '../api'
 
 export function fetchAllEvaluationCategories() {
   return function(dispatch) {
-    fetch(baseURL + '/evaluation_categories', {
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-        'Authorization': localStorage.getItem('jwt')
-      }
-    })
-      .then(resp => resp.json())
+    api.getAllEvaluationCategories()
       .then(evalCategories => dispatch(setEvalCategories(evalCategories)))
   }
 }
 
 export function createEvaluationCategory(name, possiblePoints, props) {
   return function(dispatch) {
-    const payload = JSON.stringify({name: name})
-    fetch(baseURL + '/evaluation_categories', {
-      method: 'post',
-      body: payload,
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-        'Authorization': localStorage.getItem('jwt')
-      }
-    })
-      .then(resp => resp.json())
+    api.createEvaluationCategory(name)
       .then(category => createPossiblePoints(possiblePoints, category.id, props))
   }
 }
 
-export function createPossiblePoints(possiblePoints, categoryId, props) {
+function createPossiblePoints(possiblePoints, categoryId, props) {
   for (let key in possiblePoints) {
-          let payload = JSON.stringify({score: possiblePoints[key]['score'], description: possiblePoints[key]['description'], evaluation_category_id: categoryId})
-          fetch(baseURL + '/possible_points', {
-            method: 'post',
-            body: payload,
-            headers: {
-              'Accept': 'application/json',
-              'Content-Type': 'application/json',
-              'Authorization': localStorage.getItem('jwt')
-            }
-          })
-            .then(resp => resp.json())
-            .then(possScore => console.log(possScore))
-            .then(() => {
-              props.history.push('/eval_categories')
-            })
-        }
+    api.createPossiblePoint(possiblePoints[key], categoryId)
+      .then(() => {
+        props.history.push('/eval_categories')
+      })
+  }
 }
 
-export function editEvalCategory(name, id, possiblePoints, windowProps, currentPoints) {
+export function editEvalCategory(name, id, possiblePoints, props, currentPoints) {
   return function(dispatch) {
-    const payload = JSON.stringify({name: name})
-    fetch(baseURL + '/evaluation_categories/' + id, {
-      method: 'PATCH',
-      body: payload,
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-        'Authorization': localStorage.getItem('jwt')
-      }
-    })
-      .then(resp => resp.json())
-      .then(category => console.log("updated category", category))
+    api.editEvalCategory(name, id)
       .then(() => {
         editCurrentPoints(currentPoints)
       })
       .then(() => {
         if (Object.keys(possiblePoints).length > 0) {
-          createPossiblePoints(possiblePoints, id, windowProps)
+          createPossiblePoints(possiblePoints, id, props)
         }
       })
-      .then(() => windowProps.history.push('/eval_categories'))
+      .then(() => props.history.push('/eval_categories'))
   }
 }
 
 //USED BY EDIT EVAL CATEGORY
 function editCurrentPoints(currentPoints) {
   for (let key in currentPoints) {
-    let payload = JSON.stringify({score: currentPoints[key]['score'], description: currentPoints[key]['description'], evaluation_category_id: currentPoints[key]['evaluation_category_id']})
-    fetch(baseURL + '/possible_points/' + currentPoints[key].id, {
-      method: 'PATCH',
-      body: payload,
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-        'Authorization': localStorage.getItem('jwt')
-      }
-    })
-      .then(resp => resp.json())
-      .then(possPoint => console.log('edited point', possPoint))
+    api.editCurrentPoint(currentPoints[key])
   }
 }
 

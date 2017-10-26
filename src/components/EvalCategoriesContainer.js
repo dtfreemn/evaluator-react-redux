@@ -16,7 +16,11 @@ class EvalCategoriesContainer extends React.Component {
     if (this.props.location.pathname.split('/').includes('edit') && this.props.evalCategories.length > 0) {
       if (this.props.evalCategories.length > 0) {
         let evalCategory = this.props.evalCategories.filter(category => category.id === parseInt(this.props.match.params.id, 10))[0]
-        return <EditEvalCategoryForm name={evalCategory.name} possibleScores={evalCategory.possible_points} id={this.props.match.params.id} {...this.props}/>
+        if (evalCategory) {
+          return <EditEvalCategoryForm name={evalCategory.name} possibleScores={evalCategory.possible_points} id={this.props.match.params.id} {...this.props}/>
+        } else {
+          this.props.history.push('/eval_categories')
+        }
       }
     }
   }
