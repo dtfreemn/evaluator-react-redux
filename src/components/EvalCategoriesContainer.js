@@ -2,6 +2,7 @@ import React from 'react';
 import { fetchAllEvaluationCategories } from '../actions/categoriesAndPossiblePoints'
 import EvalCategoriesList from './EvalCategoriesList'
 import EditEvalCategoryForm from './EditEvalCategoryForm'
+import Loader from './Loader'
 import { connect } from 'react-redux'
 
 //Rendered in App
@@ -21,13 +22,17 @@ class EvalCategoriesContainer extends React.Component {
   }
 
   render() {
+    if (!this.props.evalCategories || this.props.evalCategories.length === 0) {
+      return <Loader />
+    }
+
     if (!this.props.location.pathname.split('/').includes('edit')) {
       return (
       <div className='container large fade-in'>
         <table className='eval-categories-container'>
           <thead>
             <tr>
-              <td className='table-header'>Evaluation Group</td>
+              <td className='table-header'>Team</td>
               <td className='table-header'></td>
             </tr>
           </thead>

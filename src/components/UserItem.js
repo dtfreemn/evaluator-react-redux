@@ -10,9 +10,7 @@ const UserItem = (props) => {
 
   const handleDelete = (e) => {
     props.deleteUserItem(user)
-      if (props.windowProps.location.pathname.includes(user.id)) {
-      props.windowProps.history.push('/users')
-    }
+    props.windowProps.history.push('/users')
   }
 
   const profileButton = () => {

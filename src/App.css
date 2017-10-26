@@ -32,6 +32,16 @@
   margin-left: 0;
 }
 
+div.users-search {
+  margin-left: 0;
+  margin: 0;
+}
+
+div.users-search input {
+  margin-left: 0;
+  width: 500px;
+}
+
 .profile-delete-edit-button {
   border-radius: 5px;
   border: 1px solid #e3e5e8;
@@ -105,7 +115,17 @@ td.profile-button-col {
 
 #nav-bar span.logo {
   grid-row: 1;
-  grid-column: 5/7;
+  grid-column: 8;
+  margin-left: 40px;
+  margin-top: 5px;
+  color: white;
+  font-family: 'Patua One', cursive;
+  font-size: 1.2em;
+}
+
+#nav-bar span.logo-on-login {
+  grid-row: 1;
+  grid-column: 2;
   margin-left: 40px;
   margin-top: 5px;
   color: white;
@@ -116,7 +136,7 @@ td.profile-button-col {
 #nav-bar button {
   color: darkgreen;
   grid-row: 1;
-  margin-right: 40px;
+  /*margin-right: 40px;*/
   text-align: center;
   background: white;
   border: none;
@@ -127,6 +147,24 @@ td.profile-button-col {
 
 #nav-bar button:hover {
   background: #e3e5e8;
+}
+
+#nav-bar button.nav-bar-link a {
+  color: white;
+  text-decoration: none;
+  font-size: 1em;
+}
+
+#nav-bar button.nav-bar-link {
+  background: darkgreen;
+}
+
+#nav-bar button.nav-bar-link:hover {
+  background: grey;
+}
+
+.log-out-button {
+  grid-column: 9;
 }
 
 /*END NAVBAR*/
@@ -140,6 +178,16 @@ td.profile-button-col {
   margin-left: 40px;
   grid-row: 2/3;
   border-right: 1px solid #e3e5e8;
+  min-height: 700px;
+}
+
+.menu-left-on-login {
+  grid-column: 1/2;
+  /*border: 1px solid black;*/
+  text-align: left;
+  padding-top: 200px;
+  margin-left: 40px;
+  grid-row: 2/3;
   min-height: 700px;
 }
 
@@ -162,6 +210,59 @@ hr {
   color: darkgreen;
   background: #e3e5e8;
   border: 1px solid black;
+}
+
+.menu-button {
+  border-radius: 5px;
+  padding: 5px 15px 5px 15px;
+  border: 1px solid black;
+  font-size: 1.2em;
+  background: darkgreen;
+  color: white;
+  text-decoration: none;
+}
+
+.user-button {
+  background: white;
+  color: darkgreen;
+}
+
+.user-button:hover {
+  background: blue;
+  color: white;
+}
+
+.group-button {
+  background: #e3e5e8;
+  color: darkgreen;
+  border: 1px solid black;
+}
+
+.group-button:hover {
+  background: blue;
+  color: white;
+}
+
+.item-button {
+  background: darkgreen;
+  color: white;
+}
+
+.item-button:hover {
+  background: blue;
+  color: white;
+  border: 1px solid black;
+}
+
+.menu-score-button {
+  background: lightblue;
+  color: black;
+  border: 1px solid black;
+}
+
+.menu-score-button:hover {
+  background: blue;
+  color: white;
 }
 
 /*END MENU LEFT*/
@@ -549,13 +650,13 @@ tr.bottom td {
 }
 
 .submit-score-button {
-  background: red;
-  color: white;
+  background: lightblue;
+  color: black;
   border: 1px solid black;
 }
 
 .submit-score-button:hover {
-  background: darkgreen;
+  background: rgba(182, 184, 243, 0.8);
 }
 
 .float-right {
@@ -580,16 +681,17 @@ tr.bottom td {
 
 /* START SCORE RUBRIC MODAL*/
 .score-rubric-modal {
-  z-index: 999;
+  z-index: 9999;
   background: rgba(0,0,0,0.8);
   color: white;
   border-radius: 15px;
   padding: 15px;
   /*border: 1px solid #e3e5e8;*/
-  max-width: 1000px;
+  width: 800px;
   max-height: 1000px;
   font-family: 'Varela', sans-serif;
-  font-size: 1.5em;
+  font-size: 1.2em;
+  position: absolute !important;
 }
 
 .modal-hover {
@@ -611,4 +713,14 @@ tr.bottom td {
 
 textarea {
   padding: 15px;
+}
+
+.loading-screen {
+  min-width: 100%;
+  min-height: 100%;
+  text-align: center;
+}
+
+.loading-screen img {
+  padding-top: 10%;
 }

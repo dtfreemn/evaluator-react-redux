@@ -4,6 +4,7 @@ import { fetchAllEvalItems } from '../actions/evalItems'
 import EvalItemsList from './EvalItemsList'
 import DeleteEvalItemConfirm from './DeleteEvalItemConfirm'
 import EditEvalItemForm from './EditEvalItemForm'
+import Loader from './Loader'
 import { deleteEvalItem, startEvalItemDelete, endEvalItemDelete } from '../actions/evalItems'
 import { fetchAllEvaluationCategories } from '../actions/categoriesAndPossiblePoints'
 
@@ -12,7 +13,7 @@ import { fetchAllEvaluationCategories } from '../actions/categoriesAndPossiblePo
 class EvalItemsContainer extends React.Component {
   
   state = {
-    itemToDelete: null,
+    itemToDelete: {},
     currFilter: 'All'
   }
   
@@ -40,7 +41,7 @@ class EvalItemsContainer extends React.Component {
   makeEvalCategoriesSelectOptions = () => {
     if (this.props.evalCategories) {
       let options = this.props.evalCategories.map(category => <option key={category.id} value={category.id}>{category.name}</option>)
-      options.unshift(<option key='defaultCategory' value='All'>All Groups</option>)
+      options.unshift(<option key='defaultCategory' value='All'>All Teams</option>)
       return options
     }
   }
@@ -85,6 +86,10 @@ class EvalItemsContainer extends React.Component {
 
 
   render() {
+    if (!this.props.evalItems || this.props.evalItems.length === 0) {
+      return <Loader />
+    }
+
     if (!this.props.isDeletingItem) {
       return (
         <div className='container large fade-in'>
@@ -93,9 +98,9 @@ class EvalItemsContainer extends React.Component {
           <table className='eval-items-table'>
             <thead>
               <tr>
-                <td className='table-header'>Evaluation Group</td>
-                <td className='table-header'>Evaluation Item</td>
-                <td className='table-header'>Item Description</td>
+                <td className='table-header'>Team</td>
+                <td className='table-header'>Value</td>
+                <td className='table-header'>Value Description</td>
                 <td className='table-header'></td>
               </tr>
             </thead>

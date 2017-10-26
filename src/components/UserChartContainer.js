@@ -3,17 +3,26 @@ import BarChart from './BarChart'
 import LineGraph from './LineGraph'
 import ChartFilter from './ChartFilter'
 import UserScoresList from './UserScoresList'
+import Loader from './Loader'
 import UserActionStepsList from './UserActionStepsList'
 import { editActionStep } from '../actions/actionSteps'
 import { connect } from 'react-redux'
 
 //Rendered by UsersContainer
-const UserChartContainer = (props) => {
+class UserChartContainer extends React.Component {
+
+  state = {
+    isLoading: true
+  }
+
+  componentDidMount() {
+    setTimeout(() => this.setState({isLoading: false}), 1000)
+  }
 
   //gets all items that employee has been scored on to pass to the chart filter
-  const getUniqueEvalItems = () => {
-    if (props.user.length > 0) {
-      let user = props.user[0]
+  getUniqueEvalItems = () => {
+    if (this.props.user.length > 0) {
+      let user = this.props.user[0]
       let finalItems = {}
       user.scores.map(score => score.eval_item.name).forEach(name => {
         if (!finalItems[name]) {
@@ -24,24 +33,24 @@ const UserChartContainer = (props) => {
     }
   }
 
-  const graphToRender = () => {
-    if (props.currentChartFilter === 'default') {
-      return <BarChart user={props.user[0]} />
+  graphToRender = () => {
+    if (this.props.currentChartFilter === 'default') {
+      return <BarChart user={this.props.user[0]} />
     } else {
-      return <LineGraph user={props.user[0]} filter={props.currentChartFilter}/>
+      return <LineGraph user={this.props.user[0]} filter={this.props.currentChartFilter}/>
     }
   }
 
   //extracts scores from user and sorts them by date in descending order. returns either all scores or just the scores that correspond with the line graph displayed that is determined by the filter selected by the user
-  const filterScores = () => {
-    if (props.currentChartFilter === 'default') { 
-      return props.user[0].scores.sort(function(a,b) {
+  filterScores = () => {
+    if (this.props.currentChartFilter === 'default') { 
+      return this.props.user[0].scores.sort(function(a,b) {
         if (b.created_at < a.created_at) return -1;
         if (b.created_at > a.created_at) return 1;
         return 0
       })
     } else {
-      let scores = props.user[0].scores.filter(score => score.eval_item.name === props.currentChartFilter)
+      let scores = this.props.user[0].scores.filter(score => score.eval_item.name === this.props.currentChartFilter)
       return scores.sort(function(a,b) {
         if (b.created_at < a.created_at) return -1;
         if (b.created_at > a.created_at) return 1;
@@ -51,16 +60,20 @@ const UserChartContainer = (props) => {
   }
 
   //passed down to UserActionStepsList and then to UserActionStepItem to toggle itself to/from complete/incomplete
-  const toggleActionStepStatus = (id, newStatus) => {
-    props.toggleStatus(id, newStatus)
+  toggleActionStepStatus = (id, newStatus) => {
+    this.props.toggleStatus(id, newStatus)
   }
 
-  if (props.user.length > 0 && props.user[0].scores.length > 0) {
+  render() {
+  if (this.state.isLoading) {
+    return <Loader />
+  }
+  if (this.props.user.length > 0 && this.props.user[0].scores.length > 0) {
   return (
     <div className='container charts-container'>
-      <ChartFilter items={getUniqueEvalItems()}/>
+      <ChartFilter items={this.getUniqueEvalItems()}/>
       <div className='chart'>
-        {graphToRender()}
+        {this.graphToRender()}
       </div>
       <div className='bottom-tables'>
       <table id='scores-list'>
@@ -75,7 +88,7 @@ const UserChartContainer = (props) => {
             <th className='underline'>Date</th>
           </tr>
         </thead>
-        <UserScoresList scores={filterScores()}/>
+        <UserScoresList scores={this.filterScores()}/>
       </table>
       <table id='action-steps'>
         <thead>
@@ -87,14 +100,14 @@ const UserChartContainer = (props) => {
             <th className='underline'>Status</th>
           </tr>
         </thead>
-        <UserActionStepsList actionStepStatusToggle={toggleActionStepStatus} actionSteps={props.user[0].action_steps}/>
+        <UserActionStepsList actionStepStatusToggle={this.toggleActionStepStatus} actionSteps={this.props.user[0].action_steps}/>
       </table>
       </div>
     </div>
-  )} else if (props.user.length > 0) {
+  )} else if (this.props.user.length > 0) {
     return (
       <div className='no-evals-yet'>
-        {props.user[0].first_name} does not yet have any evaluations
+        {this.props.user[0].first_name} does not yet have any evaluations
       </div>
     )
   } else {
@@ -102,6 +115,7 @@ const UserChartContainer = (props) => {
       <div> </div>
     )
   }
+}
 }
 
 function mapStateToProps(state) {

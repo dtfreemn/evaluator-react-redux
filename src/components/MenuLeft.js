@@ -9,24 +9,24 @@ class MenuLeft extends React.Component {
     if (localStorage.getItem('jwt') && !this.props.showButtons) {
       return (
         <div className='menu-left'>  
-          <NavLink className='green-white-button' to='/users'>Employees</NavLink><br/><br/>
-          <NavLink className='green-white-button' to='/users/new'>New Employee</NavLink><br/><br/>
+          <NavLink className='menu-button user-button' to='/users'>Employees List</NavLink><br/><br/>
+          
           <hr/>
           <br/>
-          <NavLink className='green-white-button' to='/eval_categories'>Eval Groups</NavLink><br/><br/>
-          <NavLink className='green-white-button' to='/eval_categories/new'>New Eval Group</NavLink><br/><br/>
+          <NavLink className='menu-button group-button' to='/eval_categories'>Teams List</NavLink><br/><br/>
+          
           <hr/>
           <br/>
-          <NavLink className='green-white-button' to='/eval_items'>Eval Items</NavLink><br/><br/>
-          <NavLink className='green-white-button' to='/eval_items/new'>New Eval Item</NavLink><br/><br/>
+          <NavLink className='menu-button item-button' to='/eval_items'>Values List</NavLink><br/><br/>
+          
           <hr/>
           <br/>
-          <NavLink className='green-white-button' to='/scores/new'>Add Score</NavLink><br/><br/>
+          <NavLink className='menu-button menu-score-button' to='/scores/new'>eVALUEate</NavLink><br/><br/>
         </div>
       )
     } else {
       return (
-        <div className='menu-left'> </div>
+        <div className='menu-left-on-login'> </div>
       )
     }
   } 

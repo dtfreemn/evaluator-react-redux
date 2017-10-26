@@ -48,7 +48,7 @@ const NewScoreReviewSubmit = (props) => {
     <table className='score-review-table'>
       <thead>
         <tr>
-          <th className='align-left'>Evaluation Item</th>
+          <th className='align-left'>Value</th>
           <th className='align-left'>Your Score</th>
           <th className='align-left'>Your Notes</th>
         </tr>

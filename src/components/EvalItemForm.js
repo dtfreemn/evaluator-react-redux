@@ -35,7 +35,7 @@ class EvalItemForm extends React.Component {
   makeEvalCategoriesSelectOptions = () => {
     if (this.props.evalCategories) {
       let options = this.props.evalCategories.map(category => <option key={category.id} value={category.id}>{category.name}</option>)
-      options.unshift(<option key='defaultCategory' value=''>Choose an evaluation group</option>)
+      options.unshift(<option key='defaultCategory' value=''>Assign Value to a team</option>)
       return options
     }
   }
@@ -47,9 +47,9 @@ class EvalItemForm extends React.Component {
           <select id='eval-category-select' onChange={this.handleSelectChange} required>
               {this.makeEvalCategoriesSelectOptions()}
           </select><br/>
-          <span className='create-edit-form-label'>Item Title: </span><input type="text" id='name' value={this.state.name} onChange={this.handleChange} required/>
-          <span className='create-edit-form-label'>Item Description: </span><input type="text" id='description' value={this.state.description} onChange={this.handleChange} required/>
-          <input className='green-white-button' type="submit" value={this.props.location.pathname.includes('edit') ? 'Edit' : 'Create New Item' }/>
+          <span className='create-edit-form-label'>Value Title: </span><input type="text" id='name' value={this.state.name} onChange={this.handleChange} required/>
+          <span className='create-edit-form-label'>Value Description: </span><input type="text" id='description' value={this.state.description} onChange={this.handleChange} required/>
+          <input className='green-white-button' type="submit" value={this.props.location.pathname.includes('edit') ? 'Edit Value' : 'Create New Value' }/>
         </form>
       </div>
     )

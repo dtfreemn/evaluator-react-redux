@@ -11,11 +11,11 @@ const EvalItem = (props) => {
   }
   
   const editButton = () => {
-    return props.location.pathname !== '/eval_items/' + item.id + '/edit' ? <NavLink className='profile-delete-edit-button grey-button' to={'/eval_items/' + item.id + '/edit'}>Edit Item</NavLink> : null
+    return props.location.pathname !== '/eval_items/' + item.id + '/edit' ? <NavLink className='profile-delete-edit-button grey-button' to={'/eval_items/' + item.id + '/edit'}>Edit Value</NavLink> : null
   }
 
   const removeButton = () => {
-    return props.location.pathname === '/eval_items/' + item.id + '/edit' ? <button className='profile-delete-edit-button remove-button' onClick={handleDelete}>Remove Item</button> : null
+    return props.location.pathname === '/eval_items/' + item.id + '/edit' ? <button className='profile-delete-edit-button remove-button' onClick={handleDelete}>Remove Value</button> : null
   }
 
   return (

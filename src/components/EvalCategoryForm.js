@@ -42,13 +42,8 @@ class EvalCategoryForm extends React.Component {
       finalPossibleScores[key] = scores[key]
     }
 
-    //makes sure user doesn't create a new category without at least 2 point options
-    if ((Object.keys(finalPossibleScores).length < 2) && (Object.keys(this.state.currentScores).length < 2)) {
-      alert('Your new evaluation group must have at least 2 possible scores.')
-      return
-    }
-
     this.props.handleSubmit(this.state.name, finalPossibleScores, this.props, this.state.currentScores)
+    this.props.history.push('/eval_categories')
   }
 
   //keeps count of the number of possible score inputs that need to be rendered. incremented by user button click
@@ -74,7 +69,7 @@ class EvalCategoryForm extends React.Component {
       let inputs = []
       let num = this.state.possibleScoresCount
       for (let i = 0; i < num; i++) {
-        let newInput = <div className='score-cell' key={i}><span className='table-header white-back'>New Possible Score {i+1}</span><input className='action-step-entry' id={i} name='score' onChange={this.handlePossibleScoresScoreInputChange} value={this.state.possibleScores[i]['score']}/><br/><span className='table-header white-back'>Description</span><br/><textarea className='action-step-entry' id={i} name='description' onChange={this.handlePossibleScoresScoreInputChange} value={this.state.possibleScores[i]['description']}/><hr/></div>
+        let newInput = <div className='score-cell fade-in' key={i}><span className='table-header white-back'>New Rubric Item {i+1}</span><input className='action-step-entry' id={i} name='score' onChange={this.handlePossibleScoresScoreInputChange} value={this.state.possibleScores[i]['score']}/><br/><span className='table-header white-back'>Description</span><br/><textarea className='action-step-entry' id={i} name='description' onChange={this.handlePossibleScoresScoreInputChange} value={this.state.possibleScores[i]['description']}/><hr/></div>
         inputs.push(newInput)
     }
     return inputs
@@ -92,7 +87,7 @@ class EvalCategoryForm extends React.Component {
     let currScores = this.state.currentScores
     let inputs = []
     for (let currKey in currScores) {
-      let newInput = <div className='score-cell' key={currKey}><span className='table-header white-back'>Current Possible Score {parseInt(currKey,10) + 1}</span><input className='action-step-entry' id={currKey} name='score' onChange={this.handleCurrentScoresScoreInputChange} value={this.state.currentScores[currKey]['score']}/><br/><span className='table-header white-back'>Description</span><br/><textarea className='action-step-entry' id={currKey} name='description' onChange={this.handleCurrentScoresScoreInputChange} value={this.state.currentScores[currKey]['description']}/><hr/></div>
+      let newInput = <div className='score-cell' key={currKey}><span className='table-header white-back'>Current Rubric Item {parseInt(currKey,10) + 1}</span><input className='action-step-entry' id={currKey} name='score' onChange={this.handleCurrentScoresScoreInputChange} value={this.state.currentScores[currKey]['score']}/><br/><span className='table-header white-back'>Description</span><br/><textarea className='action-step-entry' id={currKey} name='description' onChange={this.handleCurrentScoresScoreInputChange} value={this.state.currentScores[currKey]['description']}/><hr/></div>
       inputs.push(newInput)
     }
     return inputs
@@ -101,10 +96,10 @@ class EvalCategoryForm extends React.Component {
   render() {
     return (
       <form className='form fade-in' onSubmit={this.handleSubmit}>
-        <span className='create-edit-form-label'>Name: </span><input type="text" placeholder='name of group' onChange={this.handleNameInputChange} value={this.state.name}/>
+        <span className='create-edit-form-label'>Name: </span><input type="text" placeholder='name of team' onChange={this.handleNameInputChange} value={this.state.name}/>
         {this.makeCurrentScoreEditInputs()}
         {this.makePossibleScoresInputs()} {/* renders new possible point inputs at the bottom */}
-        <input className='green-white-button' type='submit' value='Submit'/><span><button className='green-white-button grey-button' onClick={this.incrementPossibleScores}>Add Possible Score</button></span>
+        <input className='green-white-button' type='submit' value={this.props.location.pathname.includes('edit') ? 'Edit Team' : 'Create New Team'}/><span><button className='green-white-button grey-button' onClick={this.incrementPossibleScores}>Add Rubric Item</button></span>
       </form>
     )
   }

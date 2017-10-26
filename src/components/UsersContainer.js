@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { fetchAllUsers } from '../actions/users'
 import UsersList from './UsersList'
+import Loader from './Loader'
 import UserChartContainer from './UserChartContainer'
 import EditUserForm from './EditUserForm'
 
@@ -9,7 +10,7 @@ import EditUserForm from './EditUserForm'
 class UsersContainer extends React.Component {
   
   state = {
-    searchFilter: ''
+    searchFilter: '',
   }
 
   componentDidMount() {
@@ -19,7 +20,7 @@ class UsersContainer extends React.Component {
   filterUsers = () => {
     let filter = this.state.searchFilter.toLowerCase()
     if (this.props.location.pathname === '/users' || this.props.location.pathname === '/users/new') {
-      return this.props.users.filter(user => user.first_name.toLowerCase().includes(filter) || user.last_name.toLowerCase().includes(filter) || user.email.toLowerCase().includes(filter))
+      return this.props.users.filter(user => user.first_name.toLowerCase().includes(filter) || user.last_name.toLowerCase().includes(filter) || `${user.first_name.toLowerCase()} ${user.last_name.toLowerCase()}`.includes(filter) || user.email.toLowerCase().includes(filter))
     } else if (this.props.match.params.id && !isNaN(this.props.match.params.id)) {
       let id = this.props.match.params.id
       return this.props.users.filter(user => user.id === parseInt(id, 10))
@@ -59,6 +60,9 @@ class UsersContainer extends React.Component {
   }
 
   render() {
+    if (!this.props.users || this.props.users.length === 0) {
+      return <Loader />
+    }
     return (
       <div id='users-container' className='container large'>
         {this.userSearch()}
@@ -84,7 +88,8 @@ class UsersContainer extends React.Component {
 function mapStateToProps(state) {
   return {
     users: state.users,
-    currentUser: state.currentUser
+    currentUser: state.currentUser,
+    isLoading: state.isLoading
   }
 }
 

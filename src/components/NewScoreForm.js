@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux'
 import { createNewScoresAndActionSteps } from '../actions/scores'
 import { fetchAllEvaluationCategories } from '../actions/categoriesAndPossiblePoints'
+import Loader from './Loader'
 import NewScoreReviewSubmit from './NewScoreReviewSubmit'
 import PossibleScoreModal from './PossibleScoreModal'
 import ReactHover from 'react-hover'
@@ -12,11 +13,12 @@ class NewScoreForm extends React.Component {
   componentDidMount() {
     this.makeInitialState()
     this.props.fetchEvalCategories()
+    setTimeout(() => this.setState({isLoading: false}), 500)
   }
 
   makeInitialState = () => {
     let ids = this.props.evalItems.map(item => item.id)
-    let stateObj = { scores: {}, actionStepCount: 0 , actionSteps: {} , employeeId: '', evalCatFilter: '', showRubric: true, isReviewing: false}
+    let stateObj = Object.assign({}, this.state, { scores: {}, actionStepCount: 0 , actionSteps: {} , employeeId: '', evalCatFilter: '', showRubric: true, isReviewing: false, isLoading: true})
     ids.forEach(id => stateObj.scores[id] = {score: '', note: ''})
     this.setState(stateObj)
   }
@@ -33,7 +35,7 @@ class NewScoreForm extends React.Component {
         )
     } else if (this.state) {
       return this.props.evalItems.filter(item => item.evaluation_category.id === parseInt(this.state.evalCatFilter,10)).map(item =>
-        <tr key={item.id}>
+        <tr className='fade-in' key={item.id}>
           <td className='score-cell'>{item.name}<br/>({item.evaluation_category.name})</td>
           <td className='score-cell'>{item.description}</td>
           <td className='score-cell'>
@@ -113,7 +115,8 @@ class NewScoreForm extends React.Component {
     } else {
       this.props.submitNewScore(finalScoresObj, finalActionStepsObj, employeeId)
       this.hideScoreReviewPage()
-      this.makeInitialState()
+      // this.makeInitialState()
+      this.props.history.push('/scores/new')
     }
 
   }
@@ -127,7 +130,7 @@ class NewScoreForm extends React.Component {
   makeEvalCategoriesSelectOptions = () => {
     if (this.props.evalCategories) {
       let options = this.props.evalCategories.map(category => <option key={category.id} value={category.id}>{category.name}</option>)
-      options.unshift(<option key='defaultCategory' value=''>Choose an evaluation group</option>)
+      options.unshift(<option key='defaultCategory' value=''>Choose a team</option>)
       return options
     }
   }
@@ -155,7 +158,7 @@ class NewScoreForm extends React.Component {
     let num = this.state.actionStepCount
     let inputs = []
     for (let i = 0; i < num; i++) {
-      let newInput = <div key={i}><span className='table-header white-back'>Action Step {i+1} </span><br/><textarea className='action-step-entry' id={i} onChange={this.handleActionStepInputChange} value={this.state.actionSteps[i]}/><br/><br/></div>
+      let newInput = <div className='fade-in' key={i}><span className='table-header white-back'>Action Step {i+1} </span><br/><textarea className='action-step-entry' id={i} onChange={this.handleActionStepInputChange} value={this.state.actionSteps[i]}/><br/><br/></div>
       inputs.push(newInput)
     }
     return inputs
@@ -186,16 +189,19 @@ class NewScoreForm extends React.Component {
   }
 
   render() {
+    if (!this.state || this.state.isLoading) {
+      return <Loader />
+    }
     if (this.state && !this.state.isReviewing) {
       return (
         <div className='container large new-score-form'>
           <form className='form fade-in'>
             <select id='eval-category-select' onChange={this.handleEvalCategorySelectChange}>{this.makeEvalCategoriesSelectOptions()}</select>
             <span><select id='employeeID' onChange={this.handleEmployeeSelectChange} required>{this.makeEvalEmpSelectOptions()}</select></span><span className='table-header white-back'>{this.employeeBeingReviewed()}</span><button className='green-white-button' onClick={this.clearForm}>Clear Form</button><br/>
-            <span><button className='submit-score-button score-button float-right'onClick={this.handleSubmit}>Next</button></span><br/>
+            <span>{this.state.evalCatFilter !== '' ? <button className='submit-score-button score-button float-right'onClick={this.handleSubmit}>Next</button> : ''}</span><br/>
             <ReactHover options={ { followCursor: true, shiftX: 20, shiftY: 0 } }>
               <ReactHover.Trigger type='trigger'>
-                <span style={{width: '450px'}}className='modal-hover'>Scoring Rubric Reminder</span>
+                {this.state.evalCatFilter !== '' ? <span style={{width: '450px'}}className='modal-hover'>Team Scoring Rubric</span> : <div></div>}
               </ReactHover.Trigger>
               <ReactHover.Hover type='hover'>
                 <div className='score-rubric-modal'>
@@ -206,8 +212,8 @@ class NewScoreForm extends React.Component {
             <table className='top-margin'>
               <thead>
                 <tr>
-                  <td className='table-header'>Evaluation Item</td>
-                  <td className='table-header'>Item Description</td>
+                  <td className='table-header'>Value</td>
+                  <td className='table-header'>Value Description</td>
                   <td className='table-header'>Your Score</td>
                   <td className='table-header'>Your Notes</td>
                 </tr>
