@@ -28,8 +28,8 @@ alt="eVALUEate demo video" width="240" height="180" border="10" /></a>
 
 ### Instructions to run on your machine
   eVALUEate is not currently deployed to the web. To run the frontend on your machine you should:
-    - clone this repository and run 'npm install'
-    - run a local server by running 'yarn start'
+  - clone this repository and run 'npm install'
+  - run a local server by running 'yarn start'
 
 ## License
   The MIT License (MIT)
