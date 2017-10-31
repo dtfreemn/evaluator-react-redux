@@ -3,8 +3,6 @@ import React from 'react';
 //Rendered when user clicks remove button on eval item edit page. Serves as confirmation page because once item is deleted, it and all of its scores will be eliminated. Rendered in EvalItemsContainer on a state switch in the store at state.attemptingItemDelete 
 const DeleteEvalItemConfirm = (props) => {
   
-  console.log(props)
-  
   //Dispatches to switch state.attemptingDelete back to false and hide this component
   const handleCancel = () => {
     props.hideSelf()
