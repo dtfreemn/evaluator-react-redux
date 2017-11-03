@@ -1,4 +1,9 @@
 # eVALUEate
+(https://evaluationmanager.herokuapp.com)
+
+###Demo Credentials
+email: admin@flatiron.com
+password: flatiron
 
 #### YouTube Demo
 <a href="http://www.youtube.com/watch?feature=player_embedded&v=XcEE10kJ6X4
