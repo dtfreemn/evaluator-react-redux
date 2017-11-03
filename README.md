@@ -3,7 +3,7 @@
 ###Demo Credentials
 </br>
 https://evaluationmanager.herokuapp.com </br>
-email: admin@flatiron.com
+email: admin@flatiron.com </br>
 password: flatiron
 
 #### YouTube Demo
