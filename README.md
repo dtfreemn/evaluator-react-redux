@@ -1,7 +1,7 @@
 # eVALUEate
-(https://evaluationmanager.herokuapp.com)
 
 ###Demo Credentials
+https://evaluationmanager.herokuapp.com
 email: admin@flatiron.com
 password: flatiron
 
