@@ -235,7 +235,7 @@ class NewScoreForm extends React.Component {
       )
     } else {
       return (
-      <div></div>
+      <div id='error-page'>You must first create at least one team and at least one value in order to score an employee</div>
       )
     }
   }
