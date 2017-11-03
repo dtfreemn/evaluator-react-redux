@@ -25,8 +25,8 @@ class App extends Component {
     const AuthUsersContainer = Authorize(UsersContainer)
     const AuthNewEvalItemForm = Authorize(NewEvalItemForm)
     const AuthEvalItemsContainer = Authorize(EvalItemsContainer)
-    const AuthNewScoreFormContainer = Authorize(NewScoreFormContainer)
     const AuthNewEvalCategoryForm = Authorize(NewEvalCategoryForm)
+    const AuthNewScoreFormContainer = Authorize(NewScoreFormContainer)
     const AuthEvalCategoriesContainer = Authorize(EvalCategoriesContainer)
 
 
