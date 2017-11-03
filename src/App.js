@@ -18,6 +18,8 @@ import Authorize from './components/Authorize'
 class App extends Component {
   render() {
     
+    const AuthNavBar = Authorize(NavBar)
+    const AuthMenuLeft = Authorize(MenuLeft)
     const AuthLogInForm = Authorize(LogInForm)
     const AuthNewUserForm = Authorize(NewUserForm)
     const AuthUsersContainer = Authorize(UsersContainer)
@@ -30,8 +32,8 @@ class App extends Component {
 
     return (
       <div className='App'>
-        <Route path='/' render={(props) => <NavBar {...props}/>}/>
-        <Route path='/' render={(props) => <MenuLeft {...props}/>}/>
+        <Route path='/' render={(props) => <AuthNavBar {...props}/>}/>
+        <Route path='/' render={(props) => <AuthMenuLeft {...props}/>}/>
         <Switch>
             <Route exact path='/login' render={(props) => <AuthLogInForm {...props}/>} />
             <Route exact path='/users/new' render={(props) => <div className='container'><AuthNewUserForm {...props}/><AuthUsersContainer {...props}/></div>} />
