@@ -6,7 +6,7 @@ function Authorize(GivenComponent, props) {
   return class extends React.Component {
   
     render() {
-      if (localStorage.getItem('jwt') && this.props.location.pathname ==='/login') {
+      if (localStorage.getItem('jwt') && (this.props.location.pathname === '/login' || this.props.location.pathname === '/')) {
         return <Redirect to='/users' />
       } else if (!localStorage.getItem('jwt') && this.props.location.pathname !== '/login') {
         return <Redirect to='/login' />
