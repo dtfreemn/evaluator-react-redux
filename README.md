@@ -32,11 +32,6 @@ alt="eVALUEate demo video" width="240" height="180" border="10" /></a>
   - redux-thunk -> ^2.2.0</br>
   *This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).*
 
-### Instructions to run on your machine
-  eVALUEate is not currently deployed to the web. To run the frontend on your machine you should:
-  - clone this repository and run 'yarn'
-  - run a local server by running 'yarn start'
-
 ## License
   The MIT License (MIT)
 
