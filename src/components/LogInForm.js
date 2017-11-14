@@ -30,6 +30,7 @@ class LogInForm extends React.Component {
   render() {
     return (
       <div className='log-in-grid'>
+      <div id='demo'>Demo Credentials: admin@flatiron.com (password: flatiron)</div>
       <form onSubmit={this.handleSubmit} className='form create-edit-form log-in-form fade-in'>
         {this.errorMessage()}
         <input id='email' type="text" placeholder='user@email.com' onChange={this.handleChange}/>

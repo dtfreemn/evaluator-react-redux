@@ -18,7 +18,7 @@ alt="eVALUEate demo video" width="240" height="180" border="10" /></a>
 ### Frontend Depedencies for eVALUEate
   - chart.js -> ^2.7.0
   - react -> ^16.0.0
-  - react-chartjs-2 -> "^2.6.4"
+  - react-chartjs-2 -> ^2.6.4
   - react-dom -> ^16.0.0
   - react-hover -> ^1.3.2
   - react-loader -> ^2.4.2

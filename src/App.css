@@ -191,6 +191,13 @@ td.profile-button-col {
   min-height: 700px;
 }
 
+#demo {
+  font-style: italic;
+  margin-top: 20px;
+  grid-column: 2/4;
+  grid-row: 1;
+}
+
 hr {
   border: thin solid #e3e5e8;
   margin-right: 10px;
